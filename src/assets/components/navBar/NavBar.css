@@ -1,0 +1,13 @@
+.NavBar *{
+    margin: 0px;
+    padding: 0px;
+}
+
+.NavBar{
+    background-color: azure;
+    color: black;
+}
+
+.NavBar ul{
+
+}
