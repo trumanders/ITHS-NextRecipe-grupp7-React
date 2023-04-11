@@ -1,6 +1,6 @@
+import { useState } from "react";
 import './App.css';
 import {NavBar} from "./assets/components/navBar/NavBar.jsx"
-
 
 function App() {
   return (
@@ -10,4 +10,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
