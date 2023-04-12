@@ -1,13 +1,11 @@
 import { useState } from "react";
-import './App.css';
-import {NavBar} from "./assets/components/navBar/NavBar.jsx"
-
+import "./App.css";
+import Layout from "./Layout";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
-  return (
-    <div className="App">
-      <NavBar></NavBar>
-    </div>
-  )
+  const [count, setCount] = useState(0);
+
+  return <Layout />;
 }
 
 export default App;
