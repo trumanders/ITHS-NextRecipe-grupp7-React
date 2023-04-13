@@ -1,0 +1,27 @@
+.nutrition-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .nutrition-table td, #customers th {
+    border: 1px solid #eee181;
+    padding: 8px;
+  }
+  
+  .nutrition-table tr:nth-child(odd){background-color: #816266;}
+  
+  .nutrition-table tr:hover {background-color: #60a866;}
+  
+  .nutrition-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #816266;
+    color: rgb(31, 24, 24);
+  }
+
+  .nutrition-table-container{
+    margin-left: 5px;
+    margin-right: 5px;
+  }

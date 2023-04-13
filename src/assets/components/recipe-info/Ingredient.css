@@ -1,0 +1,22 @@
+.list-ingredients{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.list-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-row{
+    padding-right: 5px;
+}
+
+.ingredients-container{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.ingredients-container h2{
+    text-align: start;
+}

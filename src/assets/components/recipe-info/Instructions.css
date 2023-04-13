@@ -1,0 +1,13 @@
+.instructions{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.instructions ol{
+    padding-inline-start: 15px;
+    text-align: start;
+}
+
+.instructions-container h2{
+    text-align: start;
+}

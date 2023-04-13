@@ -1,3 +1,11 @@
+import './Recipe.css'
+import './PictureAndInfo.css'
+import './NutritionTable.css'
+import './Ingredient.css'
+import './Instructions.css'
+
+
+
 export default function Recipe(){
     const recipe = getRecipe();
     const nutritions = getNutrition();
@@ -31,6 +39,75 @@ export default function Recipe(){
         </div>
         </>
          
+    )
+}
+
+//Komponent som håller Bild, antal servings och tid att laga
+const PictureAndInfo = (props) => {
+    return(
+        <article className='picture-and-info-container'>
+            <img className="recipe-picture" src={props.image} alt="Image of recipe" />
+            {/*Att styla sen med fontawsome*/}
+            <div className='extra-recipe-info'>
+                <div>
+                    <span>Cook time: </span>
+                    <span>{props.cookTime}</span>
+                    <span> min.</span>
+                </div>
+                <div>
+                    <span>Servings: </span>
+                    <span>{props.serving}</span>
+                    <span> people</span>
+                </div>
+            </div>
+        </article>  
+    )
+}
+
+//Komponent med tabell som håller näringsinnehållet.
+const NutritionTable = (props) => {
+    return(
+        <aside className='nutrition-table-container'>
+          <table className="nutrition-table">
+              <tr>
+                  <th>Nutritions</th>
+                  <th>Amount</th>
+              </tr>
+              {props.nutritionValues.map(nutr => <tr>
+                  <td>{nutr.title}</td>
+                  <td>{nutr.amount}</td>
+              </tr>)}                 
+              <tr>
+                  <td>Protein</td>
+                  <td>{props.proteins}</td>
+              </tr>
+          </table>
+        </aside>  )
+}
+
+//Komponent som håller ingredienser och mått
+const Ingredient = (props) => {
+    return(
+        <div className="ingredients-container">
+            <h2>Ingredients</h2>
+            <ul className="list-ingredients">
+                {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
+                {props.ingredients.map(ingredient => <li className="list-row"> 
+                    <div><b>{ingredient.nameClean}</b></div>
+                    <div className='amount-unit'><span>{ingredient.amount}</span>{' '} <span>{ingredient.unit}</span></div>
+                </li> )}
+            </ul>
+        </div>
+    )
+}
+
+//Komponent som håller i stegen
+const Instructions = (props) => {
+    return(
+        <div className='instructions-container'>
+            <h2>Steps</h2>
+            <div className='instructions' dangerouslySetInnerHTML={{__html: props.steps}}></div>
+        </div> 
     )
 }
 
