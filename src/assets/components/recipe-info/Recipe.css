@@ -1,0 +1,24 @@
+.recipe-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed red;
+}
+
+.recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-insturcions{
+    border: 1px dashed black;
+}
+
+@media screen and (min-width: 400px){
+    .picture-pictureInfo-and-nutritionTable-container{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .recipe-section-pictureAndInfo{
+        width: 70%;
+    }
+
+    .recipe-section-nutritionTable{
+        width: 20%;
+    }
+}
