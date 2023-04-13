@@ -6,8 +6,10 @@
   
   .nutrition-table td, #customers th {
     border: 1px solid #eee181;
-    padding: 8px;
+    padding: 8px 1px;
+    text-align: start;
   }
+  
   
   .nutrition-table tr:nth-child(odd){background-color: #816266;}
   

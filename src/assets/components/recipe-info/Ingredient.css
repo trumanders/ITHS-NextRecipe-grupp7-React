@@ -20,3 +20,17 @@
 .ingredients-container h2{
     text-align: start;
 }
+
+.ingredient-name, .amount-unit{
+    border: 1px dashed green;
+}
+
+.ingredient-name{
+    width: 70%;
+    text-align: left;
+}
+
+.amount-unit{
+    width: 30%;
+    text-align: left;
+}

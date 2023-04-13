@@ -24,16 +24,13 @@ export default function Recipe(){
                     <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
                   </div>
               </div>
-              
-              
 
-              <div className="ingredients-and-instructions-container">
-                  <div className="recipe-section-ingredients">
+              <div className="recipe-section-ingredients">
                       <Ingredient ingredients = {recipe.extendedIngredients} />
-                  </div>
-                  <div className="recipe-section-insturcions">
+              </div>
+
+              <div className="recipe-section-insturcions">
                       <Instructions steps = {recipe.instructions} />
-                  </div>
               </div>            
             
         </div>
@@ -93,7 +90,7 @@ const Ingredient = (props) => {
             <ul className="list-ingredients">
                 {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
                 {props.ingredients.map(ingredient => <li className="list-row"> 
-                    <div><b>{ingredient.nameClean}</b></div>
+                    <div className='ingredient-name'><b>{ingredient.nameClean}</b></div>
                     <div className='amount-unit'><span>{ingredient.amount}</span>{' '} <span>{ingredient.unit}</span></div>
                 </li> )}
             </ul>
