@@ -60,7 +60,7 @@ export async function getPopularRecipes() {
         )
     })
 
-    //console.log(fetchResults)
+    // console.log(fetchResults)
     return fetchResults
 }
 
@@ -80,9 +80,7 @@ export async function getRecipeByIngredients(ingredients) {
 export async function getRecipeByFilter(mealtype, intolerances, diet, skip) {
     let allRecipes = []
     let number = 100 //antal som ska hämtas
-    //let skip = 0 //antal som ska hoppas över
-    let totalNumber = 0
-    do {
+    
     try {
         const url = `https://api.spoonacular.com/recipes/complexSearch?type=${mealtype}&diet=${diet}&intolerances=${intolerances}&number=${number}&offset=${skip}`
 
@@ -104,27 +102,24 @@ export async function getRecipeByFilter(mealtype, intolerances, diet, skip) {
         console.log(e)
     }
 
-    totalNumber = data.totalResults
-    skip = allRecipes.length
-
-    number = (totalNumber - skip) >= 100 ? 100 : (totalNumber - skip)
-
-    }while(allRecipes.length < 100)
-
     return allRecipes
 }
+
 
 export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
     var searchResults = [] //Där resultaten sen ska hamna
     var skip = 0
 
+
+    //Om inga ingredienser är ifyllda görs inget anrop till den endpointen
     const ingredientGet = ingredients === '' ? false : await getRecipeByIngredients(ingredients)
     // console.log(`ingredientGet: ${ingredientGet.length}`)
     if(ingredientGet != false) {
         do{
-        const filterGet = await getRecipeByFilter(mealtype, intolerances, diet, skip)
-        // console.log(`filterGet: ${filterGet.length}`)
-        const ingredientGetIds = ingredientGet.map(element => {
+        let filterGet = await getRecipeByFilter(mealtype, intolerances, diet, skip)
+        console.log(`filterGet: ${filterGet.length} skip: ${skip}`)
+        
+        let ingredientGetIds = ingredientGet.map(element => { //Plockar ut id för enklare filtrering
             return element.id
         })
 
@@ -133,19 +128,46 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         intersect.forEach(item => {
             searchResults.push(item)
         })
-        ////-------------------><----------------------////
-        //Lägg till funktion som sållar bort dubletter vid multipla 'filterGet'.
 
-        skip += 100
+        skip += 100 //100 adderas till hur många vi ska hoppa över i nästa hämtning
+
+        if(filterGet.length < 100 || skip > 4900) { //Om filterGet är mindre än 100 har resultaten tagit slut hos API:et
+            break
+        }
+
         }while(searchResults.length < 10)
-        // console.log(`filtrerade resultat: ${searchResults} skip: ${skip}`)
-        console.log(searchResults)
+        console.log(searchResults.length)
         return searchResults
     } else {
-        const filterGet = await getRecipeByFilter(mealtype, intolerances, diet, skip)
-        //console.log(`resultat från den ena hämtningen: ${filterGet.length}`)
+        const filterGet = await getRecipeByFilter(mealtype, intolerances, diet, skip) //Om det inte finns några ingredienser i input hämtas endast denna.
         
         return filterGet
     }
 
+}
+
+export async function getRecipeById(id) {
+    const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': `${key}`
+        }
+    })
+
+    const data = await response.json()
+
+    return(data)
+}
+
+export async function getSimilarRecipes(id) {
+    const response = await fetch(`https://api.spoonacular.com/recipes/${id}/similar`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': `${key}`
+        }
+    })
+
+    const data = await response.json()
+
+    return(data)
 }
