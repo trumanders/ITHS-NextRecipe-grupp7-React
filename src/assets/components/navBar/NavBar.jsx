@@ -1,6 +1,7 @@
 import './NavBar.css'
 import './NavFunc'
 import {Burger} from './burger.jsx'
+import {Link} from "react-router-dom";
 
 function NavBar(){
     return (
@@ -16,8 +17,9 @@ function NavBar(){
         <ul>
             <li className="navOpt"><p>Home</p></li>
             <li className="navOpt"><p>Adv. Search</p></li>
-            <li className="navOpt"><p>About</p></li>
-            <li className="navOpt"><p>Contact</p></li>
+            <li className="navOpt"><Link to="/about">About</Link></li>
+            <li className="navOpt"><Link to="/contact">Contact</Link></li>
+            
         </ul>
     </div>
     )
