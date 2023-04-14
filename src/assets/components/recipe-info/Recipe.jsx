@@ -89,7 +89,7 @@ const Ingredient = (props) => {
             <h2>Ingredients</h2>
             <ul className="list-ingredients">
                 {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
-                {props.ingredients.map(ingredient => <li className="list-row"> 
+                {props.ingredients.map(ingredient => <li key={ingredient.id} className="list-row"> 
                     <div className='ingredient-name'><b>{ingredient.nameClean}</b></div>
                     <div className='amount-unit'><span>{ingredient.amount}</span>{' '} <span>{ingredient.unit}</span></div>
                 </li> )}
