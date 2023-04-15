@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './RecipeCard.css';
-import RecipeRepresentation from './RecipeRepresentation';
+import RecipeRepresentation from '../RecipeRepresentation/RecipeRepresentation';
 
 
 

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import RecipeCard from "./RecipeCard";
-import { getPopularRecipes } from '../utils';
+import RecipeCard from "../RecipeCard/RecipeCard";
+import { getPopularRecipes } from '../../../utils';
 
 export default function RecipeRepresentation(){
     const [recipes, setRecipes]= useState([]);
