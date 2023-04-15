@@ -8,7 +8,7 @@
     border: 1px dashed black;
 }
 
-@media screen and (min-width: 400px){
+@media screen and (min-width: 730px){
 
     /* START: Bild & Tabell samma rad */
     .picture-pictureInfo-and-nutritionTable-container{
