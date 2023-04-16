@@ -5,6 +5,8 @@ import './Ingredient.css'
 import './Instructions.css'
 import {getRecipeById} from '../../../utils'
 import { useEffect, useState } from 'react'
+import {TfiTimer} from 'react-icons/tfi'
+import {BiDish} from 'react-icons/bi'
 
 const ApiKey = '338a43afc1f444c08393d10c361ea4e9';
 
@@ -82,14 +84,14 @@ const PictureAndInfo = (props) => {
             {/*Att styla sen med fontawsome*/}
             <div className='extra-recipe-info'>
                 <div>
-                    <span>Cook time: </span>
-                    <span>{props.cookTime}</span>
-                    <span> min.</span>
+                    <b><TfiTimer /></b> {'   '}
+                    <span><b>{props.cookTime}</b></span>
+                    <span><b>min.</b></span>
                 </div>
                 <div>
-                    <span>Servings: </span>
-                    <span>{props.serving}</span>
-                    <span> people</span>
+                <b><BiDish /></b> {'   '}
+                    <span><b>{props.serving}</b></span>
+                    <span><b>people</b></span>
                 </div>
             </div>
         </article>  
