@@ -3,7 +3,7 @@ import './PictureAndInfo.css'
 import './NutritionTable.css'
 import './Ingredient.css'
 import './Instructions.css'
-// import {getRecipeById} from '../../../utils'
+import {getRecipeById} from '../../../utils'
 import { useEffect, useState } from 'react'
 
 const ApiKey = '338a43afc1f444c08393d10c361ea4e9';
@@ -17,16 +17,9 @@ export default function Recipe(){
     useEffect(()=>{
         const fetchData = async () =>{
         let id = 615761;
-        let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information`, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Api-Key': `${ApiKey}`
-                        }
-            })
-
-            let data = await response.json();
-            console.log(data);
-            setRecipe(data); 
+        let response = await getRecipeById(id);
+        console.log(response);
+        setRecipe(response); 
     
     }
         fetchData();
