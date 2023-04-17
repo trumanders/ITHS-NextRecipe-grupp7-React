@@ -158,7 +158,7 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
 
 export async function getRecipeById(id) {
   const response = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information`,
+    `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true`,
     {
       headers: {
         "Content-Type": "application/json",
