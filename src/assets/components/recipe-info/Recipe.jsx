@@ -84,10 +84,7 @@ export default function Recipe(){
                     </div> 
 
                     <h2>Similar Recipes</h2>
-                    <ul>
-                        {similars.map(rec => <li>{rec.id}</li>)}
-                    </ul>           
-                    
+                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.servings} readyInMinutes={rec.readyInMinutes}/>)}                   
                 </div>
             </> 
              
@@ -162,4 +159,23 @@ const Instructions = (props) => {
             <div className='instructions' dangerouslySetInnerHTML={{__html: props.steps}}></div>
         </div> 
     )
+}
+
+const FejkKort = ({id, image, title, servings, readyInMinutes}) => {
+        return (
+          <div className='card-container'>
+          <Card key={id} style={{ width: '25rem' }} >
+            <Card.Img variant="top" src={image}  className='card-image'/>
+            <Card.Body>
+              <Card.Title className='card-title'>{title}</Card.Title>
+              <Card.Text className='card-text'>
+               Servings: {servings}
+               <br/>
+               Ready in minutes: {readyInMinutes}
+              </Card.Text>
+              <Button variant="primary" className='card-button'>View Recipe</Button>
+            </Card.Body>
+          </Card>
+          </div>
+        );
 }
