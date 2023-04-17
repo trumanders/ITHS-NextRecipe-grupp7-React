@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react'
 import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 const key = '338a43afc1f444c08393d10c361ea4e9';
 
 export default function Recipe(){
@@ -60,6 +63,7 @@ export default function Recipe(){
     },[])
 
     if((recipe != null) && (nutritions != null) && (similars != null)){
+        
         return(
             <>  
                 <h2>{recipe.title}</h2>
@@ -84,7 +88,9 @@ export default function Recipe(){
                     </div> 
 
                     <h2>Similar Recipes</h2>
-                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.servings} readyInMinutes={rec.readyInMinutes}/>)}                   
+                    <div className='similar-recipes'>
+                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.servings} readyInMinutes={rec.readyInMinutes}/>)} 
+                    </div>                          
                 </div>
             </> 
              

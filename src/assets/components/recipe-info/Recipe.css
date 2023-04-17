@@ -1,11 +1,11 @@
 .recipe-container{
     display: flex;
     flex-direction: column;
-    border: 1px dashed red;
+    /* border: 1px dashed red; */
 }
 
 .recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-insturcions{
-    border: 1px dashed black;
+    /* border: 1px dashed black; */
 }
 
 @media screen and (min-width: 730px){
@@ -23,4 +23,11 @@
     }
     /* SLUT: Bild & Tabell samma rad */
 
+}
+
+
+
+.similar-recipes{
+    display: flex;
+    flex-wrap: wrap;
 }

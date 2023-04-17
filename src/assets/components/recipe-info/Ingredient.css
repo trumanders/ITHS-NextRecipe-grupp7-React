@@ -22,7 +22,7 @@
 }
 
 .ingredient-name, .amount-unit{
-    border: 1px dashed green;
+    /* border: 1px dashed green; */
 }
 
 .ingredient-name{
