@@ -3,19 +3,21 @@ import './PictureAndInfo.css'
 import './NutritionTable.css'
 import './Ingredient.css'
 import './Instructions.css'
-import {getRecipeById} from '../../../utils'
+import {getRecipeById, getSimilarRecipes} from '../../../utils'
 import { useEffect, useState } from 'react'
 import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
 
-const ApiKey = '338a43afc1f444c08393d10c361ea4e9';
+const key = '338a43afc1f444c08393d10c361ea4e9';
 
 export default function Recipe(){
    
     const [recipe, setRecipe] = useState(null);
     const [nutritions, setNutritions] = useState(null);
+    const [similars, setSimilars] = useState(null);
 
 
+    //Hämta information för recept
     useEffect(()=>{
         const fetchData = async () =>{
         let id = 615761;
@@ -27,25 +29,37 @@ export default function Recipe(){
         fetchData();
     },[])
 
+    //Hämta Näringsvärde för recept
     useEffect(()=>{
         const fetchData = async () =>{ 
         let id = 615761;
         let response = await fetch(`https://api.spoonacular.com/recipes/${id}/nutritionWidget.json`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Api-Key': `${ApiKey}`
-                    }
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Api-Key': `${key}`
+            }
         })
-
-        let data = await response.json();
-        console.log(data); 
-        setNutritions(data); 
+    
+        const data = await response.json()
+    
+        setNutritions(data)
     
     }
         fetchData();
     },[])
 
-    if((recipe != null) && (nutritions != null)){
+    //Hämta linkande recept
+    useEffect(()=>{
+        const fetchData = async () =>{ 
+        let id = 615761;
+        let response = await getSimilarRecipes(id);
+        console.log(response); 
+        setSimilars(response);
+    }
+        fetchData();
+    },[])
+
+    if((recipe != null) && (nutritions != null) && (similars != null)){
         return(
             <>  
                 <h2>{recipe.title}</h2>
@@ -67,7 +81,12 @@ export default function Recipe(){
     
                     <div className="recipe-section-insturcions">
                             <Instructions steps = {recipe.instructions} />
-                    </div>            
+                    </div> 
+
+                    <h2>Similar Recipes</h2>
+                    <ul>
+                        {similars.map(rec => <li>{rec.id}</li>)}
+                    </ul>           
                     
                 </div>
             </> 
