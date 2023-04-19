@@ -89,7 +89,7 @@ export default function Recipe(){
 
                     <h2>Similar Recipes</h2>
                     <div className='similar-recipes'>
-                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.servings} readyInMinutes={rec.readyInMinutes}/>)} 
+                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.title} servings={rec.servings} readyInMinutes={rec.readyInMinutes}/>)} 
                     </div>                          
                 </div>
             </> 

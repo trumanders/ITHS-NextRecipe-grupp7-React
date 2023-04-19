@@ -10,7 +10,7 @@ function Layout() {
   return (
     <>
       
-      <NavBar />
+      {/* <NavBar /> */}
       <PageContainer />
       <Recipe></Recipe>
       {/* <Footer></Footer> */}
