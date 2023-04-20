@@ -7,7 +7,7 @@ const key = 'ce78851c6bc24bf4944626cc0c04848e'
 
 // getRecipeSearch("Carbonara")
 
-getRandomRecipes("vegetarian, gluten, dinner")
+//  getRandomRecipes("vegetarian, gluten, dinner")
 
 export async function getAllRecipes() {
     let allRecipes = []
@@ -56,7 +56,9 @@ export async function getRandomRecipes(tags) {
             'X-Api-Key': `${key}`
         }
     })
+    
     var data = await response.json()
+    
 
     // data.results.forEach(item => {
     //     fetchResults.push(
@@ -65,7 +67,8 @@ export async function getRandomRecipes(tags) {
     // })
 
     console.log(data)
-    // return fetchResults
+    //  return fetchResults
+    return data.recipes
 }
 
 export async function getRecipeSearch(searchString) {

@@ -16,3 +16,9 @@
     padding-bottom: 15px;
     
 }
+
+.itemContainer{
+    display: flex-box;
+    flex-direction: row;;
+    list-style-type: none;
+}

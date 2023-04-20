@@ -5,7 +5,7 @@ import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
-import {filterRecipes} from '../../../utils'
+import {filterRecipes, getRecipeSearch, getRandomRecipes} from '../../../utils'
 
 
 function Search() {
@@ -87,14 +87,32 @@ function Search() {
         fetchData()
       }
 
+      const sendRecipe =() => {
+        console.log(recipeSearch)
+        const fetchData = async() => {
+          const response = await getRecipeSearch(recipeSearch)
+          console.log(response)
+        }
+        fetchData()
+      }
+
+      const sendRandom = () => {
+        const valuesRandom = [listDiet, listType, listIntolerances].toString()
+        
+        const fetchData = async () => {
+          const response = await getRandomRecipes(valuesRandom)
+          console.log(valuesRandom)
+          console.log(response)
+        }
+        fetchData()
+      }
+
   return (
     
     <Tabs
-      defaultActiveKey="profile"
       id="searchtabs"
-      className="mb-3"
+      className="tabs"
     >
-      
       <Tab eventKey="take-what-you-have" title="Take what you have">
         <p>Add your ingridients in the box below, we will fix the rest.</p>
 
@@ -107,18 +125,20 @@ function Search() {
             <Button variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
             {
-          listInputs.map(item => {
+              
+            listInputs.map(item => {
             return (
-          <li key={item}>
+            
+            <li key={item} >
+            
             <span>{item} {"  "}</span>
             <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
             </li>
-            )
+            )  
           })}
 
-
             <hr></hr>
-            
+
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
@@ -138,27 +158,18 @@ function Search() {
         </Accordion>
         </form>
   
-        {/* {
-          listInputs.map(item => {
-            return (
-          <li key={item}>
-            <span>{item} {"  "}</span>
-            <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
-            </li>
-            )
-          })} */}
           
         <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
       </Tab>
-      <Tab eventKey="home" title="Recepies">
-      <p>Search a recipe</p>
+      <Tab eventKey="home" title="Recipes">
+      <p>Search recipes</p>
       
         <form onSubmit={handleRecipeSearch} className="search">
         <div>
         <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" className="search-recipe" onChange={(event)=>setrecipeSearch(event.target.value)}/>
             
             </div>
-            <Button variant="outline-dark" type="Button" onClick={handleRecipeSearch}>Search</Button>
+            <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
  
         </form>
       
@@ -191,7 +202,7 @@ function Search() {
       </Accordion.Item>
       </Accordion>
 
-        <Button variant="outline-dark" onClick={sendIngridients}type="Button">Go!</Button>
+        <Button variant="outline-dark" onClick={sendRandom}type="Button">Go!</Button>
         
       </Tab>
     </Tabs>
