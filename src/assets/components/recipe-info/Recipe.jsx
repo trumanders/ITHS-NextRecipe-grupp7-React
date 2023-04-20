@@ -18,13 +18,17 @@ export default function Recipe(){
     const [recipe, setRecipe] = useState(null);
     const [nutritions, setNutritions] = useState(null);
     const [similars, setSimilars] = useState(null);
-    const [showMore, setShowMore] = useState(false);
+    const [showNutritions, setShowNutritions] = useState(false);
+    const [showIngredients, setShowIngredients] = useState(false);
+    const [showSteps, setShowSteps] = useState(false);
     const [isMobile, setMobile] = useState(window.innerWidth<730);
 
+    //Denna del av Shakiba
     const updateMedia = () =>{
         setMobile(window.innerWidth<730)
     }
 
+    //Denna del av Shakiba för rerender vid mobil version för show/hide button
     useEffect(()=>{
         window.addEventListener("resize", updateMedia);
         return () => window.removeEventListener("resize", updateMedia);
@@ -33,7 +37,7 @@ export default function Recipe(){
     //Hämta information för recept
     useEffect(()=>{
         const fetchData = async () =>{
-        let id = 615761;
+        let id = 615761; //detta id ersätts sen av props
         let response = await getRecipeById(id);
         console.log(response);
         setRecipe(response); 
@@ -45,7 +49,7 @@ export default function Recipe(){
     //Hämta Näringsvärde för recept
     useEffect(()=>{
         const fetchData = async () =>{ 
-        let id = 615761;
+        let id = 615761; //detta id ersätts sen av props
         let response = await fetch(`https://api.spoonacular.com/recipes/${id}/nutritionWidget.json`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +68,7 @@ export default function Recipe(){
     //Hämta linkande recept
     useEffect(()=>{
         const fetchData = async () =>{ 
-        let id = 615761;
+        let id = 615761; //detta id ersätts sen av props
         let response = await getSimilarRecipes(id);
         console.log(response); 
         setSimilars(response);
@@ -73,8 +77,16 @@ export default function Recipe(){
     },[])
 
 
-    function handleShowMore(){
-        setShowMore(!showMore);
+    function handleShowNutritions(){
+        setShowNutritions(!showNutritions);
+    }
+
+    function handleShowIngredients(){
+        setShowIngredients(!showIngredients);
+    }
+
+    function handleShowSteps(){
+        setShowSteps(!showSteps);
     }
 
     if((recipe != null) && (nutritions != null) && (similars != null)){
@@ -88,29 +100,79 @@ export default function Recipe(){
                         <div className="recipe-section-pictureAndInfo">
                             <PictureAndInfo image = {recipe.image} cookTime = {recipe.readyInMinutes} serving = {recipe.servings}/>
                         </div>
-                        <div>
-                        {isMobile? 
-                         (<div className='showMorebtn' >
-                        <button onClick={handleShowMore}>
-                            {showMore? 'Hide': 'Show'} ingredients
-                        </button>
-                        {showMore && 
-                        <div className="recipe-section-nutritionTable">
-                            <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
-                        </div>}
-                        </div>):
-                        (<div className="recipe-section-nutritionTable">
-                        <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
-                        </div>)} 
-                        </div> 
+                        <>
+                            {/* Kollar om mobile version */}
+                            {isMobile? 
+                                /*Om Mobilversion*/
+                                (<div className='showMorebtn' >
+                                    {/* Sätt en knapp för att visa nutritions*/}
+                                    <button onClick={handleShowNutritions}>
+                                        {/* I och med boolean, första värde på showMore = false */}
+                                        {showNutritions? 'Hide': 'Show'} Nutritions
+                                    </button>
+                                    {/* När showMore = sant, visas nutrition tabell. {showMore && } fungerar som if(showMore == true)*/}
+                                    {showNutritions && 
+                                        <div className="recipe-section-nutritionTable">
+                                            <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
+                                        </div>}
+                                </div>):
+                                /* Om inte mobilversion */
+                                (<div className="recipe-section-nutritionTable">
+                                    <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
+                                </div>)}
+                        </>
                     </div>
 
                     <div className="recipe-section-ingredients">
-                            <Ingredient ingredients = {recipe.extendedIngredients} />
+                        {/* Kollar om mobile version */}
+                        {isMobile?
+                            (<div className='showMorebtn' >
+                                {/* Sätt en knapp för att visa nutritions*/}
+                                <button onClick={handleShowIngredients}>
+                                    {/* I och med boolean, första värde på showMore = false */}
+                                    {showIngredients? 'Hide': 'Show'} Ingredients
+                                </button>
+                                {/* När showMore = sant, visas ingrediens lista. {showMore && } fungerar som if(showMore == true)*/}
+                                {showIngredients && 
+                                        
+                                    <Ingredient ingredients = {recipe.extendedIngredients} />
+                                }
+                            </div>):
+                            /* Om inte mobilversion */
+                            (
+                                <Ingredient ingredients = {recipe.extendedIngredients} />
+                            )
+                        
+                        }
+                            
                     </div>
     
-                    <div className="recipe-section-insturcions">
-                            <Instructions steps = {recipe.instructions} />
+                    <div className=".recipe-section-instructions">
+                        {/* Kollar om mobile version */}
+                        {isMobile?
+                            (
+                                <div className='showMorebtn' >
+                                    {/* Sätt en knapp för att visa nutritions*/}
+                                    <button onClick={handleShowSteps}>
+                                        {/* I och med boolean, första värde på showMore = false */}
+                                        {showSteps? 'Hide': 'Show'} Steps
+                                    </button>
+                                    {/* När showMore = sant, visas ingrediens lista. {showMore && } fungerar som if(showMore == true)*/}
+                                    {showSteps && 
+                                        
+                                        <Instructions steps = {recipe.instructions} />
+                                    }
+                                </div>
+                            )
+                            :
+                            (
+                                /* Om inte mobilversion */
+                                (
+                                    <Instructions steps = {recipe.instructions} />
+                                )
+                            )
+                        }
+        
                     </div> 
 
                     <h2>Similar Recipes</h2>

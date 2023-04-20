@@ -1,11 +1,15 @@
 .recipe-container{
     display: flex;
     flex-direction: column;
-    /* border: 1px dashed red; */
+    border: 1px dashed red;
 }
 
-.recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-insturcions{
-    /* border: 1px dashed black; */
+.picture-pictureInfo-and-nutritionTable-container{
+    border: 1px dashed blue;
+}
+
+.recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-instructions{
+    border: 1px dashed black;
 }
 
 @media screen and (min-width: 730px){
