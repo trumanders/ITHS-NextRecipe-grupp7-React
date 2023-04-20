@@ -18,7 +18,17 @@ export default function Recipe(){
     const [recipe, setRecipe] = useState(null);
     const [nutritions, setNutritions] = useState(null);
     const [similars, setSimilars] = useState(null);
+    const [showMore, setShowMore] = useState(false);
+    const [isMobile, setMobile] = useState(window.innerWidth<730);
 
+    const updateMedia = () =>{
+        setMobile(window.innerWidth<730)
+    }
+
+    useEffect(()=>{
+        window.addEventListener("resize", updateMedia);
+        return () => window.removeEventListener("resize", updateMedia);
+    }, [isMobile]);
 
     //Hämta information för recept
     useEffect(()=>{
@@ -62,6 +72,11 @@ export default function Recipe(){
         fetchData();
     },[])
 
+
+    function handleShowMore(){
+        setShowMore(!showMore);
+    }
+
     if((recipe != null) && (nutritions != null) && (similars != null)){
         
         return(
@@ -73,12 +88,23 @@ export default function Recipe(){
                         <div className="recipe-section-pictureAndInfo">
                             <PictureAndInfo image = {recipe.image} cookTime = {recipe.readyInMinutes} serving = {recipe.servings}/>
                         </div>
-    
+                        <div>
+                        {isMobile? 
+                         (<div className='showMorebtn' >
+                        <button onClick={handleShowMore}>
+                            {showMore? 'Hide': 'Show'} ingredients
+                        </button>
+                        {showMore && 
                         <div className="recipe-section-nutritionTable">
                             <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
-                        </div>
+                        </div>}
+                        </div>):
+                        (<div className="recipe-section-nutritionTable">
+                        <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
+                        </div>)} 
+                        </div> 
                     </div>
-    
+
                     <div className="recipe-section-ingredients">
                             <Ingredient ingredients = {recipe.extendedIngredients} />
                     </div>
