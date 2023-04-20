@@ -15,6 +15,7 @@ import {
 function PageContainer() {
   return (
     <Container>
+      {/* SEARCH-BAR HÄR? Förutom när about eller contact visas? */}
       <Routes>
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
