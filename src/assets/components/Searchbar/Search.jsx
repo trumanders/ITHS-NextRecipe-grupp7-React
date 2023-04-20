@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 
 function Search() {
     const[input, setInput] = useState("")
@@ -100,6 +99,19 @@ function Search() {
         <form onSubmit={handleSubmit} className="search-form">
             <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
             <Button variant="dark" type="button" onClick={handleSubmit}>Add</Button>
+
+            {
+          listInputs.map(item => {
+            return (
+          <li key={item}>
+            <span>{item} {"  "}</span>
+            <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
+            </li>
+            )
+          })}
+
+
+            <hr></hr>
             
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
@@ -120,7 +132,7 @@ function Search() {
         </Accordion>
         </form>
   
-        {
+        {/* {
           listInputs.map(item => {
             return (
           <li key={item}>
@@ -128,7 +140,7 @@ function Search() {
             <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
             </li>
             )
-          })}
+          })} */}
           
         <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
       </Tab>
@@ -178,8 +190,6 @@ function Search() {
       </Tab>
     </Tabs>
 
-          
-    
   );
 };
 
