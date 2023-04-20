@@ -5,6 +5,7 @@ import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
+import {filterRecipes} from '../../../utils'
 
 
 function Search() {
@@ -79,6 +80,11 @@ function Search() {
         console.log(listInputs.toString())
         console.log(listDiet.toString())
         console.log(listIntolerances.toString())
+        const fetchData = async() => {
+          const response = await filterRecipes(listInputs.toString(), listType, listIntolerances.toString(), listDiet.toString())
+          console.log(response)
+        }
+        fetchData()
       }
 
   return (

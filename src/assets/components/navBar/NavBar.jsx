@@ -16,7 +16,7 @@ function NavBar(){
         </div>
         <ul>
             <li className="navOpt"><p>Home</p></li>
-            <li className="navOpt"><p>Adv. Search</p></li>
+            <li className="navOpt"><Link to="/search">Search</Link></li>
             <li className="navOpt"><Link to="/about">About</Link></li>
             <li className="navOpt"><Link to="/contact">Contact</Link></li>
             

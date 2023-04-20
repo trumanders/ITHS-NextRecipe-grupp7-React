@@ -11,10 +11,13 @@ import {
   useMatch,
   useResolvedPath,
 } from "react-router-dom";
+import Search from "./assets/components/Searchbar/Search";
+
  function PageContainer() {
   return (
     <Container>
-      <Routes>              
+      <Routes>
+          <Route path="search" element={<Search />}  />            
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<ContactUs />} /> 
       </Routes>
