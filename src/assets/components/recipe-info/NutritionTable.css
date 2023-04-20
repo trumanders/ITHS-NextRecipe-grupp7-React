@@ -11,15 +11,15 @@
   }
   
   
-  .nutrition-table tr:nth-child(odd){background-color: #816266;}
+  .nutrition-table tr:nth-child(odd){background-color: white;}
   
-  .nutrition-table tr:hover {background-color: #60a866;}
+  .nutrition-table tr:hover {background-color: grey;}
   
   .nutrition-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #816266;
+    background-color: grey;
     color: rgb(31, 24, 24);
   }
 

@@ -16,7 +16,6 @@ const key = '338a43afc1f444c08393d10c361ea4e9';
 export default function Recipe(){
    
     const [recipe, setRecipe] = useState(null);
-    const [nutritions, setNutritions] = useState(null);
     const [similars, setSimilars] = useState(null);
     const [showNutritions, setShowNutritions] = useState(false);
     const [showIngredients, setShowIngredients] = useState(false);
@@ -46,25 +45,6 @@ export default function Recipe(){
         fetchData();
     },[])
 
-    //Hämta Näringsvärde för recept
-    useEffect(()=>{
-        const fetchData = async () =>{ 
-        let id = 615761; //detta id ersätts sen av props
-        let response = await fetch(`https://api.spoonacular.com/recipes/${id}/nutritionWidget.json`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Api-Key': `${key}`
-            }
-        })
-    
-        const data = await response.json()
-    
-        setNutritions(data)
-    
-    }
-        fetchData();
-    },[])
-
     //Hämta linkande recept
     useEffect(()=>{
         const fetchData = async () =>{ 
@@ -89,7 +69,7 @@ export default function Recipe(){
         setShowSteps(!showSteps);
     }
 
-    if((recipe != null) && (nutritions != null) && (similars != null)){
+    if((recipe != null) && (similars != null)){
         
         return(
             <>  
@@ -106,19 +86,19 @@ export default function Recipe(){
                                 /*Om Mobilversion*/
                                 (<div className='showMorebtn' >
                                     {/* Sätt en knapp för att visa nutritions*/}
-                                    <button onClick={handleShowNutritions}>
+                                    <button className='showButton' onClick={handleShowNutritions}>
                                         {/* I och med boolean, första värde på showMore = false */}
                                         {showNutritions? 'Hide': 'Show'} Nutritions
                                     </button>
                                     {/* När showMore = sant, visas nutrition tabell. {showMore && } fungerar som if(showMore == true)*/}
                                     {showNutritions && 
                                         <div className="recipe-section-nutritionTable">
-                                            <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
+                                            <NutritionTable nutritionValues = {recipe.nutrition.nutrients.slice(0,9)} />
                                         </div>}
                                 </div>):
                                 /* Om inte mobilversion */
                                 (<div className="recipe-section-nutritionTable">
-                                    <NutritionTable nutritionValues = {nutritions['bad']} proteins = {nutritions[`protein`]} />
+                                    <NutritionTable nutritionValues = {recipe.nutrition.nutrients.slice(0,9)} />
                                 </div>)}
                         </>
                     </div>
@@ -128,7 +108,7 @@ export default function Recipe(){
                         {isMobile?
                             (<div className='showMorebtn' >
                                 {/* Sätt en knapp för att visa nutritions*/}
-                                <button onClick={handleShowIngredients}>
+                                <button className='showButton' onClick={handleShowIngredients}>
                                     {/* I och med boolean, första värde på showMore = false */}
                                     {showIngredients? 'Hide': 'Show'} Ingredients
                                 </button>
@@ -153,7 +133,7 @@ export default function Recipe(){
                             (
                                 <div className='showMorebtn' >
                                     {/* Sätt en knapp för att visa nutritions*/}
-                                    <button onClick={handleShowSteps}>
+                                    <button className='showButton' onClick={handleShowSteps}>
                                         {/* I och med boolean, första värde på showMore = false */}
                                         {showSteps? 'Hide': 'Show'} Steps
                                     </button>
@@ -217,14 +197,11 @@ const NutritionTable = (props) => {
                   <th>Nutritions</th>
                   <th>Amount</th>
               </tr>
-              {props.nutritionValues.map(nutr => <tr>
-                  <td>{nutr.title}</td>
-                  <td>{nutr.amount}</td>
-              </tr>)}                 
+              {props.nutritionValues.map(nutr => 
               <tr>
-                  <td>Protein</td>
-                  <td>{props.proteins}</td>
-              </tr>
+                  <td>{nutr.name}</td>
+                  <td>{nutr.amount}{' '}{nutr.unit}</td>
+              </tr>)}                 
           </table>
         </aside>  )
 }
