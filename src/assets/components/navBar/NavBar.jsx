@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react'
-import './NavBar.css'
-import './NavFunc'
-import { Burger } from './burger.jsx'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import "./NavBar.css";
+import "./NavFunc";
+import { Burger } from "./burger.jsx";
+import { Link } from "react-router-dom";
 
 function NavBar(){
     const [visible, setVisible] = useState(false)
@@ -17,7 +17,7 @@ function NavBar(){
         return () => window.removeEventListener("resize", updateMedia);
     }, [isMobile]);
 
-    return (
+  return (
     <div className="NavBar">
         <a href="./"><img src="logotype.png" className="Logotype" alt="Logotype"/></a>
         <div className="NaviIntro">
@@ -29,14 +29,25 @@ function NavBar(){
         </div>
             {!isMobile || visible ? (
         <ul>
-            <li className="navOpt"><Link to=""><p>Home</p></Link></li>
-            <li className="navOpt"><Link to="/search"><p>Adv. Search</p></Link></li>
-            <li className="navOpt"><Link to="/about"><p>About</p></Link></li>
-            <li className="navOpt"><Link to="/contact"><p>Contact</p></Link></li>
+          <li className="navOpt">
+            <Link to="">
+              <p>Home</p>
+            </Link>
+          </li>
+          <li className="navOpt">
+            <Link to="/about">
+              <p>About</p>
+            </Link>
+          </li>
+          <li className="navOpt">
+            <Link to="/contact">
+              <p>Contact</p>
+            </Link>
+          </li>
         </ul>
         ) : (<></>)}
     </div>
-    )
+  );
 }
 
 export {NavBar};
