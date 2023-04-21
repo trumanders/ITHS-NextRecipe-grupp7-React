@@ -160,7 +160,7 @@ export async function getRecipeById(id) {
 }
 
 export async function getSimilarRecipes(id) {
-    const response = await fetch(`https://api.spoonacular.com/recipes/${id}/similar`, {
+    const response = await fetch(`https://api.spoonacular.com/recipes/${id}/similar?number=3`, {
         headers: {
             'Content-Type': 'application/json',
             'X-Api-Key': `${key}`

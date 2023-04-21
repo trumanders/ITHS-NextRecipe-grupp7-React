@@ -4,9 +4,11 @@ import './NutritionTable.css'
 import './Ingredient.css'
 import './Instructions.css'
 import {getRecipeById, getSimilarRecipes} from '../../../utils'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
+
+import RecipeCard from '../RecipeCard/RecipeCard'
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -21,6 +23,8 @@ export default function Recipe(){
     const [showIngredients, setShowIngredients] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [isMobile, setMobile] = useState(window.innerWidth<730);
+
+    // const [liknande, setLiknande] = useState(null);
 
     //Denna del av Shakiba
     const updateMedia = () =>{
@@ -38,7 +42,7 @@ export default function Recipe(){
         const fetchData = async () =>{
         let id = 615761; //detta id ersätts sen av props
         let response = await getRecipeById(id);
-        console.log(response);
+        //console.log(response);
         setRecipe(response); 
     
     }
@@ -50,10 +54,11 @@ export default function Recipe(){
         const fetchData = async () =>{ 
         let id = 615761; //detta id ersätts sen av props
         let response = await getSimilarRecipes(id);
-        console.log(response); 
+        //console.log(response); 
         setSimilars(response);
     }
         fetchData();
+        // console.log(similars);
     },[])
 
 
@@ -155,9 +160,9 @@ export default function Recipe(){
         
                     </div> 
 
-                    <h2>Similar Recipes</h2>
                     <div className='similar-recipes'>
-                        {similars.map(rec => <FejkKort id = {rec.id} image={recipe.image} title={rec.title} servings={rec.servings} readyInMinutes={rec.readyInMinutes}/>)} 
+                        <Similars similaRecipesWithoutImage = {similars}/>
+                        {/* {similars.map(rec => <RecipeCard id = {rec.id} image={recipe.imageType} title={rec.title} />)} */}
                     </div>                          
                 </div>
             </> 
@@ -193,15 +198,21 @@ const NutritionTable = (props) => {
     return(
         <aside className='nutrition-table-container'>
           <table className="nutrition-table">
-              <tr>
+            <thead>
+                <tr>
                   <th>Nutritions</th>
                   <th>Amount</th>
-              </tr>
-              {props.nutritionValues.map(nutr => 
-              <tr>
-                  <td>{nutr.name}</td>
-                  <td>{nutr.amount}{' '}{nutr.unit}</td>
-              </tr>)}                 
+                </tr>
+            </thead>
+              
+              {props.nutritionValues.map((nutr, index) => nutr.name !== "Net Carbohydrates" &&
+                <tbody>
+                    <tr key={index}>
+                        <td><b>{nutr.name}</b></td>
+                        <td><b>{nutr.amount}{' '}{nutr.unit}</b></td>
+                    </tr>
+                </tbody>
+              )}                 
           </table>
         </aside>  )
 }
@@ -213,7 +224,7 @@ const Ingredient = (props) => {
             <h2>Ingredients</h2>
             <ul className="list-ingredients">
                 {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
-                {props.ingredients.map(ingredient => <li key={ingredient.id} className="list-row"> 
+                {props.ingredients.map((ingredient, index) => <li key={index} className="list-row"> 
                     <div className='ingredient-name'><b>{ingredient.nameClean}</b></div>
                     <div className='amount-unit'><span>{ingredient.amount}</span>{' '} <span>{ingredient.unit}</span></div>
                 </li> )}
@@ -227,26 +238,58 @@ const Instructions = (props) => {
     return(
         <div className='instructions-container'>
             <h2>Steps</h2>
-            <div className='instructions' dangerouslySetInnerHTML={{__html: props.steps}}></div>
+            <div className='instructions' dangerouslySetInnerHTML={{__html: props.steps.replaceAll(". ", ".<br/>")}}></div>
         </div> 
     )
 }
 
-const FejkKort = ({id, image, title, servings, readyInMinutes}) => {
-        return (
-          <div className='card-container'>
-          <Card key={id} style={{ width: '25rem' }} >
-            <Card.Img variant="top" src={image}  className='card-image'/>
-            <Card.Body>
-              <Card.Title className='card-title'>{title}</Card.Title>
-              <Card.Text className='card-text'>
-               Servings: {servings}
-               <br/>
-               Ready in minutes: {readyInMinutes}
-              </Card.Text>
-              <Button variant="primary" className='card-button'>View Recipe</Button>
-            </Card.Body>
-          </Card>
-          </div>
-        );
+const Similars = (props) => {
+
+    console.log(props.similaRecipesWithoutImage.map(x => x.id));
+
+    return(
+        <div>
+            <h2>Similar Recipes</h2>
+            <ul>
+            {props.similaRecipesWithoutImage.map((element, index) => {
+                <li key={index}>{element.id}</li>
+            })}
+        </ul>
+        </div>
+    )
+
 }
+
+const SimilarsMemo = React.memo(Similars); //För att stoppa re-renderingsproblem
+
+    // const [similarsInfo, setsimilarsInfo] = useState(null);
+
+    // useEffect(()=>{
+    //     let responseArray = [];
+    //     // let cancel = false;
+    //     const getImages = async () => {
+    //         props.similaRecipesWithoutImage.map(async(element) =>{
+    //             const response = await getRecipeById(element.id);
+    //             responseArray.push(response);
+    //             setsimilarsInfo((prevSimilarsInfo) => [...prevSimilarsInfo, responseArray]);
+    //             console.log(similarsInfo)
+    //         })
+    //     }
+    //     getImages();
+    //     //console.log(similarsInfo)
+    //     // return () => {
+    //     //     cancel = true
+    //     // }
+        
+    // },[])
+
+    // useEffect(()=>{
+    //     const fetchData = async () =>{
+    //     let id = 615761; //detta id ersätts sen av props
+    //     let response = await getRecipeById(id);
+    //     //console.log(response);
+    //     setRecipe(response); 
+    
+    // }
+    //     fetchData();
+    // },[])
