@@ -84,7 +84,7 @@ button {
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 730px){
     .Logotype{
         display: block;
     }
@@ -103,7 +103,6 @@ button {
         margin: 15px 5px;
         width: 100px;
         height: 25px;
-
         background-color: rgba(240, 248, 255, 0);
     }
 
@@ -113,10 +112,6 @@ button {
 
     .NavBar p{
         color: rgb(25, 25, 25);
-    }
-
-    .NavBar p:hover{
-        color: rgb(240, 248, 255);
     }
 
     .NavBar{
