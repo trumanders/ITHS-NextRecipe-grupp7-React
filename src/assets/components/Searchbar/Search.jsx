@@ -124,8 +124,8 @@ function Search() {
             <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
             <Button variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
+            <ul className="itemContainer">
             {
-              
             listInputs.map(item => {
             return (
             
@@ -136,6 +136,7 @@ function Search() {
             </li>
             )  
           })}
+          </ul>
 
             <hr></hr>
 

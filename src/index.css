@@ -26,7 +26,9 @@ body {
   font-size: 12px;
   color:rgb(55, 35, 75);
 
-  background-color: rgb(120,120,120);
+  background-color: rgba(120,120,120, 0.5);
+  background: url(./assets/pictures/saladbowl.jpg) top left no-repeat fixed;
+  background-size: cover;
 }
 
 
@@ -48,6 +50,7 @@ body a:active {
   color: rgb(150, 60, 200);
 }
 
-/*
-  
-*/
+/* QUERY DESKTOP STYLE */
+@media screen and (min-width: 730px){
+
+}

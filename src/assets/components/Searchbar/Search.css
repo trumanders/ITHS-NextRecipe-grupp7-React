@@ -21,4 +21,5 @@
     display: flex-box;
     flex-direction: row;;
     list-style-type: none;
+    width: auto;
 }
