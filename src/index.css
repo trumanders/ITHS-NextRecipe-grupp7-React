@@ -1,15 +1,53 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424;  */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  transition: color 200ms;
 }
+
+/*
+  BOILER PLATING
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  box-sizing: content-box;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color:rgb(55, 35, 75);
+
+  background-color: rgb(120,120,120);
+}
+
+
+/*
+  LINK DESIGN
+*/
+
+body a {
+  color: rgb(70, 50, 100);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body a:hover {
+  color: rgb(130, 100, 150);
+}
+
+body a:active {
+  color: rgb(150, 60, 200);
+}
+
+/*
+  
+*/

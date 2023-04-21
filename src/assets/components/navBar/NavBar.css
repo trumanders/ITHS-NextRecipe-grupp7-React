@@ -13,10 +13,11 @@ button {
     position: sticky;
     top: 0px;
     background-color: rgba(150, 150, 150, 0);
-    color: black;
     width: 100%;
     height: auto;
     margin: 0px;
+
+    z-index: 500;
 }
 
 .Logotype{
@@ -25,7 +26,6 @@ button {
     width: 55px;
     height: 55px;
     box-sizing: border-box;
-    border: 1px solid red;
     left: 0px;
     overflow: hidden;
 }
@@ -80,7 +80,6 @@ button {
 
 .navOpt:hover{
     background-color: rgb(90,120,255);
-    color:rgb(240, 248, 255);
 }
 
 /* QUERY DESKTOP VIEW */
@@ -108,10 +107,6 @@ button {
 
     .navOpt:hover{
         background-color:rgba(240, 248, 255, 0);
-    }
-
-    .NavBar p{
-        color: rgb(25, 25, 25);
     }
 
     .NavBar{
