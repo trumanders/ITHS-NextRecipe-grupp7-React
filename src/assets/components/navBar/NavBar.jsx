@@ -6,22 +6,16 @@ import { Link } from 'react-router-dom'
 
 function NavBar(){
     const [visible, setVisible] = useState(false)
-    const [screenSize, setScreenSize] = useState()
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 730);
 
-    const getCurrentDimension = () => {
-        return window.innerWidth
+    const updateMedia = () => {
+        setIsMobile(window.innerWidth < 730)
     }
 
     useEffect(() => {
-        const updateDimension = () => {
-            setScreenSize(getCurrentDimension())
-        }
-        window.addEventListener("resize", updateDimension)
-
-        return(() => {
-            window.removeEventListener("resize", updateDimension)
-        })
-    },[screenSize])
+        window.addEventListener("resize", updateMedia);
+        return () => window.removeEventListener("resize", updateMedia);
+    }, [isMobile]);
 
     return (
     <div className="NavBar">
@@ -33,16 +27,14 @@ function NavBar(){
                 <img src="src/assets/components/navBar/pngegg.png" alt="Search recipe" />
             </div>
         </div>
-        
-            {visible || screenSize > 1199 ? (
+            {!isMobile || visible ? (
         <ul>
             <li className="navOpt"><Link to=""><p>Home</p></Link></li>
             <li className="navOpt"><Link to="/search"><p>Adv. Search</p></Link></li>
             <li className="navOpt"><Link to="/about"><p>About</p></Link></li>
             <li className="navOpt"><Link to="/contact"><p>Contact</p></Link></li>
         </ul>
-        ) : (<></>)
-            }
+        ) : (<></>)}
     </div>
     )
 }
