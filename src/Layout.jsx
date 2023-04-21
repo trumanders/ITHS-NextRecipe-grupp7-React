@@ -9,11 +9,6 @@ import Recipe from "./assets/components/recipe-info/Recipe";
 function Layout() {
   return (
     <>
-      
-      {/* <NavBar /> */}
-      <PageContainer />
-      <Recipe></Recipe>
-      {/* <Footer></Footer> */}
     </>
   )
 }

@@ -1,17 +1,17 @@
 .recipe-container{
     display: flex;
     flex-direction: column;
-    border: 1px dashed red;
+    /* border: 1px dashed red; */
 }
 
 .picture-pictureInfo-and-nutritionTable-container{
-    border: 1px dashed blue;
+    /* border: 1px dashed blue; */
     margin-bottom: 10px;
 }
 
-.recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-instructions{
+/* .recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-instructions{
     border: 1px dashed black;
-}
+} */
 
 .showButton{
     width: 70%;
