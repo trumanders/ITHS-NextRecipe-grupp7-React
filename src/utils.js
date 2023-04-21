@@ -5,6 +5,10 @@ const key = "ce78851c6bc24bf4944626cc0c04848e";
 
 //filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
 
+// getRecipeSearch("Carbonara")
+
+//  getRandomRecipes("vegetarian, gluten, dinner")
+
 export async function getAllRecipes() {
   let allRecipes = [];
   let number = 100; //antal som ska hämtas
@@ -38,6 +42,51 @@ export async function getAllRecipes() {
   } while (allRecipes.length < 200); //hämtar 200 recept. För samtliga recept - (allRecipes.length < totalNumber)
 
   return allRecipes;
+}
+
+export async function getRandomRecipes(tags) {
+    let fetchResults = []
+
+    const response = await fetch(`https://api.spoonacular.com/recipes/random?number=10&tags=${tags}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': `${key}`
+        }
+    })
+    
+    var data = await response.json()
+    
+
+    // data.results.forEach(item => {
+    //     fetchResults.push(
+    //         item
+    //     )
+    // })
+
+    console.log(data)
+    //  return fetchResults
+    return data.recipes
+}
+
+export async function getRecipeSearch(searchString) {
+    let fetchResults = []
+
+    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchString}&number=10`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': `${key}`
+        }
+    })
+    var data = await response.json()
+
+    data.results.forEach(item => {
+        fetchResults.push(
+            item
+        )
+    })
+
+    // console.log(fetchResults)
+    return fetchResults
 }
 
 export async function getPopularRecipes() {

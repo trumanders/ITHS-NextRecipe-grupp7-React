@@ -1,0 +1,24 @@
+.itemInput{
+    align-items:center;
+}
+
+.search-form{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.diet-boxes{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.accordion-style{
+    padding-bottom: 15px;
+    
+}
+
+.itemContainer{
+    display: flex-box;
+    flex-direction: row;;
+    list-style-type: none;
+}
