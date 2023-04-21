@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
 import {filterRecipes, getRecipeSearch, getRandomRecipes} from '../../../utils'
+import { useClickStore } from '../../hooks/useClickStore';
+import { useSearchStringStore } from '../../hooks/useSearchStringStore';
+import { shallow } from 'zustand/shallow';
 
 
 function Search() {
@@ -15,7 +18,14 @@ function Search() {
     const[listDiet, setlistDiet] = useState([])
     const[listType, setlistType] = useState()
     const[listIntolerances, setlistIntolerances] = useState([])
-    
+    const [searchString, setSearchString] = useSearchStringStore(
+      (state) => [state.searchString, state.setSearchString],
+      shallow
+    )
+    const [isClicked, setIsClicked] = useClickStore(
+      (state) => [state.isClicked, state.setIsClicked],
+      shallow
+  )
 
     const handleSubmit=(event)=> {
       // Gör att browsern ej refreshar utan stannar på sidan
@@ -76,15 +86,17 @@ function Search() {
       }
 
       const sendIngridients = () => {
-        console.log(listType)
-        console.log(listInputs.toString())
-        console.log(listDiet.toString())
-        console.log(listIntolerances.toString())
-        const fetchData = async() => {
-          const response = await filterRecipes(listInputs.toString(), listType, listIntolerances.toString(), listDiet.toString())
-          console.log(response)
-        }
-        fetchData()
+        // console.log(listType)
+        // console.log(listInputs.toString())
+        // console.log(listDiet.toString())
+        // console.log(listIntolerances.toString())
+        // const fetchData = async() => {
+        //   const response = await filterRecipes(listInputs.toString(), listType, listIntolerances.toString(), listDiet.toString())
+        //   console.log(response)
+        // }
+        // fetchData()
+        setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString()})
+        setIsClicked()
       }
 
       const sendRecipe =() => {
