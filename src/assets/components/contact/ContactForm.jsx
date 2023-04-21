@@ -13,6 +13,7 @@ const YOUR_PUBLIC_KEY = "nHWPgzJslJB85tQhf"
 export const ContactUs = () => {
   const form = useRef(); 
   const [status, setStatus] = useState(null); 
+ 
   
 
   //funktionen sendEmail är funktionen som körs när formuläret submittas, se längre ner i returnen på "Form". Så fort vi submittar formuläret kommer status att förändras genom "setStatus" från null till "sending"
@@ -20,12 +21,15 @@ export const ContactUs = () => {
     event.preventDefault();
     setStatus("sending");
 
+   
+    
 
 //Med hjälp av emailJS funktion sendForm så skickas mailet från sidan till oss med den data som funktionen tar in. 
 //om meddelandet lyckas skickas så ska statusen förändras från sending till "sent" och om meddelandet inte lyckas skickas ska statusen förändras från sending till error med hjälp av setStatus
     emailjs.sendForm(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, form.current, YOUR_PUBLIC_KEY) 
       .then((result) => {         
-          setStatus("sent"); 
+          setStatus("sent");           
+          document.getElementById("mailForm").reset();          
       }, (error) => {                            
           setStatus("error"); 
       });
@@ -42,7 +46,7 @@ export const ContactUs = () => {
         <br></br>
         <div className="d-flex justify-content-center">
         <Col md={4}> 
-            <Form ref={form} onSubmit={sendEmail}>       
+            <Form ref={form} id={"mailForm"} onSubmit={sendEmail}>       
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Row>  
                         <Col lg={6}>
@@ -57,7 +61,7 @@ export const ContactUs = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control required={true} type="email" name="from_email" placeholder="" />
+                    <Form.Control required={true} type="email" name="from_email" placeholder="your@emailadress.com" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Message</Form.Label>
