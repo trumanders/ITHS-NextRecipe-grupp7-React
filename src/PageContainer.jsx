@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import AboutUs from "./assets/pages/about/AboutUs";
 import { ContactUs } from "./assets/pages/contact/ContactForm";
 import RecipeRepresentation from "./assets/components/RecipeRepresentation/RecipeRepresentation";
-import Home from "./assets/pages/Home"
+import Home from "./assets/pages/home/Home"
 
 import {
   Routes,
@@ -20,6 +20,7 @@ function PageContainer() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/" element={<Home />} />
+        {/* <Route path="recipe/:recipeId" element={<Recipe />} /> */}
       </Routes>
     </Container>
   );

@@ -2,12 +2,19 @@ import {useState,useEffect} from 'react'
 import { 
     getPopularRecipes, 
     filterRecipes, 
-} from '../../utils'
-import Search from '../components/Searchbar/Search'
-import RecipeRepresentation from '../components/RecipeRepresentation/RecipeRepresentation'
-import { useSearchStringStore } from '../hooks/useSearchStringStore'
-import { useClickStore } from '../hooks/useClickStore'
+} from '../../../utils'
+import Search from '../../components/Searchbar/Search'
+import RecipeRepresentation from '../../components/RecipeRepresentation/RecipeRepresentation'
+import { useSearchStringStore } from '../../hooks/useSearchStringStore'
+import { useClickStore } from '../../hooks/useClickStore'
+import { useLoaderData } from 'react-router-dom'
 
+//---- Tas i bruk när routingen är på plats
+// export async function loader() {
+//   const popularRecipes = await getPopularRecipes()
+//   return {popularRecipes}
+// }
+//-----------
 
 export default function Home() {
   const [recipes, setRecipes] = useState([])
