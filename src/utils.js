@@ -85,7 +85,7 @@ export async function getRecipeSearch(searchString) {
         )
     })
 
-    // console.log(fetchResults)
+    console.log(fetchResults)
     return fetchResults
 }
 

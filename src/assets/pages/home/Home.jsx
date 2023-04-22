@@ -1,7 +1,9 @@
 import {useState,useEffect} from 'react'
 import { 
     getPopularRecipes, 
-    filterRecipes, 
+    filterRecipes,
+    getRecipeSearch,
+    getRandomRecipes, 
 } from '../../../utils'
 import Search from '../../components/Searchbar/Search'
 import RecipeRepresentation from '../../components/RecipeRepresentation/RecipeRepresentation'
@@ -41,21 +43,23 @@ export default function Home() {
           const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
           setRecipes(response)
         }
-        return fetchIngredient()
+        fetchIngredient()
+        break
       case "getRecipeSearch":
         const fetchFreeSearch = async() => {
-          const response = await filterRecipes(searchString.ingredients)
+          const response = await getRecipeSearch(searchString.ingredients)
           setRecipes(response)
         }
-        return fetchFreeSearch()
+        fetchFreeSearch()
+        break
       case "getRandom":
         const fetchRandom = async() => {
-          const response = await filterRecipes(searchString.ingredients)
+          const response = await getRandomRecipes(searchString.ingredients)
           setRecipes(response)
         }
-        return fetchRandom()
+        fetchRandom()
+        break
     }
-    
     setPrevClick(prevClick + 1)
   }
 
