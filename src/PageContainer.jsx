@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Container } from "react-bootstrap";
-import AboutUs from "./assets/pages/about/AboutUs";
-import { ContactUs } from "./assets/pages/contact/ContactForm";
-import RecipeRepresentation from "./assets/components/RecipeRepresentation/RecipeRepresentation";
+  import AboutUs from "./assets/pages/about/AboutUs";
+  import { ContactUs } from "./assets/pages/contact/ContactForm";
 import Home from "./assets/pages/home/Home"
+
 
 
 import {
@@ -17,12 +17,13 @@ import {
  function PageContainer() {
   return (
     <Container>
-      <Routes>
+      <Outlet />
+      {/* <Routes>
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/" element={<Home />} />
-        {/* <Route path="recipe/:recipeId" element={<Recipe />} /> */}
-      </Routes>
+        <Route path="recipe/:recipeId" element={<Recipe />} />
+      </Routes> */}
     </Container>
   );
 }

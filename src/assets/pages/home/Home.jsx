@@ -12,28 +12,28 @@ import { useClickStore } from '../../hooks/useClickStore'
 import { useLoaderData } from 'react-router-dom'
 
 //---- Tas i bruk när routingen är på plats
-// export async function loader() {
-//   const popularRecipes = await getPopularRecipes()
-//   return {popularRecipes}
-// }
+export async function loader() {
+  const popularRecipes = await getPopularRecipes()
+  return {popularRecipes}
+}
 //-----------
 
 export default function Home() {
   const [recipes, setRecipes] = useState([])
   const searchString = useSearchStringStore((state) => state.searchString)
-  //const {popularRecipes} = useLoaderData()
+  const {popularRecipes} = useLoaderData()
   const [isClicked, setIsClicked] = useClickStore(
     (state) => [state.isClicked, state.setIsClicked])
   const [prevClick, setPrevClick] = useState(0)
 
   //----Ersätts av useLoaderData när routingen är på plats.
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getPopularRecipes();
-      setRecipes(response);
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await getPopularRecipes();
+  //     setRecipes(response);
+  //   }
+  //   fetchData();
+  // }, []);
   //------
 
   if(isClicked > prevClick) {
@@ -63,9 +63,9 @@ export default function Home() {
     setPrevClick(prevClick + 1)
   }
 
-//   if(recipes.length === 0) {
-//     setRecipes(popularRecipes)
-//   }
+  if(recipes.length === 0) {
+    setRecipes(popularRecipes)
+  }
 
   return(
   <>

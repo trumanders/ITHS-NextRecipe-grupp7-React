@@ -7,6 +7,7 @@ import {getRecipeById, getSimilarRecipes} from '../../../utils'
 import React, { useEffect, useState } from 'react'
 import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
+import {useLoaderData} from 'react-router-dom'
 
 import RecipeCard from '../RecipeCard/RecipeCard'
 
@@ -16,9 +17,14 @@ import { get } from 'react-hook-form'
 
 const key = '338a43afc1f444c08393d10c361ea4e9';
 
+export async function loader({ params }) {
+    const recipe = await getRecipeById(params.recipeId)
+    return { recipe }
+}
+
 export default function Recipe(){
-   
-    const [recipe, setRecipe] = useState(null);
+    const { recipe } = useLoaderData()
+    // const [recipe, setRecipe] = useState(null);
     const [similars, setSimilars] = useState(null);
     const [showNutritions, setShowNutritions] = useState(false);
     const [showIngredients, setShowIngredients] = useState(false);
