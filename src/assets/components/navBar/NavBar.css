@@ -4,6 +4,11 @@
     transition: color 150ms;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+}
+
 .NavBar{
     position: sticky;
     top: 0px;
@@ -79,7 +84,7 @@
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 730px){
     .Logotype{
         display: block;
     }
@@ -98,7 +103,6 @@
         margin: 15px 5px;
         width: 100px;
         height: 25px;
-
         background-color: rgba(240, 248, 255, 0);
     }
 
@@ -110,12 +114,8 @@
         color: rgb(25, 25, 25);
     }
 
-    .NavBar p:hover{
-        color: rgb(240, 248, 255);
-    }
-
     .NavBar{
-        background-color:rgb(150, 150, 150);
+        background-color: #b5ffd5;
         height: 55px;
     }
 }
