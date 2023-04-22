@@ -55,16 +55,9 @@ export async function getRandomRecipes(tags) {
     })
     
     var data = await response.json()
-    
-
-    // data.results.forEach(item => {
-    //     fetchResults.push(
-    //         item
-    //     )
-    // })
 
     console.log(data)
-    //  return fetchResults
+    
     return data.recipes
 }
 
@@ -223,7 +216,7 @@ export async function getRecipeById(id) {
 
 export async function getSimilarRecipes(id) {
   const response = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/similar`,
+    `https://api.spoonacular.com/recipes/${id}/similar?number=3`,
     {
       headers: {
         "Content-Type": "application/json",

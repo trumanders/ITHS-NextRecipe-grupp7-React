@@ -1,0 +1,18 @@
+.recipe-picture{
+    margin-left: 5px;
+    margin-right: 5px; 
+    max-width: 100%;  
+}
+
+.extra-recipe-info{
+    margin-left: 5px;
+    margin-right: 5px;
+    /* align-items: center; */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.picture-and-info-container{
+    display: flex;
+    flex-direction: column;
+}

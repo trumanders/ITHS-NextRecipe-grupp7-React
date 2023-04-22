@@ -1,0 +1,12 @@
+.instructions{
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: start;
+    margin-bottom: 10px;
+}
+
+.instructions ol{
+    padding-inline-start: 15px;
+    text-align: start;
+}
+
