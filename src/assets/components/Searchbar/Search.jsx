@@ -95,28 +95,32 @@ function Search() {
         //   console.log(response)
         // }
         // fetchData()
-        setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString()})
+        setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString(), call: "getIngredient"})
         setIsClicked()
       }
 
       const sendRecipe =() => {
-        console.log(recipeSearch)
-        const fetchData = async() => {
-          const response = await getRecipeSearch(recipeSearch)
-          console.log(response)
-        }
-        fetchData()
+        // console.log(recipeSearch)
+        // const fetchData = async() => {
+        //   const response = await getRecipeSearch(recipeSearch)
+        //   console.log(response)
+        // }
+        // fetchData()
+        setSearchString({ingredients: recipeSearch, call: "getRecipeSearch"})
+        setIsClicked()
       }
 
       const sendRandom = () => {
         const valuesRandom = [listDiet, listType, listIntolerances].toString()
         
-        const fetchData = async () => {
-          const response = await getRandomRecipes(valuesRandom)
-          console.log(valuesRandom)
-          console.log(response)
-        }
-        fetchData()
+        // const fetchData = async () => {
+        //   const response = await getRandomRecipes(valuesRandom)
+        //   console.log(valuesRandom)
+        //   console.log(response)
+        // }
+        // fetchData()
+        setSearchString({ingredients: valuesRandom, call: "getRandom"})
+        setIsClicked()
       }
 
   return (

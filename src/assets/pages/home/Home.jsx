@@ -35,11 +35,27 @@ export default function Home() {
   //------
 
   if(isClicked > prevClick) {
-    const fetchData = async() => {
-      const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
-      setRecipes(response)
+    switch (searchString.call) {
+      case "getIngredient":
+        const fetchIngredient = async() => {
+          const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
+          setRecipes(response)
+        }
+        return fetchIngredient()
+      case "getRecipeSearch":
+        const fetchFreeSearch = async() => {
+          const response = await filterRecipes(searchString.ingredients)
+          setRecipes(response)
+        }
+        return fetchFreeSearch()
+      case "getRandom":
+        const fetchRandom = async() => {
+          const response = await filterRecipes(searchString.ingredients)
+          setRecipes(response)
+        }
+        return fetchRandom()
     }
-    fetchData()
+    
     setPrevClick(prevClick + 1)
   }
 
