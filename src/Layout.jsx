@@ -9,8 +9,7 @@ import Search from "./assets/components/Searchbar/Search.jsx";
 function Layout() {
   return (
     <>      
-      <NavBar />
-      <Search />   
+      <NavBar /> 
       <PageContainer />
       {/* <Footer></Footer> */}
     </>

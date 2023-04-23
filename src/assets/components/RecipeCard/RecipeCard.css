@@ -32,10 +32,12 @@
 }
 
 .card-button {
-  background-color: rgb(48, 44, 44);
+  background-color: #b5ffd5;;
   border-color: azure;
-  color: azure;
+  color: rgb(21, 22, 22);
   margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 7px;
 }
 
 .card-button:hover {

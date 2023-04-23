@@ -19,7 +19,7 @@ function NavBar(){
 
   return (
     <div className="NavBar">
-        <a href="./"><img src="logotype.png" className="Logotype" alt="Logotype"/></a>
+        <a href="./"><img src="#" className="Logotype" alt="Logotype"/></a>
         <div className="NaviIntro">
             <button onClick={() => setVisible(!visible)}><Burger></Burger></button>
             <p>Nail Soup</p>
@@ -30,7 +30,7 @@ function NavBar(){
             {!isMobile || visible ? (
         <ul>
           <li className="navOpt">
-            <Link to="">
+            <Link to="/">
               <p>Home</p>
             </Link>
           </li>
