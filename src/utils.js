@@ -8,6 +8,7 @@ const key = "ce78851c6bc24bf4944626cc0c04848e";
 // getRecipeSearch("Carbonara")
 
 //  getRandomRecipes("vegetarian, gluten, dinner")
+getSimilarRecipes(615761)
 
 export async function getAllRecipes() {
   let allRecipes = [];
@@ -227,5 +228,22 @@ export async function getSimilarRecipes(id) {
 
   const data = await response.json();
 
-  return data;
+  //Eftersom similarRecipes inte levereras med bild plockas id:n ut från similar-resultaten och hela recepten hämtas.
+  const ids = data.map((item) => {
+    return item.id
+  })
+
+  const responseTwo = await fetch(
+    `https://api.spoonacular.com/recipes/informationBulk?ids=${ids.toString()}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Api-Key": `${key}`,
+      },
+    }
+  );
+
+  const dataTwo = await responseTwo.json();
+
+  return dataTwo;
 }

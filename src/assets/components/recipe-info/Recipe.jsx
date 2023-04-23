@@ -25,7 +25,7 @@ export async function loader({ params }) {
 export default function Recipe(){
     const { recipe } = useLoaderData()
     // const [recipe, setRecipe] = useState(null);
-    const [similars, setSimilars] = useState(null);
+    const [similars, setSimilars] = useState();
     const [showNutritions, setShowNutritions] = useState(false);
     const [showIngredients, setShowIngredients] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
@@ -45,22 +45,22 @@ export default function Recipe(){
     }, [isMobile]);
 
     //Hämta information för recept
-    useEffect(()=>{
-        const fetchData = async () =>{
-        let id = 615761; //detta id ersätts sen av props
-        let response = await getRecipeById(id);
-        //console.log(response);
-        setRecipe(response); 
+    // useEffect(()=>{
+    //     const fetchData = async () =>{
+    //     let id = 615761; //detta id ersätts sen av props
+    //     let response = await getRecipeById(id);
+    //     //console.log(response);
+    //     setRecipe(response); 
     
-    }
-        fetchData();
-    },[])
+    // }
+    //     fetchData();
+    // },[])
 
-    //Hämta linkande recept
+    //Hämta liknande recept
     useEffect(()=>{
         const fetchData = async () =>{ 
-        let id = 615761; //detta id ersätts sen av props
-        let response = await getSimilarRecipes(id);
+        //let id = 615761; //detta id ersätts sen av props
+        let response = await getSimilarRecipes(recipe.id);
         //console.log(response); 
         setSimilars(response);
     }
@@ -169,7 +169,7 @@ export default function Recipe(){
 
                     <div className='similar-recipes'>
                         <SimilarsMemo similaRecipesWithoutImage = {similars}/>
-                        {/* {similars.map(rec => <RecipeCard id = {rec.id} image={recipe.imageType} title={rec.title} />)} */}
+                        {/* {similars.map(rec => <RecipeCard id = {rec.Id} image={rec.Image} title={rec.Title} />)} */}
                     </div>                          
                 </div>
             </> 
