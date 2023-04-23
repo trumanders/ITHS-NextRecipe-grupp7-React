@@ -1,0 +1,42 @@
+.recipe-container{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px dashed red; */
+}
+
+.picture-pictureInfo-and-nutritionTable-container{
+    /* border: 1px dashed blue; */
+    margin-bottom: 10px;
+}
+
+/* .recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-instructions{
+    border: 1px dashed black;
+} */
+
+.showButton{
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 730px){
+
+    /* START: Bild & Tabell samma rad */
+    .picture-pictureInfo-and-nutritionTable-container{
+        display: flex;
+        justify-content: space-between;
+    }
+    .recipe-section-pictureAndInfo{
+        width: 70%;
+    }
+    .recipe-section-nutritionTable{
+        width: 25%;
+    }
+    /* SLUT: Bild & Tabell samma rad */
+}
+
+
+.similar-recipes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
