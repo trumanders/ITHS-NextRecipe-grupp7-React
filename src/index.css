@@ -31,6 +31,12 @@ body {
   background-size: cover;
 }
 
+.wrapper{
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgb(230,230,230);
+}
+
 
 /*
   LINK DESIGN
