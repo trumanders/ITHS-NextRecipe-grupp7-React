@@ -1,121 +1,121 @@
-.NavBar *{
-    margin: 0px;
-    padding: 0px;
-    transition: color 150ms;
+.NavBar * {
+  margin: 0px;
+  padding: 0px;
+  transition: color 150ms;
 }
 
 button {
-    border: none;
-    background-color: transparent;
+  border: none;
+  background-color: transparent;
 }
 
-.NavBar{
-    position: sticky;
-    top: 0px;
-    background-color: rgba(150, 150, 150, 0);
-    color: black;
-    width: 100%;
-    height: auto;
-    margin: 0px;
+.NavBar {
+  position: sticky;
+  top: 0px;
+  background-color: rgba(150, 150, 150, 0);
+  color: black;
+  width: 100%;
+  height: auto;
+  margin: 0px;
 }
 
-.Logotype{
-    display: none;
-    position: absolute;
-    width: 55px;
-    height: 55px;
-    box-sizing: border-box;
-    border: 1px solid red;
-    left: 0px;
-    overflow: hidden;
+.Logotype {
+  display: none;
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  box-sizing: border-box;
+  border: 1px solid red;
+  left: 0px;
+  overflow: hidden;
 }
 
-.NavBar ul{
-    float: none;
-    display: contents;
-    flex-direction: row;
-    list-style-type: none;
-    background-color: rgba(255, 200, 255, 0);
+.NavBar ul {
+  float: none;
+  display: contents;
+  flex-direction: row;
+  list-style-type: none;
+  background-color: rgba(255, 200, 255, 0);
 }
 
-.NaviIntro{
-    box-sizing: content-box;
-    height: 55px;
-    background-color: rgb(200, 200, 200);
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
+.NaviIntro {
+  box-sizing: content-box;
+  height: 55px;
+  background-color: rgb(200, 200, 200);
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
 
-    /* FONT DESIGN */
-    font-size: larger;
+  /* FONT DESIGN */
+  font-size: larger;
 }
 
-.NaviIntro p{
-    margin: 10px auto;
+.NaviIntro p {
+  margin: 10px auto;
 }
 
-.searchIcon{
-    width: 45px;
-    height: 45px;
-    border-radius: 5px;
-    padding: 7px 5px 3px 5px;
-    background-color: rgb(150, 150, 150);
+.searchIcon {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  padding: 7px 5px 3px 5px;
+  background-color: rgb(150, 150, 150);
 }
 
-.searchIcon img{
-    width: 40px;
-    height: 40px;
+.searchIcon img {
+  width: 40px;
+  height: 40px;
 }
 
-.navOpt{
-    box-sizing: content-box;
-    background-color: rgb(240, 248, 255);
-    width: 100%;
-    height: 35px;
-    margin: 5px 0px 0px 0px;
-    padding: 2px 0px;
-    transition: 150ms;
-    overflow: hidden;
+.navOpt {
+  box-sizing: content-box;
+  background-color: rgb(240, 248, 255);
+  width: 100%;
+  height: 35px;
+  margin: 5px 0px 0px 0px;
+  padding: 2px 0px;
+  transition: 150ms;
+  overflow: hidden;
 }
 
-.navOpt:hover{
-    background-color: rgb(90,120,255);
-    color:rgb(240, 248, 255);
+.navOpt:hover {
+  background-color: rgb(90, 120, 255);
+  color: rgb(240, 248, 255);
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 730px){
-    .Logotype{
-        display: block;
-    }
+@media screen and (min-width: 730px) {
+  .Logotype {
+    display: block;
+  }
 
-    .NaviIntro{
-        display: none;
-    }
+  .NaviIntro {
+    display: none;
+  }
 
-    .NavBar ul{
-        float: right;
-        display: flex;
-        flex-direction: row;
-    }
+  .NavBar ul {
+    float: right;
+    display: flex;
+    flex-direction: row;
+  }
 
-    .navOpt{
-        margin: 15px 5px;
-        width: 100px;
-        height: 25px;
-        background-color: rgba(240, 248, 255, 0);
-    }
+  .navOpt {
+    margin: 15px 5px;
+    width: 100px;
+    height: 25px;
+    background-color: rgba(240, 248, 255, 0);
+  }
 
-    .navOpt:hover{
-        background-color:rgba(240, 248, 255, 0);
-    }
+  .navOpt:hover {
+    background-color: rgba(240, 248, 255, 0);
+  }
 
-    .NavBar p{
-        color: rgb(25, 25, 25);
-    }
+  .NavBar p {
+    color: rgb(25, 25, 25);
+  }
 
-    .NavBar{
-        background-color: #b5ffd5;
-        height: 55px;
-    }
+  .NavBar {
+    background-color: #b5ffd5;
+    height: 55px;
+  }
 }
