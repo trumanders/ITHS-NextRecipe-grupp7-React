@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function RecipeCard({ id, image, title }) {
   return (
     <div className="card-container">
-      <Card key={id} style={{ width: "20rem" }} className="card-Card">
+      <Card key={id} style={{ width: "20rem" }}>
         <Card.Img variant="top" src={image} className="card-image" />
         <Card.Body>
           <Card.Title className="card-title">{title}</Card.Title>
@@ -15,9 +15,9 @@ function RecipeCard({ id, image, title }) {
          <br/>
          Ready in minutes: {readyInMinutes}
         </Card.Text> */}
-          <Link to={`/recipe/${id}`} className="card-button">
+          {/* <Link to={`/recipe/${id}`} className="card-button">
             View Recipe
-          </Link>
+          </Link> */}
         </Card.Body>
       </Card>
     </div>
