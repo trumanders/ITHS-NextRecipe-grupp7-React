@@ -151,7 +151,6 @@ export default function Recipe(){
                     </div> 
 
                     <div className='similar-recipes'>
-                        {/* <SimilarsMemo similaRecipesWithoutImage = {similars}/> */}
                         {similars.map(rec => <RecipeCard id = {rec.id} image={rec.image} title={rec.title} key={rec.id}/>)}
                     </div>                          
                 </div>
@@ -188,15 +187,15 @@ const NutritionTable = (props) => {
     return(
         <aside className='nutrition-table-container'>
           <table className="nutrition-table">
-            <thead>
-                <tr>
-                  <th>Nutritions</th>
-                  <th>Amount</th>
+            <thead key="head">
+                <tr key="headrow">
+                  <th key="Nutritions">Nutritions</th>
+                  <th key="Amount">Amount</th>
                 </tr>
             </thead>
               
               {props.nutritionValues.map((nutr, index) => nutr.name !== "Net Carbohydrates" &&
-                <tbody>
+                <tbody key={`${index}body`}>
                     <tr key={index}>
                         <td><b>{nutr.name}</b></td>
                         <td><b>{nutr.amount}{' '}{nutr.unit}</b></td>
