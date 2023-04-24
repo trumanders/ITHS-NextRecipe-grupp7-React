@@ -8,7 +8,7 @@ const key = "ce78851c6bc24bf4944626cc0c04848e";
 // getRecipeSearch("Carbonara")
 
 //  getRandomRecipes("vegetarian, gluten, dinner")
-getSimilarRecipes(615761)
+// getSimilarRecipes(615761)
 
 export async function getAllRecipes() {
   let allRecipes = [];
