@@ -138,8 +138,6 @@ function Search() {
           })}
           </ul>
 
-            <hr></hr>
-
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
@@ -182,8 +180,7 @@ function Search() {
         <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
         <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
         <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
-        </div>  
-        <hr></hr>
+        </div>
 
         <Accordion className="accordion-style">
       <Accordion.Item eventKey="0">
