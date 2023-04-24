@@ -16,7 +16,7 @@ function Search() {
     const[listInputs, setlistInputs] = useState([])
     const[recipeSearch, setrecipeSearch] = useState("")
     const[listDiet, setlistDiet] = useState([])
-    const[listType, setlistType] = useState()
+    const[listType, setlistType] = useState("")
     const[listIntolerances, setlistIntolerances] = useState([])
     const [searchString, setSearchString] = useSearchStringStore(
       (state) => [state.searchString, state.setSearchString],
@@ -28,14 +28,22 @@ function Search() {
   )
 
     const handleSubmit=(event)=> {
-      // Gör att browsern ej refreshar utan stannar på sidan
       event.preventDefault();
-      const item=[input]
+      const item = input
+      
+      if(listInputs.includes(item))
+      {
+        alert("Ingredient already added.")
+        setInput("")
+        return;
+      }
       if(input)
       {
         setlistInputs((ls) =>[...ls, item])
         setInput("")
-        
+      }
+      else{
+        alert("No ingredient added")
       }
       
     }
@@ -86,41 +94,29 @@ function Search() {
       }
 
       const sendIngridients = () => {
-        // console.log(listType)
-        // console.log(listInputs.toString())
-        // console.log(listDiet.toString())
-        // console.log(listIntolerances.toString())
-        // const fetchData = async() => {
-        //   const response = await filterRecipes(listInputs.toString(), listType, listIntolerances.toString(), listDiet.toString())
-        //   console.log(response)
-        // }
-        // fetchData()
+      
+        if(listInputs.length === 0)
+        {
+          alert("Dont forget to add your ingridients!")
+          return;
+        }
         setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString(), call: "getIngredient"})
         setIsClicked()
       }
 
       const sendRecipe =() => {
-        // console.log(recipeSearch)
-        // const fetchData = async() => {
-        //   const response = await getRecipeSearch(recipeSearch)
-        //   console.log(response)
-        // }
-        // fetchData()
+       
+        
         setSearchString({ingredients: recipeSearch, call: "getRecipeSearch"})
         setIsClicked()
       }
 
       const sendRandom = () => {
         const valuesRandom = [listDiet, listType, listIntolerances].toString()
-        
-        // const fetchData = async () => {
-        //   const response = await getRandomRecipes(valuesRandom)
-        //   console.log(valuesRandom)
-        //   console.log(response)
-        // }
-        // fetchData()
-        setSearchString({ingredients: valuesRandom, call: "getRandom"})
-        setIsClicked()
+
+          setSearchString({ingredients: valuesRandom, call: "getRandom"})
+          setIsClicked()
+            console.log(valuesRandom)
       }
 
   return (
