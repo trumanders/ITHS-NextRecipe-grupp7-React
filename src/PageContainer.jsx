@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Container } from "react-bootstrap";
-import AboutUs from "./assets/components/about/AboutUs";
-import {ContactUs} from "./assets/components/contact/ContactForm"
+  import AboutUs from "./assets/pages/about/AboutUs";
+  import { ContactUs } from "./assets/pages/contact/ContactForm";
+import Home from "./assets/pages/home/Home"
+
+
 
 import {
   Routes,
@@ -14,10 +17,13 @@ import {
  function PageContainer() {
   return (
     <Container>
-      <Routes>              
-          <Route path="about" element={<AboutUs />} />
-          <Route path="contact" element={<ContactUs />} /> 
-      </Routes>
+      <Outlet />
+      {/* <Routes>
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/" element={<Home />} />
+        <Route path="recipe/:recipeId" element={<Recipe />} />
+      </Routes> */}
     </Container>
   );
 }
