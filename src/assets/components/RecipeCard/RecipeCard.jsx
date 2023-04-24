@@ -15,7 +15,7 @@ function RecipeCard({ id, image, title }) {
          <br/>
          Ready in minutes: {readyInMinutes}
         </Card.Text> */}
-          <Link to={`recipe/${id}`} className="card-button">
+          <Link to={`/recipe/${id}`} className="card-button">
             View Recipe
           </Link>
         </Card.Body>
