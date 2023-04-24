@@ -14,9 +14,9 @@ function RecipeCard({ id, image, title }) {
          <br/>
          Ready in minutes: {readyInMinutes}
         </Card.Text> */}
-          <Button variant="primary" className="card-button">
+          <button className="card-button">
             View Recipe
-          </Button>
+          </button>
         </Card.Body>
       </Card>
     </div>

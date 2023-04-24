@@ -17,7 +17,7 @@
 .card-image {
   width: 100%;
   height: auto;
-  border-radius: 3%;
+  border-radius: 0px;
 }
 
 .card-title {
@@ -32,12 +32,19 @@
 }
 
 .card-button {
-  background-color: rgb(48, 44, 44);
-  border-color: azure;
-  color: azure;
-  margin-top: 1rem;
+  background-color: #0d6efd;
+  color:rgb(238, 238, 238);
+  height: 35px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid rgb(238, 238, 238);
+  transition: color 150ms;
+  position: relative;
+  bottom: 5px;
 }
 
 .card-button:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  background-color:rgb(238, 238, 238);
+  color: #0d6efd;
+  border-color: #0d6efd;
 }

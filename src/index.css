@@ -31,11 +31,16 @@ body {
   background-size: cover;
 }
 
+body button{
+  margin: 5px;
+}
+
 .wrapper{
   width: 100%;
   max-width: 1200px;
-  background-color: rgb(230,230,230);
+  background-color: rgb(245,245,245);
   margin: 0px auto;
+  padding: 15px;
 }
 
 

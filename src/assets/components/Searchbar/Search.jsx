@@ -1,11 +1,11 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import React, {useState} from 'react';
-import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
 import {filterRecipes, getRecipeSearch, getRandomRecipes} from '../../../utils'
+import './Search.css';
 
 
 function Search() {
@@ -124,12 +124,12 @@ function Search() {
             <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
             <Button variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
-            <ul className="itemContainer">
+            <ul id="itemContainer">
             {
             listInputs.map(item => {
             return (
             
-            <li key={item} >
+            <li className="searchItem" key={item} >
             
             <span>{item} {"  "}</span>
             <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
