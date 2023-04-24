@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
-    "@esbuild/darwin-arm64": "^0.17.17",
     "@radix-ui/react-alert-dialog": "^1.0.3",
     "bootstrap": "^5.2.3",
     "clsx": "^1.2.1",
