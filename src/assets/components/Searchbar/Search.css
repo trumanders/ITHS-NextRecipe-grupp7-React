@@ -22,7 +22,7 @@
     flex-direction: row;;
     list-style-type: none;
     justify-content: center;
-    margin: 0px auto;
+    margin: 0px auto 15px;
     padding: 0px;
 }
 
@@ -37,5 +37,12 @@
 }
 
 .btn-close{
+    margin: 0px;
+}
+
+.accordion-item{
+    margin-top: 15px;
+}
+.accordion-button{
     margin: 0px;
 }
