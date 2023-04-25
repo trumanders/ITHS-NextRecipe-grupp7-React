@@ -1,26 +1,29 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./RecipeCard.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function RecipeCard({ id, image, title }) {
+  const navigate = useNavigate();
+  function clickHandler() {
+    navigate(`/recipe/${id}`);
+  }
+
   return (
-    <div className="card-container">
-      <Card key={id} style={{ width: "20rem" }} className="card-Card">
-        <Card.Img variant="top" src={image} className="card-image" />
-        <Card.Body>
-          <Card.Title className="card-title">{title}</Card.Title>
-          {/* <Card.Text className='card-text'>
+    <button onClick={clickHandler}>
+      <div className="card-container">
+        <Card key={id} style={{ width: "20rem" }}>
+          <Card.Img variant="top" src={image} className="card-image" />
+          <Card.Body>
+            <Card.Title className="card-title">{title}</Card.Title>
+            {/* <Card.Text className='card-text'>
          Servings: {servings}
          <br/>
          Ready in minutes: {readyInMinutes}
         </Card.Text> */}
-          <Link to={`recipe/${id}`} className="card-button">
-            View Recipe
-          </Link>
-        </Card.Body>
-      </Card>
-    </div>
+          </Card.Body>
+        </Card>
+      </div>
+    </button>
   );
 }
 
