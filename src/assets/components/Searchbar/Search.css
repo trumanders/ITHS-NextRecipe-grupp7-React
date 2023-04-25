@@ -14,11 +14,23 @@
 
 .accordion-style{
     padding-bottom: 15px;
-    
+    padding-top: 15px;
+    width: 450px;
+    margin: auto;
 }
 
-.itemContainer{
-    display: flex-box;
-    flex-direction: row;;
-    list-style-type: none;
+.searchpadding{
+    padding-top: 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-bottom: 40px;
 }
+
+.textpadding{
+    padding-top: 10px;
+}
+
+.searchbar{
+    padding-bottom: 15px;
+}
+
