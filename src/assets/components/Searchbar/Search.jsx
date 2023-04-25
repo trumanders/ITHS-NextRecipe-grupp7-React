@@ -27,6 +27,7 @@ function Search() {
       shallow
   )
 
+  // Funktion för addera ingridienser till lista med felhantering
     const handleSubmit=(event)=> {
       event.preventDefault();
       const item = input
@@ -48,6 +49,7 @@ function Search() {
       
     }
 
+    // Funktion för att ta bort ingridienserna från listan. 
     const deleteInput = value => {
       setlistInputs(oldValues => {
         
@@ -55,6 +57,8 @@ function Search() {
         
       })
     }
+
+    // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
      const handleDietbox =(event) =>{
       
        const{value, checked} = event.target
@@ -70,7 +74,7 @@ function Search() {
        )
 
       }
-
+      // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
       const handleIntolerances =(event) => {
         const{value, checked} = event.target
        
@@ -85,14 +89,14 @@ function Search() {
        )
 
       }
-      
+      // Tar emot inputvärde och sätter recipeSearch till inputvärdet
       const handleRecipeSearch = (event) =>{
         event.preventDefault();
         const recipeItem = (recipeSearch)
         setrecipeSearch(recipeItem)
         console.log(recipeSearch)
       }
-
+      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
       
         if(listInputs.length === 0)
@@ -104,14 +108,24 @@ function Search() {
         setIsClicked()
       }
 
+      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om sökinput ej finns, så får man felmeddelande
       const sendRecipe =() => {
-       
-        
+       if(recipeSearch === "")
+       {
+        alert("You have not searched for anything")
+        return;
+       }
         setSearchString({ingredients: recipeSearch, call: "getRecipeSearch"})
         setIsClicked()
       }
 
+      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om man ej valt frukost, lunch eller middag får man felmeddelande.
       const sendRandom = () => {
+        if(listType === "")
+        {
+          alert("Please choose breakfast, lunch or dinner")
+          return;
+        }
         const valuesRandom = [listDiet, listType, listIntolerances].toString()
 
           setSearchString({ingredients: valuesRandom, call: "getRandom"})
@@ -121,12 +135,13 @@ function Search() {
 
   return (
     
+    <div className="searchpadding">
     <Tabs
       id="searchtabs"
-      className="tabs"
+      className="justify-content-center"
     >
       <Tab eventKey="take-what-you-have" title="Take what you have">
-        <p>Add your ingridients in the box below, we will fix the rest.</p>
+        <p className="textpadding">Here you will find recipes based on what ingridients you have at home.</p>
 
         <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
         <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
@@ -149,8 +164,7 @@ function Search() {
             )  
           })}
 
-            <hr></hr>
-
+          
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
@@ -172,29 +186,31 @@ function Search() {
   
           
         <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
+        <hr></hr>
       </Tab>
       <Tab eventKey="home" title="Recipes">
-      <p>Search recipes</p>
+      <p className="textpadding">Search recipes</p>
       
         <form onSubmit={handleRecipeSearch} className="search">
-        <div>
+        <div className="searchbar">
         <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" className="search-recipe" onChange={(event)=>setrecipeSearch(event.target.value)}/>
             
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
+            <hr></hr>
  
         </form>
       
       </Tab>
 
       <Tab eventKey="contact" title="Random recipe">
-        <p>Use our randomizer when you have a hard time coming up with ideas.</p>
+        <p className="textpadding">Use our randomizer when you have a hard time coming up with ideas.</p>
         <div>
         <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
         <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
         <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
         </div>  
-        <hr></hr>
+        
 
         <Accordion className="accordion-style">
       <Accordion.Item eventKey="0">
@@ -215,10 +231,11 @@ function Search() {
       </Accordion>
 
         <Button variant="outline-dark" onClick={sendRandom}type="Button">Go!</Button>
-        
+        <hr></hr>
       </Tab>
     </Tabs>
-
+    </div>
+    
   );
 };
 
