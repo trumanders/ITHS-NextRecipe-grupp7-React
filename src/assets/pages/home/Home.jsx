@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import { 
     getPopularRecipes, 
     filterRecipes,
@@ -11,12 +11,11 @@ import { useSearchStringStore } from '../../hooks/useSearchStringStore'
 import { useClickStore } from '../../hooks/useClickStore'
 import { useLoaderData } from 'react-router-dom'
 
-//---- Tas i bruk när routingen är på plats
+//Laddar populära recept innan rendering
 export async function loader() {
   const popularRecipes = await getPopularRecipes()
   return {popularRecipes}
 }
-//-----------
 
 export default function Home() {
   const [recipes, setRecipes] = useState([])
@@ -26,16 +25,7 @@ export default function Home() {
     (state) => [state.isClicked, state.setIsClicked])
   const [prevClick, setPrevClick] = useState(0)
 
-  //----Ersätts av useLoaderData när routingen är på plats.
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await getPopularRecipes();
-  //     setRecipes(response);
-  //   }
-  //   fetchData();
-  // }, []);
-  //------
-
+  //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   if(isClicked > prevClick) {
     switch (searchString.call) {
       case "getIngredient":
