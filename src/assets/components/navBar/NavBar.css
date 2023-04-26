@@ -17,6 +17,7 @@ button {
   width: 100%;
   height: auto;
   margin: 0px;
+  z-index: 1; /*Så att navbaren inte hamnar bakom bild på receptkort när man scrollar ner*/
 }
 
 .Logotype {
