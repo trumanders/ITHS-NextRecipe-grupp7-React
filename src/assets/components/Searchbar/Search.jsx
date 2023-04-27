@@ -89,27 +89,24 @@ function Search() {
        )
 
       }
-      // Tar emot inputvärde och sätter recipeSearch till inputvärdet
-      const handleRecipeSearch = (event) =>{
-        event.preventDefault();
-        const recipeItem = (recipeSearch)
-        setrecipeSearch(recipeItem)
-        console.log(recipeSearch)
-      }
+     
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
       
-        if(listInputs.length === 0)
-        {
-          alert("Dont forget to add your ingridients!")
-          return;
-        }
+        // if(listInputs.length === 0)
+        // {
+        //   alert("Dont forget to add your ingridients!")
+        //   return;
+        // }
         setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString(), call: "getIngredient"})
         setIsClicked()
       }
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om sökinput ej finns, så får man felmeddelande
-      const sendRecipe =() => {
+      const sendRecipe =(event) => {
+        event.preventDefault();
+        const recipeItem = (recipeSearch)
+        setrecipeSearch(recipeItem)
        if(recipeSearch === "")
        {
         alert("You have not searched for anything")
@@ -121,16 +118,14 @@ function Search() {
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om man ej valt frukost, lunch eller middag får man felmeddelande.
       const sendRandom = () => {
-        if(listType === "")
-        {
-          alert("Please choose breakfast, lunch or dinner")
-          return;
-        }
+        // if(listType === "")
+        // {
+        //   alert("Please choose breakfast, lunch or dinner")
+        //   return;
+        // }
         const valuesRandom = [listDiet, listType, listIntolerances].toString()
-
           setSearchString({ingredients: valuesRandom, call: "getRandom"})
           setIsClicked()
-            console.log(valuesRandom)
       }
 
   return (
@@ -143,32 +138,38 @@ function Search() {
       <Tab eventKey="take-what-you-have" title="Take what you have">
         <p className="textpadding">Here you will find recipes based on what ingridients you have at home.</p>
 
-        <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
-        <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
-        <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
+        
 
         <form onSubmit={handleSubmit} className="search-form">
             <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
-            <Button variant="dark" type="button" onClick={handleSubmit}>Add</Button>
+            <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
+            <ul id="itemContainer">
             {
-              
             listInputs.map(item => {
             return (
             
-            <li key={item} >
+            <li className="searchItem" key={item} >
             
             <span>{item} {"  "}</span>
             <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
             </li>
             )  
           })}
+          </ul>
+
+          <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
 
           
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
             <Accordion.Body>
+              <div>
+              <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
+              <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
+              <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
+              </div>
             <div className="diet-boxes">
             <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
             <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
@@ -185,13 +186,13 @@ function Search() {
         </form>
   
           
-        <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
-        <hr></hr>
+        
+        {/* <hr></hr> */}
       </Tab>
       <Tab eventKey="home" title="Recipes">
       <p className="textpadding">Search recipes</p>
       
-        <form onSubmit={handleRecipeSearch} className="search">
+        <form onSubmit={sendRecipe} className="search">
         <div className="searchbar">
         <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" className="search-recipe" onChange={(event)=>setrecipeSearch(event.target.value)}/>
             
@@ -205,17 +206,18 @@ function Search() {
 
       <Tab eventKey="contact" title="Random recipe">
         <p className="textpadding">Use our randomizer when you have a hard time coming up with ideas.</p>
-        <div>
-        <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
-        <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
-        <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
-        </div>  
-        
+         
+        <Button variant="outline-dark" onClick={sendRandom}type="Button">Go!</Button>
 
         <Accordion className="accordion-style">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Advanced search</Accordion.Header>
         <Accordion.Body>
+        <div>
+        <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
+        <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
+        <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
+        </div> 
         <div className="diet-boxes">
             <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
             <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
@@ -230,7 +232,7 @@ function Search() {
       </Accordion.Item>
       </Accordion>
 
-        <Button variant="outline-dark" onClick={sendRandom}type="Button">Go!</Button>
+        
         <hr></hr>
       </Tab>
     </Tabs>

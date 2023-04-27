@@ -19,18 +19,60 @@
     margin: auto;
 }
 
+.accordion-button {
+    padding: 10px!important;
+}
+
 .searchpadding{
     padding-top: 20px;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 150px;
+    padding-right: 150px;
     padding-bottom: 40px;
+    height: 350px;
 }
 
 .textpadding{
-    padding-top: 10px;
+    padding-top: 30px;
+    text-align: center;
+
 }
 
 .searchbar{
     padding-bottom: 15px;
+}
+
+#itemContainer{
+    display: flex;
+    flex-direction: row;;
+    list-style-type: none;
+    justify-content: center;
+    margin: 0px auto 15px;
+    padding: 0px;
+}
+
+.searchItem{
+    width: auto;
+    height: 25px;
+    border: 1px solid #0d6efd;
+    margin: 0px 5px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+.btn-close{
+    margin-bottom: 5px!important;
+    width: 10px!important;
+    height: 10px!important;
+    padding: 0px!important;
+}
+
+.addBtn {
+    height: 30px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding: 0px!important;
+    padding-left: 5px!important;
+    padding-right: 5px!important;
 }
 

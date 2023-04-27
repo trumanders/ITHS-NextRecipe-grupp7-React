@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
 import {useLoaderData} from 'react-router-dom'
-
+import defaultFood from '../../pictures/defaultFood.jpeg'
 
 
 import RecipeCard from '../RecipeCard/RecipeCard'
@@ -184,8 +184,7 @@ const PictureAndInfo = (props) => {
   }
     return(
         <article className='picture-and-info-container'>
-            <img className="recipe-picture" src={props.image} alt="Image of recipe" />
-            <br></br>
+            <img className="recipe-picture" src={props.image !== null ? props.image : defaultFood} alt="Image of recipe" />
             {/*Att styla sen med fontawsome*/}
             <div className='extra-recipe-info'>
                 <div>
@@ -260,7 +259,11 @@ const Instructions = (props) => {
     return(
         <div className='instructions-container'>
             <h2>Steps</h2>
+            {props.steps !== null ?
             <div className='instructions' dangerouslySetInnerHTML={{__html: props.steps.replaceAll(". ", ".<br/>")}}></div>
+            :
+            <p>Sorry, no instructions found for this recipe. Feel free to improvise!</p>
+        }
         </div> 
     )
 }
