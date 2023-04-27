@@ -9,6 +9,8 @@ import {TfiTimer} from 'react-icons/tfi'
 import {BiDish} from 'react-icons/bi'
 import {useLoaderData} from 'react-router-dom'
 
+
+
 import RecipeCard from '../RecipeCard/RecipeCard'
 
 export async function loader({ params }) {
@@ -24,6 +26,8 @@ export default function Recipe(){
     const [showIngredients, setShowIngredients] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
     const [isMobile, setMobile] = useState(window.innerWidth<730);
+    const [servings, setServings] = useState(recipe.servings);
+    
 
     // const [liknande, setLiknande] = useState(null);
 
@@ -64,6 +68,17 @@ export default function Recipe(){
         setShowSteps(!showSteps);
     }
 
+    //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
+    function changeIngredients(pickedServings){     
+        
+        recipe.extendedIngredients.forEach(element => {
+            element.amount = (((element.amount ) / servings)) * pickedServings
+        });
+        //Renderar om sidan med pickedServings
+        recipe.servings = pickedServings;
+        setServings(pickedServings);        
+    }  
+
     if((recipe != null) && (similars != null)){
         
         return(
@@ -72,8 +87,8 @@ export default function Recipe(){
                 <div className="recipe-container">
                 
                     <div className="picture-pictureInfo-and-nutritionTable-container">
-                        <div className="recipe-section-pictureAndInfo">
-                            <PictureAndInfo image = {recipe.image} cookTime = {recipe.readyInMinutes} serving = {recipe.servings}/>
+                        <div className="recipe-section-pictureAndInfo">                            
+                            <PictureAndInfo calculate={changeIngredients}  image = {recipe.image} cookTime = {recipe.readyInMinutes} serving = {servings}/>
                         </div>
                         <>
                             {/* Kollar om mobile version */}
@@ -162,9 +177,15 @@ export default function Recipe(){
 
 //Komponent som håller Bild, antal servings och tid att laga
 const PictureAndInfo = (props) => {
+
+    //calculate är propertyn som håller värdet (antalet valda portioner) som sedan ska beräknas i changeIngredients
+  const handleChange = (event) => {
+   props.calculate(event.target.value);
+  }
     return(
         <article className='picture-and-info-container'>
             <img className="recipe-picture" src={props.image} alt="Image of recipe" />
+            <br></br>
             {/*Att styla sen med fontawsome*/}
             <div className='extra-recipe-info'>
                 <div>
@@ -175,9 +196,17 @@ const PictureAndInfo = (props) => {
                 <div>
                 <b><BiDish /></b> {'   '}
                     <span><b>{props.serving}</b></span>
-                    <span><b>people</b></span>
+                    <span><b> people</b></span>
                 </div>
-            </div>
+                <select onChange={handleChange} name="servings" >
+                    <option value={0}>Change servings</option>
+                    <option value={2}>2</option>
+                    <option value={4}>4</option>
+                    <option value={6}>6</option>
+                    <option value={8}>8</option>
+                </select>
+               
+            </div>            
         </article>  
     )
 }
@@ -218,9 +247,13 @@ const Ingredient = (props) => {
                     <div className='amount-unit'><span>{ingredient.amount}</span>{' '} <span>{ingredient.unit}</span></div>
                 </li> )}
             </ul>
+            <br></br>           
         </div>
+
     )
 }
+
+
 
 //Komponent som håller i stegen
 const Instructions = (props) => {
