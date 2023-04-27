@@ -87,7 +87,7 @@ export async function getPopularRecipes() {
   let fetchResults = [];
 
   const response = await fetch(
-    "https://api.spoonacular.com/recipes/complexSearch?sort=popularity&number=8",
+    "https://api.spoonacular.com/recipes/complexSearch?sort=popularity&number=100",
     {
       headers: {
         "Content-Type": "application/json",
