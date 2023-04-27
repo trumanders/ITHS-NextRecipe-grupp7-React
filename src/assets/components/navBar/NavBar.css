@@ -9,15 +9,15 @@ button {
   background-color: transparent;
 }
 
-.NavBar{
-    position: sticky;
-    top: 0px;
-    background-color: var(--primary);
-    width: 100%;
-    height: auto;
-    margin: 0px;
+.NavBar {
+  position: sticky;
+  top: 0px;
+  background-color: var(--primary);
 
-    z-index: 500;
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  z-index: 1; /*Så att navbaren inte hamnar bakom bild på receptkort när man scrollar ner*/
 }
 
 .Logotype {
@@ -84,8 +84,8 @@ button {
   color: var(--off-white);
 }
 
-.navOpt:hover a{
-    color: var(--off-white);
+.navOpt:hover a {
+  color: var(--off-white);
 }
 
 /* QUERY DESKTOP VIEW */
@@ -111,14 +111,14 @@ button {
     background-color: rgba(240, 248, 255, 0);
   }
 
-  .navOpt:hover a{
+  .navOpt:hover a {
     color: white;
   }
 
-    .navOpt:hover{
-        background-color:var(--secondary);
-        border-radius: 5px;
-    }
+  .navOpt:hover {
+    background-color: var(--secondary);
+    border-radius: 5px;
+  }
 
   .NavBar {
     background-color: var(--primary);

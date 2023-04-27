@@ -46,9 +46,9 @@ export async function getAllRecipes() {
 }
 
 export async function getRandomRecipes(tags) {
-    let fetchResults = []
+    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=10&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=10`
 
-    const response = await fetch(`https://api.spoonacular.com/recipes/random?number=10&tags=${tags}`, {
+    const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
             'X-Api-Key': `${key}`

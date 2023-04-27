@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import "./RecipeCard.css";
 import { useNavigate } from "react-router-dom";
+import defaultFood from '../../pictures/defaultFood.jpeg'
 
 function RecipeCard({ id, image, title }) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function RecipeCard({ id, image, title }) {
     <button onClick={clickHandler}>
       <div className="card-container">
         <Card key={id} style={{ width: "20rem" }}>
-          <Card.Img variant="top" src={image} className="card-image" />
+          <Card.Img variant="top" src={image !== null ? image : defaultFood} className="card-image" />
           <Card.Body>
             <Card.Title className="card-title">{title}</Card.Title>
             {/* <Card.Text className='card-text'>

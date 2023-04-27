@@ -13,6 +13,7 @@ import AboutUs from "./assets/pages/about/AboutUs";
 import "./index.css";
 import App from "./App";
 import Layout from "./Layout";
+import ErrorPage from './assets/components/ErrorPage/ErrorPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         <Route path="about" element={<AboutUs />} />
         <Route path="recipe/:recipeId" element={<Recipe />} loader={recipeLoader} />
         <Route index element={<Home />} loader={startLoader} />
+        <Route path="*" element={<ErrorPage/>}/>
     </Route>
 
   )
