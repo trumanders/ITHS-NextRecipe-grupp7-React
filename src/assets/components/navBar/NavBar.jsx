@@ -29,7 +29,7 @@ function NavBar(){
             {!isMobile || visible ? (
         <ul>
           <li className="navOpt">
-            <Link to="">
+            <Link to="/">
               <p>Home</p>
             </Link>
           </li>

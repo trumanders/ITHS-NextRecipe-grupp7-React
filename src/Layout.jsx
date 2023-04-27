@@ -9,7 +9,7 @@ import { NavBar } from "./assets/components/navBar/NavBar.jsx";
 function Layout() {
   return (
     <>      
-      <NavBar />
+      <NavBar /> 
       <PageContainer />
       {/* <Footer></Footer> */}
     </>
