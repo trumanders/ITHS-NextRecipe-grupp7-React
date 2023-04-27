@@ -10,6 +10,8 @@
   -webkit-text-size-adjust: 100%;
 
   transition: color 200ms;
+  --primary: rgb(218, 206, 189);
+  --secondary: rgb(158, 150, 138);
 }
 
 /*

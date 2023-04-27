@@ -12,7 +12,7 @@ button {
 .NavBar{
     position: sticky;
     top: 0px;
-    background-color: rgba(150, 150, 150, 0);
+    /*background-color: rgba(150, 150, 150, 0);*/
     width: 100%;
     height: auto;
     margin: 0px;
@@ -110,7 +110,7 @@ button {
     }
 
     .NavBar{
-        background-color: #b5ffd5;
+        /*background-color: #b5ffd5;*/
         height: 55px;
     }
 }

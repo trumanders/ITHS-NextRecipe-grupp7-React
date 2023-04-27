@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./NavBar.css";
-import "./NavFunc";
 import { Burger } from "./burger.jsx";
 import { Link } from "react-router-dom";
 
