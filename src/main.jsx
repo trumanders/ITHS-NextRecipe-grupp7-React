@@ -13,6 +13,7 @@ import AboutUs from "./assets/pages/about/AboutUs";
 import "./index.css";
 import App from "./App";
 import Layout from "./Layout";
+import ErrorPage from './assets/components/ErrorPage/ErrorPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

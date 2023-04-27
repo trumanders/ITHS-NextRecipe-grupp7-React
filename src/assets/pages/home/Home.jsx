@@ -24,6 +24,7 @@ export default function Home() {
   const [isClicked, setIsClicked] = useClickStore(
     (state) => [state.isClicked, state.setIsClicked])
   const [prevClick, setPrevClick] = useState(0)
+  const [title, setTitle] = useState("Popular Recipes")
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   if(isClicked > prevClick) {
@@ -32,6 +33,7 @@ export default function Home() {
         const fetchIngredient = async() => {
           const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
           setRecipes(response)
+          setTitle(`Recipes with ${searchString.ingredients}`)
         }
         fetchIngredient()
         break
@@ -39,6 +41,7 @@ export default function Home() {
         const fetchFreeSearch = async() => {
           const response = await getRecipeSearch(searchString.ingredients)
           setRecipes(response)
+          setTitle(`Recipes with ${searchString.ingredients}`)
         }
         fetchFreeSearch()
         break
@@ -46,6 +49,7 @@ export default function Home() {
         const fetchRandom = async() => {
           const response = await getRandomRecipes(searchString.ingredients)
           setRecipes(response)
+          setTitle("Random Recipes")
         }
         fetchRandom()
         break
@@ -61,7 +65,7 @@ export default function Home() {
   <>
   <Search />
   {recipes.length > 0 && 
-  <RecipeRepresentation recipes={recipes} />}
+  <RecipeRepresentation recipes={recipes} title={title} />}
   </>
   )
 }
