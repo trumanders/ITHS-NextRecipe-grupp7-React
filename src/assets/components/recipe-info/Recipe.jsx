@@ -49,7 +49,7 @@ export default function Recipe(){
     }
         fetchData();
         // console.log(similars);
-    },[])
+    },[recipe])
 
 
     function handleShowNutritions(){
