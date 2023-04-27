@@ -4,7 +4,7 @@
     height: 50px;
     list-style-type: none;
     display: block;
-    background-color: rgb(150, 150, 150);
+    background-color: var(--secondary);
     border-radius: 5px;
     padding: 5px;
 }
@@ -12,12 +12,10 @@
 .burger_menu div{
     width: 40px;
     height: 7px;
-    background-color: rgb(200, 200, 200);
+    background-color: var(--primary);
     border-radius: 3px;
     margin-bottom: 7px;
     margin-top: 3px;
-
-    color: #90ffc5;
 }
 
 @media screen and (min-width: 1200px){

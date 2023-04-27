@@ -162,7 +162,7 @@ function Search() {
             </li>
             )  
           })}
-
+            </ul>
           
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">

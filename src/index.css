@@ -10,8 +10,11 @@
   -webkit-text-size-adjust: 100%;
 
   transition: color 200ms;
-  --primary: rgb(218, 206, 189);
-  --secondary: rgb(158, 150, 138);
+  --primary: #b5ffd5;
+  --secondary: #5bc287;
+  --off-white: rgb(245, 245, 245);
+
+  --breakpoint: 760px;
 }
 
 /*
@@ -37,12 +40,12 @@ body button{
   margin: 5px;
 }
 
-.wrapper{
-  width: 100%;
-  max-width: 1200px;
-  background-color: rgb(245,245,245);
+#wrapper{
+  width: 95%;
+  max-width: 970px;
+  background-color: var(--off-white);
   margin: 0px auto;
-  padding: 15px;
+  padding: 25px;
 }
 
 
@@ -65,6 +68,8 @@ body a:active {
 }
 
 /* QUERY DESKTOP STYLE */
-@media screen and (min-width: 730px){
+@media screen and (min-width: 760px){
+  #wrapper{
 
+  }
 }
