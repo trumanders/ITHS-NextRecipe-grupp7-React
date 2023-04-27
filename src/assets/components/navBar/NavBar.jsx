@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./NavBar.css";
-import "./NavFunc";
 import { Burger } from "./burger.jsx";
 import { Link } from "react-router-dom";
 
@@ -19,7 +18,7 @@ function NavBar(){
 
   return (
     <div className="NavBar">
-        <a href="./"><img src="#" className="Logotype" alt="Logotype"/></a>
+        <Link to=""><img src="logotype.png" className="Logotype" alt="Logotype"/></Link>
         <div className="NaviIntro">
             <button onClick={() => setVisible(!visible)}><Burger></Burger></button>
             <p>Nail Soup</p>

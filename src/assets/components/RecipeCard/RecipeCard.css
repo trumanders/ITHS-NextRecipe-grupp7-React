@@ -31,7 +31,7 @@ div.card {
 .card-image {
   width: 100%;
   height: auto;
-  border-radius: 3%;
+  border-radius: 0px;
 }
 
 .card-title {

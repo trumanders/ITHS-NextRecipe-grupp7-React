@@ -12,8 +12,8 @@ button {
 .NavBar {
   position: sticky;
   top: 0px;
-  background-color: rgba(150, 150, 150, 0);
-  color: black;
+  background-color: var(--primary);
+
   width: 100%;
   height: auto;
   margin: 0px;
@@ -23,8 +23,8 @@ button {
 .Logotype {
   display: none;
   position: absolute;
-  width: 55px;
-  height: 55px;
+  width: 75px;
+  height: 75px;
   box-sizing: border-box;
   border: 1px solid red;
   left: 0px;
@@ -42,7 +42,7 @@ button {
 .NaviIntro {
   box-sizing: content-box;
   height: 55px;
-  background-color: rgb(200, 200, 200);
+  background-color: var(--primary);
   display: flex;
   flex-direction: row;
   padding: 10px;
@@ -56,11 +56,11 @@ button {
 }
 
 .searchIcon {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 5px;
   padding: 7px 5px 3px 5px;
-  background-color: rgb(150, 150, 150);
+  background-color: var(--secondary);
 }
 
 .searchIcon img {
@@ -70,7 +70,7 @@ button {
 
 .navOpt {
   box-sizing: content-box;
-  background-color: rgb(240, 248, 255);
+  background-color: var(--off-white);
   width: 100%;
   height: 35px;
   margin: 5px 0px 0px 0px;
@@ -80,12 +80,16 @@ button {
 }
 
 .navOpt:hover {
-  background-color: rgb(90, 120, 255);
-  color: rgb(240, 248, 255);
+  background-color: var(--secondary);
+  color: var(--off-white);
+}
+
+.navOpt:hover a {
+  color: var(--off-white);
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 730px) {
+@media screen and (min-width: 760px) {
   .Logotype {
     display: block;
   }
@@ -101,22 +105,23 @@ button {
   }
 
   .navOpt {
-    margin: 15px 5px;
+    margin: 25px 5px;
     width: 100px;
     height: 25px;
     background-color: rgba(240, 248, 255, 0);
   }
 
-  .navOpt:hover {
-    background-color: rgba(240, 248, 255, 0);
+  .navOpt:hover a {
+    color: white;
   }
 
-  .NavBar p {
-    color: rgb(25, 25, 25);
+  .navOpt:hover {
+    background-color: var(--secondary);
+    border-radius: 5px;
   }
 
   .NavBar {
-    background-color: #b5ffd5;
-    height: 55px;
+    background-color: var(--primary);
+    height: 75px;
   }
 }
