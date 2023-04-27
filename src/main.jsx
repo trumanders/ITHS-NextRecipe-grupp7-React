@@ -23,6 +23,7 @@ const router = createBrowserRouter(
         <Route path="about" element={<AboutUs />} />
         <Route path="recipe/:recipeId" element={<Recipe />} loader={recipeLoader} />
         <Route index element={<Home />} loader={startLoader} />
+        <Route path="*" element={<ErrorPage/>}/>
     </Route>
 
   )
