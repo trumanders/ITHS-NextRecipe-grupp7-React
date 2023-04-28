@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
   import AboutUs from "./assets/pages/about/AboutUs";
   import { ContactUs } from "./assets/pages/contact/ContactForm";
 import Home from "./assets/pages/home/Home"
+import { Footer } from "./assets/components/footer/footer";
 
 
 
@@ -24,6 +25,7 @@ import {
         <Route path="/" element={<Home />} />
         <Route path="recipe/:recipeId" element={<Recipe />} />
       </Routes> */}
+      <Footer />
     </div>
   );
 }

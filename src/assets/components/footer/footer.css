@@ -1,0 +1,51 @@
+#footer{
+    width: 100%;
+    margin: 0px auto;
+
+    background-color: var(--off-white);
+
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.footerFlex{
+    display: flex;
+    flex-direction: row;
+}
+
+#leftBox{
+    width: 50%;
+    border-right: 1px solid #ddd;
+}
+
+#rightBox{
+    padding: 10px;
+    width: 50%;
+}
+
+#footerNav{
+    list-style-type: none;
+    justify-content: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.footerNavOpt{
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#footerCopyright{
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+}
+
+
+/*****************************************
+*   QUERY DESKTOP SCREEN
+*****************************************/
+
+@media screen and (min-width: 760px){
+
+}

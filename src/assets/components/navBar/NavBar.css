@@ -28,7 +28,6 @@ button {
 .Logotype {
   display: none;
   position: absolute;
-  width: 75px;
   height: 75px;
   box-sizing: border-box;
   left: 0px;
@@ -83,6 +82,10 @@ button {
   overflow: hidden;
 }
 
+.navOpt p{
+  text-align: center;
+}
+
 .navOpt:hover {
   background-color: var(--secondary);
   color: var(--off-white);
@@ -127,5 +130,6 @@ button {
   .NavBar {
     background-color: var(--primary);
     height: 75px;
+    padding-right: 20px;
   }
 }
