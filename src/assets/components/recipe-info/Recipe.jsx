@@ -9,6 +9,7 @@ import { TfiTimer } from "react-icons/tfi";
 import { BiDish } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
+import Accordion from 'react-bootstrap/Accordion';
 
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -21,9 +22,6 @@ export default function Recipe() {
   const { recipe } = useLoaderData();
   // const [recipe, setRecipe] = useState(null);
   const [similars, setSimilars] = useState();
-  const [showNutritions, setShowNutritions] = useState(false);
-  const [showIngredients, setShowIngredients] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
   const [servings, setServings] = useState(recipe.servings);
 
@@ -51,18 +49,6 @@ export default function Recipe() {
     fetchData();
     // console.log(similars);
   }, [recipe]);
-
-  function handleShowNutritions() {
-    setShowNutritions(!showNutritions);
-  }
-
-  function handleShowIngredients() {
-    setShowIngredients(!showIngredients);
-  }
-
-  function handleShowSteps() {
-    setShowSteps(!showSteps);
-  }
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
   function changeIngredients(pickedServings) {
@@ -94,18 +80,18 @@ export default function Recipe() {
                 /*Om Mobilversion*/
                 <div className="showMorebtn">
                   {/* Sätt en knapp för att visa nutritions*/}
-                  <button className="showButton" onClick={handleShowNutritions}>
-                    {/* I och med boolean, första värde på showMore = false */}
-                    {showNutritions ? "Hide" : "Show"} Nutritions
-                  </button>
-                  {/* När showMore = sant, visas nutrition tabell. {showMore && } fungerar som if(showMore == true)*/}
-                  {showNutritions && (
-                    <div className="recipe-section-nutritionTable">
-                      <NutritionTable
-                        nutritionValues={recipe.nutrition.nutrients.slice(0, 9)}
-                      />
-                    </div>
-                  )}
+                    <Accordion>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Nutritions</Accordion.Header>
+                            <Accordion.Body>
+                                <div className="recipe-section-nutritionTable">
+                                    <NutritionTable
+                                        nutritionValues={recipe.nutrition.nutrients.slice(0, 9)}
+                                    />
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
                 </div>
               ) : (
                 /* Om inte mobilversion */
@@ -121,17 +107,20 @@ export default function Recipe() {
           <div className="recipe-section-ingredients">
             {/* Kollar om mobile version */}
             {isMobile ? (
-              <div className="showMorebtn">
-                {/* Sätt en knapp för att visa nutritions*/}
-                <button className="showButton" onClick={handleShowIngredients}>
-                  {/* I och med boolean, första värde på showMore = false */}
-                  {showIngredients ? "Hide" : "Show"} Ingredients
-                </button>
-                {/* När showMore = sant, visas ingrediens lista. {showMore && } fungerar som if(showMore == true)*/}
-                {showIngredients && (
-                  <Ingredient ingredients={recipe.extendedIngredients} />
-                )}
-              </div>
+                 <div className="showMorebtn">
+                 {/* Sätt en knapp för att visa nutritions*/}
+                 
+                   <Accordion>
+                       <Accordion.Item eventKey="0">
+                           <Accordion.Header>Ingredients</Accordion.Header>
+                           <Accordion.Body>
+                               <div className="recipe-section-nutritionTable">
+                                    <Ingredient ingredients={recipe.extendedIngredients} />
+                               </div>
+                           </Accordion.Body>
+                       </Accordion.Item>
+                   </Accordion>
+               </div>
             ) : (
               /* Om inte mobilversion */
               <Ingredient ingredients={recipe.extendedIngredients} />
@@ -141,15 +130,18 @@ export default function Recipe() {
           <div className="recipe-section-instructions">
             {/* Kollar om mobile version */}
             {isMobile ? (
-              <div className="showMorebtn">
-                {/* Sätt en knapp för att visa nutritions*/}
-                <button className="showButton" onClick={handleShowSteps}>
-                  {/* I och med boolean, första värde på showMore = false */}
-                  {showSteps ? "Hide" : "Show"} Steps
-                </button>
-                {/* När showMore = sant, visas ingrediens lista. {showMore && } fungerar som if(showMore == true)*/}
-                {showSteps && <Instructions steps={recipe.instructions} />}
-              </div>
+                <div className="showMorebtn">    
+                    <Accordion>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Steps</Accordion.Header>
+                            <Accordion.Body>
+                                <div className="recipe-section-nutritionTable">
+                                    <Instructions steps={recipe.instructions} />
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                </div>
             ) : (
               /* Om inte mobilversion */
               <Instructions steps={recipe.instructions} />
