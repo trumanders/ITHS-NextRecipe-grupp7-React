@@ -27,7 +27,7 @@ function Search() {
       shallow
   )
 
-  // Funktion för addera ingridienser till lista med felhantering
+  // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
       event.preventDefault();
       const item = input
@@ -93,11 +93,7 @@ function Search() {
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
       
-        // if(listInputs.length === 0)
-        // {
-        //   alert("Dont forget to add your ingridients!")
-        //   return;
-        // }
+      
         setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString(), call: "getIngredient"})
         setIsClicked()
       }
@@ -116,16 +112,19 @@ function Search() {
         setIsClicked()
       }
 
-      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om man ej valt frukost, lunch eller middag får man felmeddelande.
+      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
       const sendRandom = () => {
-        // if(listType === "")
-        // {
-        //   alert("Please choose breakfast, lunch or dinner")
-        //   return;
-        // }
+        
         const valuesRandom = [listDiet, listType, listIntolerances].toString()
           setSearchString({ingredients: valuesRandom, call: "getRandom"})
           setIsClicked()
+      }
+
+      const setNull =() =>{
+        setlistDiet([])
+        setlistType("")
+        setlistIntolerances([])
+        console.log(listDiet)
       }
 
   return (
@@ -165,11 +164,11 @@ function Search() {
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
             <Accordion.Body>
-              <div>
+              <div className="smallText">
               <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
               <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
               <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
-              </div>
+              
             <div className="diet-boxes">
             <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
             <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
@@ -180,6 +179,8 @@ function Search() {
             <input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}
             <input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}
             </div>
+            </div>
+            
             </Accordion.Body>
         </Accordion.Item>
         </Accordion>
@@ -187,7 +188,7 @@ function Search() {
   
           
         
-        {/* <hr></hr> */}
+        
       </Tab>
       <Tab eventKey="home" title="Recipes">
       <p className="textpadding">Search recipes</p>
@@ -198,7 +199,7 @@ function Search() {
             
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
-            <hr></hr>
+            
  
         </form>
       
@@ -213,11 +214,11 @@ function Search() {
       <Accordion.Item eventKey="0">
         <Accordion.Header>Advanced search</Accordion.Header>
         <Accordion.Body>
-        <div>
+        <div className="smallText">
         <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
         <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
         <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
-        </div> 
+        
         <div className="diet-boxes">
             <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
             <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
@@ -228,12 +229,13 @@ function Search() {
             <input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}
             <input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}
             </div>
+            </div> 
         </Accordion.Body>
       </Accordion.Item>
       </Accordion>
 
         
-        <hr></hr>
+       
       </Tab>
     </Tabs>
     </div>
