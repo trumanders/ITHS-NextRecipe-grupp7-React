@@ -16,7 +16,7 @@ import {
 } from "react-router-dom";
  function PageContainer() {
   return (
-    <Container>
+    <div id="wrapper">
       <Outlet />
       {/* <Routes>
         <Route path="/about" element={<AboutUs />} />
@@ -24,7 +24,7 @@ import {
         <Route path="/" element={<Home />} />
         <Route path="recipe/:recipeId" element={<Recipe />} />
       </Routes> */}
-    </Container>
+    </div>
   );
 }
 export default PageContainer;

@@ -11,20 +11,20 @@ import { shallow } from 'zustand/shallow';
 
 
 function Search() {
-    const[input, setInput] = useState("")
-    const[listInputs, setlistInputs] = useState([])
-    const[recipeSearch, setrecipeSearch] = useState("")
-    const[listDiet, setlistDiet] = useState([])
-    const[listType, setlistType] = useState("")
-    const[listIntolerances, setlistIntolerances] = useState([])
-    const [searchString, setSearchString] = useSearchStringStore(
-      (state) => [state.searchString, state.setSearchString],
-      shallow
-    )
-    const [isClicked, setIsClicked] = useClickStore(
-      (state) => [state.isClicked, state.setIsClicked],
-      shallow
-  )
+  const [input, setInput] = useState("");
+  const [listInputs, setlistInputs] = useState([]);
+  const [recipeSearch, setrecipeSearch] = useState("");
+  const [listDiet, setlistDiet] = useState([]);
+  const [listType, setlistType] = useState("");
+  const [listIntolerances, setlistIntolerances] = useState([]);
+  const [searchString, setSearchString] = useSearchStringStore(
+    (state) => [state.searchString, state.setSearchString],
+    shallow
+  );
+  const [isClicked, setIsClicked] = useClickStore(
+    (state) => [state.isClicked, state.setIsClicked],
+    shallow
+  );
 
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
@@ -47,6 +47,7 @@ function Search() {
       }
       
     }
+  
 
     // Funktion för att ta bort ingridienserna från listan. 
     const deleteInput = value => {
@@ -97,19 +98,18 @@ function Search() {
         setIsClicked()
       }
 
-      // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om sökinput ej finns, så får man felmeddelande
-      const sendRecipe =(event) => {
-        event.preventDefault();
-        const recipeItem = (recipeSearch)
-        setrecipeSearch(recipeItem)
-       if(recipeSearch === "")
-       {
-        alert("You have not searched for anything")
-        return;
-       }
-        setSearchString({ingredients: recipeSearch, call: "getRecipeSearch"})
-        setIsClicked()
-      }
+  // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om sökinput ej finns, så får man felmeddelande
+  const sendRecipe = (event) => {
+    event.preventDefault();
+    const recipeItem = recipeSearch;
+    setrecipeSearch(recipeItem);
+    if (recipeSearch === "") {
+      alert("You have not searched for anything");
+      return;
+    }
+    setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
+    setIsClicked();
+  };
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
       const sendRandom = () => {
@@ -126,7 +126,6 @@ function Search() {
       }
 
   return (
-    
     <div className="searchpadding">
     <Tabs
       id="searchtabs"
@@ -143,22 +142,24 @@ function Search() {
             <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
             <ul id="itemContainer">
-            {
-            listInputs.map(item => {
-            return (
-            
-            <li className="searchItem" key={item} >
-            
-            <span>{item} {"  "}</span>
-            <CloseButton type="Button" onClick={() => deleteInput(item)}></CloseButton>
-            </li>
-            )  
-          })}
-          </ul>
+              {listInputs.map((item) => {
+                return (
+                  <li className="searchItem" key={item}>
+                    <span>
+                      {item} {"  "}
+                    </span>
+                    <CloseButton
+                      type="Button"
+                      onClick={() => deleteInput(item)}
+                    ></CloseButton>
+                  </li>
+                );
+              })}
+            </ul>
 
-          <Button onClick={sendIngridients} variant="outline-dark">Search</Button>
-
-          
+            <Button onClick={sendIngridients} variant="outline-dark">
+              Search
+            </Button>
             <Accordion className="accordion-style">
             <Accordion.Item eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
@@ -204,10 +205,14 @@ function Search() {
       
       </Tab>
 
-      <Tab eventKey="contact" title="Random recipe">
-        <p className="textpadding">Use our randomizer when you have a hard time coming up with ideas.</p>
-         
-        <Button variant="outline-dark" onClick={sendRandom}type="Button">Go!</Button>
+        <Tab eventKey="contact" title="Random recipe">
+          <p className="textpadding">
+            Use our randomizer when you have a hard time coming up with ideas.
+          </p>
+
+          <Button variant="outline-dark" onClick={sendRandom} type="Button">
+            Go!
+          </Button>
 
         <Accordion className="accordion-style">
       <Accordion.Item eventKey="0">
@@ -238,8 +243,7 @@ function Search() {
       </Tab>
     </Tabs>
     </div>
-    
   );
-};
+}
 
 export default Search;
