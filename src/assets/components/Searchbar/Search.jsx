@@ -5,7 +5,6 @@ import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Accordion from 'react-bootstrap/Accordion';
-import {filterRecipes, getRecipeSearch, getRandomRecipes} from '../../../utils'
 import { useClickStore } from '../../hooks/useClickStore';
 import { useSearchStringStore } from '../../hooks/useSearchStringStore';
 import { shallow } from 'zustand/shallow';
@@ -124,7 +123,6 @@ function Search() {
         setlistDiet([])
         setlistType("")
         setlistIntolerances([])
-        console.log(listDiet)
       }
 
   return (
@@ -133,6 +131,7 @@ function Search() {
     <Tabs
       id="searchtabs"
       className="justify-content-center"
+      onClick={setNull}
     >
       <Tab eventKey="take-what-you-have" title="Take what you have">
         <p className="textpadding">Here you will find recipes based on what ingridients you have at home.</p>
@@ -165,19 +164,19 @@ function Search() {
             <Accordion.Header>Advanced search</Accordion.Header>
             <Accordion.Body>
               <div className="smallText">
-              <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
-              <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
-              <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
+              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
+              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
+              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
               
             <div className="diet-boxes">
-            <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
-            <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
-            <input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}
+            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
+            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
+            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
             </div>
             <div>
-            <input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}
-            <input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}
-            <input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}
+            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
+            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
+            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
             </div>
             </div>
             
@@ -215,21 +214,21 @@ function Search() {
         <Accordion.Header>Advanced search</Accordion.Header>
         <Accordion.Body>
         <div className="smallText">
-        <input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}
-        <input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}
-        <input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner 
-        
-        <div className="diet-boxes">
-            <input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}
-            <input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}
-            <input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}
+              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
+              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
+              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
+              
+            <div className="diet-boxes">
+            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
+            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
+            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
             </div>
             <div>
-            <input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}
-            <input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}
-            <input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}
+            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
+            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
+            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
             </div>
-            </div> 
+            </div>
         </Accordion.Body>
       </Accordion.Item>
       </Accordion>
