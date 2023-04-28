@@ -8,7 +8,7 @@ export function Footer(){
             <div className="footerFlex">
                 <div id="leftBox">
                     <ul id="footerNav">
-                        <li className="footerNavOpt"><Link to="/">Home</Link></li>
+                        <li className="footerNavOpt"><Link to="/">Search</Link></li>
                         <li className="footerNavOpt"><Link to="/about">About us</Link></li>
                         <li className="footerNavOpt"><Link to="/contact">Contact us</Link></li>
                     </ul>
