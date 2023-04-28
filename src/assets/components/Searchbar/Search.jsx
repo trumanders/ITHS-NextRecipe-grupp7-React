@@ -25,6 +25,7 @@ function Search() {
     (state) => [state.isClicked, state.setIsClicked],
     shallow
   );
+  const [alertMsg, setAlertMsg] = useState("")
 
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
@@ -104,11 +105,12 @@ function Search() {
     const recipeItem = recipeSearch;
     setrecipeSearch(recipeItem);
     if (recipeSearch === "") {
-      alert("You have not searched for anything");
+      setAlertMsg("Please type something to search for.");
       return;
     }
     setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
     setIsClicked();
+    setAlertMsg("")
   };
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
@@ -138,7 +140,7 @@ function Search() {
         
 
         <form onSubmit={handleSubmit} className="search-form">
-            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
+            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="search-text" onChange={(event)=>setInput(event.target.value)}/>
             <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
 
             <ul id="itemContainer">
@@ -194,9 +196,10 @@ function Search() {
       <p className="textpadding">Search recipes</p>
       
         <form onSubmit={sendRecipe} className="search">
-        <div className="searchbar">
-        <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" className="search-recipe" onChange={(event)=>setrecipeSearch(event.target.value)}/>
-            
+        <div className="searchbar" style={ alertMsg !== "" ? {padding: 0} : {paddingBottom: 23}}>
+        <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" 
+          className={alertMsg !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setrecipeSearch(event.target.value)} />
+        <div className="alertOutput">{alertMsg}</div>
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
             

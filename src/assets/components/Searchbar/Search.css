@@ -33,13 +33,21 @@
   height: 380px;
 }
 
+.search-text:hover {
+  border: 3px solid #94c9a3;
+}
+
+.search-text-alert {
+  border: 2px solid red;
+}
+
 .textpadding {
   padding-top: 30px;
   text-align: center;
 }
 
-.searchbar {
-  padding-bottom: 15px;
+.alertOutput {
+  color: red;
 }
 
 #itemContainer {
