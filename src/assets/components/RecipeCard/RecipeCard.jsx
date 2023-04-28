@@ -11,7 +11,7 @@ function RecipeCard({ id, image, title }) {
   return (
     <button onClick={clickHandler}>
       {/* <div className="card-container"> */}
-      <Card className="card" key={id} border="light">
+      <Card className="card" key={id}>
         <Card.Body className="card-body" style={{ padding: "0" }}>
           <Card.Img
             variant="top"
