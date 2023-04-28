@@ -15,6 +15,7 @@ export function Footer(){
                 </div>
                 <div id="rightBox">
                     <p id="footerInfo">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                    
                 </div>
             </div>
             <p id="footerCopyright">Nail Soup 1.0 - © 2023</p>
