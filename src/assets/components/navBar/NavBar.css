@@ -17,7 +17,12 @@ button {
   width: 100%;
   height: auto;
   margin: 0px;
-  z-index: 1; /*Så att navbaren inte hamnar bakom bild på receptkort när man scrollar ner*/
+  z-index: 2; /*Så att navbaren inte hamnar bakom bild på receptkort när man scrollar ner*/
+}
+
+.NavBar img {
+  width: 150px;
+  margin-left: 30px;
 }
 
 .Logotype {
@@ -26,7 +31,6 @@ button {
   width: 75px;
   height: 75px;
   box-sizing: border-box;
-  border: 1px solid red;
   left: 0px;
   overflow: hidden;
 }

@@ -10,7 +10,7 @@
   -webkit-text-size-adjust: 100%;
 
   transition: color 200ms;
-  --primary: #b5ffd5;
+  --primary: #94c9a3;
   --secondary: #5bc287;
   --off-white: rgb(245, 245, 245);
 
@@ -32,7 +32,7 @@ body {
   color: rgb(55, 35, 75);
 
   background-color: rgba(120, 120, 120, 0.5);
-  background: url(./assets/pictures/saladbowl.jpg) top left no-repeat fixed;
+  background: url(./assets/pictures/background.jpg) top left no-repeat fixed;
   background-size: cover;
 }
 
