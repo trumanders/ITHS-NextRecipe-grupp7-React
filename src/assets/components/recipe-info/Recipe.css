@@ -13,11 +13,6 @@
     border: 1px dashed black;
 } */
 
-.showButton{
-    width: 70%;
-    margin-bottom: 10px;
-}
-
 @media screen and (min-width: 730px){
 
     /* START: Bild & Tabell samma rad */
