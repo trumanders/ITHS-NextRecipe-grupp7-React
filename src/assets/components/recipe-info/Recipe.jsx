@@ -23,9 +23,17 @@ export default function Recipe() {
   // const [recipe, setRecipe] = useState(null);
   const [similars, setSimilars] = useState();
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
+  const [isTablet, setTablet] = useState(window.innerWidth < 900); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
   const [servings, setServings] = useState(recipe.servings);
 
-  // const [liknande, setLiknande] = useState(null);
+  const updateMediaToTablet = () => {
+    setTablet(window.innerWidth < 900);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMediaToTablet);
+    return () => window.removeEventListener("resize", updateMediaToTablet);
+  }, [isTablet]);
 
   //Denna del av Shakiba
   const updateMedia = () => {
@@ -76,7 +84,7 @@ export default function Recipe() {
             </div>
             <>
               {/* Kollar om mobile version */}
-              {isMobile ? (
+              {isTablet ? (
                 /*Om Mobilversion*/
                 <div className="showMorebtn">
                   {/* Sätt en knapp för att visa nutritions*/}
