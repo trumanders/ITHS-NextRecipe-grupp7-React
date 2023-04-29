@@ -17,21 +17,15 @@ button {
   width: 100%;
   height: auto;
   margin: 0px;
-  z-index: 2; /*Så att navbaren inte hamnar bakom bild på receptkort när man scrollar ner*/
-}
-
-.NavBar img {
-  width: 150px;
-  margin-left: 3px;
+  z-index: 200;
 }
 
 .Logotype {
   display: none;
   position: absolute;
-  width: 75px;
   height: 75px;
   box-sizing: border-box;
-  left: 0px;
+  left: 20px;
   overflow: hidden;
 }
 
@@ -83,6 +77,10 @@ button {
   overflow: hidden;
 }
 
+.navOpt p{
+  text-align: center;
+}
+
 .navOpt:hover {
   background-color: var(--secondary);
   color: var(--off-white);
@@ -127,5 +125,6 @@ button {
   .NavBar {
     background-color: var(--primary);
     height: 75px;
+    padding-right: 20px;
   }
 }

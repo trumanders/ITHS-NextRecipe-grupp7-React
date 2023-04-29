@@ -13,7 +13,7 @@
     border: 1px dashed black;
 } */
 
-@media screen and (min-width: 730px){
+@media screen and (min-width: 900px){
 
     /* START: Bild & Tabell samma rad */
     .picture-pictureInfo-and-nutritionTable-container{
@@ -24,7 +24,7 @@
         width: 70%;
     }
     .recipe-section-nutritionTable{
-        width: 25%;
+        width: 30%;
     }
     /* SLUT: Bild & Tabell samma rad */
 }

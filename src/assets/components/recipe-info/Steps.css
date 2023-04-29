@@ -1,0 +1,15 @@
+.steps-list{
+    text-align: start;
+    list-style: none;
+    padding-left: 5px;
+}
+
+.steps-list-row{
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 3px;
+}
+
+.list-text{
+    margin-left: 20px;
+}
