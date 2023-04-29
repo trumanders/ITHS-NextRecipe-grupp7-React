@@ -18,7 +18,7 @@
     margin-top: 3px;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 730px){
     .burger_menu{
         display: none;
     }

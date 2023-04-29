@@ -91,7 +91,7 @@ button {
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 730px) {
   .Logotype {
     display: block;
   }
