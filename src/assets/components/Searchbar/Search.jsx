@@ -1,6 +1,6 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -26,6 +26,16 @@ function Search() {
     shallow
   );
   const [alertMsg, setAlertMsg] = useState("")
+  const [isMobile, setMobile] = useState(window.innerWidth < 730);
+
+  const updateMedia = () => {
+    setMobile(window.innerWidth < 730);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, [isMobile]);
 
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {

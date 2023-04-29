@@ -14,6 +14,7 @@
 
 .accordion-style {
   position: relative;
+  margin: auto;
   padding-bottom: 5px;
   padding-top: 10px;
   max-width: 350px;
@@ -30,7 +31,11 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 5px;
-  height: 380px;
+  height: 420px;
+}
+
+.search-text {
+  max-width: 12rem;
 }
 
 .search-text:hover {
@@ -122,11 +127,11 @@
   }
 
   .searchpadding {
-    padding-top: 20px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-top: 5px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-bottom: 40px;
-    height: 350px;
+    height: 380px;
   }
 
   .textpadding {
@@ -180,5 +185,12 @@
   .smallText {
     font-size: 15px;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 420px){
+  .searchpadding{
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

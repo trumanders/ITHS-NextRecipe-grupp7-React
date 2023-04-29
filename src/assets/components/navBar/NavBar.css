@@ -22,7 +22,7 @@ button {
 
 .NavBar img {
   width: 150px;
-  margin-left: 30px;
+  margin-left: 3px;
 }
 
 .Logotype {
@@ -93,7 +93,7 @@ button {
 }
 
 /* QUERY DESKTOP VIEW */
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 730px) {
   .Logotype {
     display: block;
   }
