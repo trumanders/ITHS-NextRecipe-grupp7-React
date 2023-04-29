@@ -11,7 +11,6 @@ function Layout() {
     <>      
       <NavBar /> 
       <PageContainer />
-      {/* <Footer></Footer> */}
     </>
   )
 }
