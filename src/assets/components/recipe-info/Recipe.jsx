@@ -3,6 +3,7 @@ import "./PictureAndInfo.css";
 import "./NutritionTable.css";
 import "./Ingredient.css";
 import "./Instructions.css";
+import "./Steps.css"
 import { getRecipeById, getSimilarRecipes } from "../../../utils";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
@@ -282,16 +283,28 @@ const Ingredient = (props) => {
 
 //Komponent som håller i stegen
 const Instructions = (props) => {
+
+  const beautifySteps = () =>{/* För bättre kontroll av instruktioner */
+    let steps = ({html: props.steps.replaceAll(/((<p>)|(<\/p>)|(<ol>)|(<ul>)|(<\/ol>)|(<\/ul>)|(<li>)|(<\/li>))/g, "").replaceAll(/((\.)(\s))/g,`.`).replaceAll(/(\s\s+)/g,"").replace(/(\.)([A-Z])/g, `$1<br/>$2`).replaceAll(/\r\n|\r|\n/gm,"<br/>")});
+
+    const stepArray = steps.html.split("<br>")[0].split("<br/>");
+    return stepArray;
+  }
+
+  const steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
+  
   return (
     <div className="instructions-container">
       <h2>Steps</h2>
       {props.steps !== null ? (
-        <div
-          className="instructions"
-          dangerouslySetInnerHTML={{
-            __html: props.steps.replaceAll(". ", ".<br/>"),
-          }}
-        ></div>
+        <ul className="steps-list">
+          {steps.map((row, index) => (
+            <li key={index} className="steps-list-row">
+              <input type="checkbox"/>{' '}
+              <div className="list-text">{row}</div>
+            </li>
+          ))}
+        </ul>
       ) : (
         <p>
           Sorry, no instructions found for this recipe. Feel free to improvise!
