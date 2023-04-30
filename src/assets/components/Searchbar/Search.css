@@ -1,36 +1,176 @@
-.itemInput{
-    align-items:center;
+.itemInput {
+  align-items: center;
 }
 
-.search-form{
+.search-form {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.diet-boxes {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.accordion-style {
+  position: relative;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  max-width: 350px;
+  z-index: 1;
+}
+
+.accordion-button {
+  padding: 10px !important;
+  width: 97% !important;
+}
+
+.searchpadding {
+  padding-top: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 5px;
+  height: 380px;
+}
+
+.textpadding {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.searchbar {
+  padding-bottom: 15px;
+}
+
+#itemContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: center;
+  margin: 0px auto 15px;
+  padding: 0px;
+}
+
+.searchItem {
+  position: relative;
+  width: auto;
+  height: 25px;
+  border: 1px solid #0d6efd;
+  margin: 5px 5px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0px 18px 0px 10px;
+}
+
+.btn-close {
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  margin-left: 2px;
+  width: 10px !important;
+  height: 10px !important;
+  padding: 0px !important;
+}
+
+.addBtn {
+  height: 30px;
+  margin-top: 0;
+  padding: 0px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.smallText {
+  font-size: 14px;
+  text-align: left;
+}
+
+@media screen and (min-width: 730px) {
+  .itemInput {
+    align-items: center;
+  }
+
+  .search-form {
     padding-top: 15px;
     padding-bottom: 15px;
-}
+  }
 
-.diet-boxes{
+  .diet-boxes {
     padding-top: 10px;
     padding-bottom: 10px;
-}
+  }
 
-.accordion-style{
+  .accordion-style {
+    position: relative;
     padding-bottom: 15px;
     padding-top: 15px;
     width: 450px;
     margin: auto;
-}
+  }
 
-.searchpadding{
+  .accordion-button {
+    padding: 10px !important;
+  }
+
+  .searchpadding {
     padding-top: 20px;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 150px;
+    padding-right: 150px;
     padding-bottom: 40px;
-}
+    height: 350px;
+  }
 
-.textpadding{
-    padding-top: 10px;
-}
+  .textpadding {
+    padding-top: 30px;
+    text-align: center;
+  }
 
-.searchbar{
+  .searchbar {
     padding-bottom: 15px;
-}
+  }
 
+  #itemContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: center;
+    margin: 0px auto 15px;
+    padding: 0px;
+  }
+
+  .searchItem {
+    width: auto;
+    height: 25px;
+    border: 1px solid #0d6efd;
+    margin: 0px 5px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 0px 10px;
+  }
+
+  .btn-close {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    margin-bottom: 5px !important;
+    width: 10px !important;
+    height: 10px !important;
+    padding: 0px !important;
+  }
+
+  .addBtn {
+    height: 30px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding: 0px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .smallText {
+    font-size: 15px;
+    text-align: left;
+  }
+}

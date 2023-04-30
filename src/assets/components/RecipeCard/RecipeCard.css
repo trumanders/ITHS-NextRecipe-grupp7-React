@@ -1,59 +1,28 @@
-:root {
-  --divcard: rgb(202, 191, 175);
+.button {
+  border: none;
 }
 
-div.card {
-  background-color: var(--divcard);
-  border-color: var(--divcard);
-  height: 22rem;
+.card {
+  width: 13rem;
 }
 
-.card-container {
-  height: 25rem;
-  display: inline-block;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--divcard);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 1.5%;
-  /* box-shadow: 1px 2px 0px 2px rgb(66, 66, 66); */
-  /* transition: transform ease 0.2s, box-shadow ease 0.2s; */
+.card-body {
+  height: 12rem;
+  background-color: var(--primary);
+  border-radius: 5px;
 }
 
-.card-container:hover {
-  box-shadow: 0px 3px 10px 0px rgb(58, 49, 42);
-  /* transform: translateY(-7px);
-  transition: all 0.2 ease-in-out; */
+.card .card-title {
+  color: black;
+  font-size: 0.75rem;
+  margin-top: 3px;
 }
 
 .card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 3%;
+  height: 9rem;
+  /* object-fit: cover; */
 }
 
-.card-title {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: rem;
-  color: black;
+.card:hover {
+  box-shadow: 0px 3px 10px 0px rgb(58, 49, 42);
 }
-
-.card-text {
-  color: black;
-}
-/* 
-.card-button {
-  background-color: #b5ffd5;
-  border-color: azure;
-  color: rgb(21, 22, 22);
-  margin-top: 1rem;
-  padding: 0.75rem;
-  border-radius: 7px;
-} */
-
-/* .card-button:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-} */

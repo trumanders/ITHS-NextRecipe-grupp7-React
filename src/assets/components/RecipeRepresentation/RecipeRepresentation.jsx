@@ -30,7 +30,7 @@ export default function RecipeRepresentation(props) {
   }
   return (
     <>
-      <h1>Popular Recipes</h1>
+      <h1>{props.title}</h1>
       <div className="recipeRepresentation">
         {currentRecipes.map((recipe) => (
           <RecipeCard {...recipe} key={recipe.id} />

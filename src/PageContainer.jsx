@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
   import AboutUs from "./assets/pages/about/AboutUs";
   import { ContactUs } from "./assets/pages/contact/ContactForm";
 import Home from "./assets/pages/home/Home"
+import { Footer } from "./assets/components/footer/footer";
 
 
 
@@ -16,7 +17,7 @@ import {
 } from "react-router-dom";
  function PageContainer() {
   return (
-    <Container>
+    <div id="wrapper">
       <Outlet />
       {/* <Routes>
         <Route path="/about" element={<AboutUs />} />
@@ -24,7 +25,8 @@ import {
         <Route path="/" element={<Home />} />
         <Route path="recipe/:recipeId" element={<Recipe />} />
       </Routes> */}
-    </Container>
+      <Footer />
+    </div>
   );
 }
 export default PageContainer;

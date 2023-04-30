@@ -1,15 +1,74 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424;  */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  transition: color 200ms;
+  --primary: #94c9a3;
+  --secondary: #5bc287;
+  --off-white: rgb(245, 245, 245);
+
+  --breakpoint: 760px;
+}
+
+/*
+  BOILER PLATING
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  box-sizing: content-box;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: rgb(55, 35, 75);
+
+  background-color: rgba(120, 120, 120, 0.5);
+  background: url(./assets/pictures/background.jpg) top left no-repeat fixed;
+  background-size: cover;
+}
+
+body button {
+  margin: 5px;
+}
+
+#wrapper {
+  width: 95%;
+  max-width: 970px;
+  background-color: var(--off-white);
+  margin: 0px auto;
+  padding: 25px;
+  position: static;
+}
+
+/*
+  LINK DESIGN
+*/
+
+body a {
+  color: rgb(70, 50, 100);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body a:hover {
+  color: rgb(130, 100, 150);
+}
+
+body a:active {
+  color: rgb(150, 60, 200);
+}
+
+/* QUERY DESKTOP STYLE */
+@media screen and (min-width: 760px) {
+  #wrapper {
+  }
 }
