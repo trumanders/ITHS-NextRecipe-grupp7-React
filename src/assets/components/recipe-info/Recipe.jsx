@@ -145,7 +145,7 @@ export default function Recipe() {
                             <Accordion.Header>Steps</Accordion.Header>
                             <Accordion.Body>
                                 <div className="recipe-section-nutritionTable">
-                                    <Instructions steps={recipe.instructions} />
+                                    <Instructions steps={recipe.instructions} recipeID = {recipe.id} />
                                 </div>
                             </Accordion.Body>
                         </Accordion.Item>
@@ -153,7 +153,7 @@ export default function Recipe() {
                 </div>
             ) : (
               /* Om inte mobilversion */
-              <Instructions steps={recipe.instructions} />
+              <Instructions steps={recipe.instructions} recipeID = {recipe.id} />
             )}
           </div>
 
@@ -292,17 +292,25 @@ const Instructions = (props) => {
   }
 
   const steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
+
+  const checkBoxChange = (instructionElemID) =>{
+
+    document.getElementById(instructionElemID).classList.toggle("instructionDone");
+    
+  }
   
   return (
     <div className="instructions-container">
       <h2>Steps</h2>
       {props.steps !== null ? (
         <ul className="steps-list">
-          {steps.map((row, index) => (
-            <li key={index} className="steps-list-row">
-              <input type="checkbox"/>{' '}
-              <div className="list-text">{row}</div>
-            </li>
+          {steps.map((instructionRow, index) => (
+            <li key={props.recipeID+"_"+index} >
+              <label htmlFor={props.recipeID+"_"+index} className="steps-list-row">
+                <input id={props.recipeID+"_"+index} key={props.recipeID+"_"+index} type="checkbox" className="instructionCheckBox" onChange= {() => checkBoxChange(props.recipeID+"_"+index+"_instruction")} />{' '} <div id={props.recipeID+"_"+index+"_instruction"} className="instruction">{instructionRow}</div>
+              </label>
+            
+             </li>
           ))}
         </ul>
       ) : (
