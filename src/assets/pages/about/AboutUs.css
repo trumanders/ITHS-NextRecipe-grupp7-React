@@ -1,7 +1,29 @@
-.breakfast{    
-    margin-bottom: 20px;    
-}
-.intro{
-    margin-bottom: 30px;
+.aboutText{
     text-align:left;
+}
+
+.aboutImg{
+    width: 100%;
+}
+
+.aboutRow{
+    margin: 30px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.aboutCol{
+    margin: 0px 25px;
+}
+
+.aboutTitle{
+    margin: 25px;
+}
+
+.about40percent{
+    width: 40%;
+}
+
+.about60percent{
+    width: 60%;
 }
