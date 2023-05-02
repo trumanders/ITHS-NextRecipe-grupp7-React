@@ -25,7 +25,8 @@ function Search() {
     (state) => [state.isClicked, state.setIsClicked],
     shallow
   );
-  const [alertMsg, setAlertMsg] = useState("")
+  const [alertMsgRecipe, setAlertMsgRecipe] = useState("")
+  const [alertMsgIngredient, setAlertMsgIngredient] = useState("")
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
 
   const updateMedia = () => {
@@ -44,7 +45,7 @@ function Search() {
       
       if(listInputs.includes(item))
       {
-        alert("Ingredient already added.")
+        setAlertMsgIngredient("Ingredient already added.")
         setInput("")
         return;
       }
@@ -52,9 +53,10 @@ function Search() {
       {
         setlistInputs((ls) =>[...ls, item])
         setInput("")
+        setAlertMsgIngredient("")
       }
       else{
-        alert("No ingredient added")
+        setAlertMsgIngredient("No ingredient added")
       }
       
     }
@@ -115,12 +117,12 @@ function Search() {
     const recipeItem = recipeSearch;
     setrecipeSearch(recipeItem);
     if (recipeSearch === "") {
-      setAlertMsg("Please type something to search for.");
+      setAlertMsgRecipe("Please type something to search for.");
       return;
     }
     setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
     setIsClicked();
-    setAlertMsg("")
+    setAlertMsgRecipe("")
   };
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
@@ -150,9 +152,11 @@ function Search() {
         
 
         <form onSubmit={handleSubmit} className="search-form">
-            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="search-text" onChange={(event)=>setInput(event.target.value)}/>
+        <div className="searchbar" style={ alertMsgIngredient !== "" ? {padding: 0} : {paddingBottom: 23}}>
+            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className={alertMsgIngredient !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setInput(event.target.value)}/>
             <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
-
+            <div className="alertOutput">{alertMsgIngredient}</div>
+          </div>
             <ul id="itemContainer">
               {listInputs.map((item) => {
                 return (
@@ -206,10 +210,10 @@ function Search() {
       <p className="textpadding">Search recipes</p>
       
         <form onSubmit={sendRecipe} className="search">
-        <div className="searchbar" style={ alertMsg !== "" ? {padding: 0} : {paddingBottom: 23}}>
+        <div className="searchbar" style={ alertMsgRecipe !== "" ? {padding: 0} : {paddingBottom: 23}}>
         <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" 
-          className={alertMsg !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setrecipeSearch(event.target.value)} />
-        <div className="alertOutput">{alertMsg}</div>
+          className={alertMsgRecipe !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setrecipeSearch(event.target.value)} />
+        <div className="alertOutput">{alertMsgRecipe}</div>
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
             
