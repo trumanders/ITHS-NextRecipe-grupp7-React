@@ -1,5 +1,5 @@
 .aboutText{
-    text-align:left;
+    text-align: center;
 }
 
 .aboutImg{
@@ -8,8 +8,8 @@
 
 .aboutRow{
     margin: 30px 0px;
-    display: flex;
-    flex-direction: row;
+    display: block;
+    flex-direction: column;
 }
 
 .aboutCol{
@@ -18,6 +18,7 @@
 
 .aboutTitle{
     margin: 25px;
+    text-align: center;
 }
 
 .about40percent{
@@ -26,4 +27,20 @@
 
 .about60percent{
     width: 60%;
+}
+
+/* QUERY DESKTOP VIEW */
+@media screen and (min-width: 730px){
+    .aboutRow{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .aboutText{
+        text-align: left;
+    }
+
+    .aboutTitle{
+        text-align: left;
+    }
 }

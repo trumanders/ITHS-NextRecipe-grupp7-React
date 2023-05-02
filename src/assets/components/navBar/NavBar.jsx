@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import logo from '../../pictures/logo.png'
 
 function NavBar(){
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 730);
 
     const updateMedia = () => {
