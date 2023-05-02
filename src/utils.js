@@ -46,7 +46,7 @@ export async function getAllRecipes() {
 }
 
 export async function getRandomRecipes(tags) {
-    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=10&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=10`
+    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=10&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=100`
 
     const response = await fetch(url, {
         headers: {
@@ -65,7 +65,7 @@ export async function getRandomRecipes(tags) {
 export async function getRecipeSearch(searchString) {
     let fetchResults = []
 
-    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchString}&number=10`, {
+    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchString}&number=100`, {
         headers: {
             'Content-Type': 'application/json',
             'X-Api-Key': `${key}`
@@ -87,7 +87,7 @@ export async function getPopularRecipes() {
   let fetchResults = [];
 
   const response = await fetch(
-    "https://api.spoonacular.com/recipes/complexSearch?sort=popularity&number=8",
+    "https://api.spoonacular.com/recipes/complexSearch?sort=popularity&number=100",
     {
       headers: {
         "Content-Type": "application/json",
