@@ -46,7 +46,7 @@ export async function getAllRecipes() {
 }
 
 export async function getRandomRecipes(tags) {
-    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=10&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=100`
+    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=100&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=100`
 
     const response = await fetch(url, {
         headers: {
@@ -184,7 +184,7 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         //Om filterGet är mindre än 100 har resultaten tagit slut hos API:et
         break;
       }
-    } while (searchResults.length < 10);
+    } while (searchResults.length < 100);
     console.log(searchResults.length);
     return searchResults;
   } else {
