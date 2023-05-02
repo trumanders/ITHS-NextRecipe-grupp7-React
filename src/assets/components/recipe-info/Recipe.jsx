@@ -176,8 +176,8 @@ export default function Recipe() {
 //Komponent som håller Bild, antal servings och tid att laga
 const PictureAndInfo = (props) => {
   //calculate är propertyn som håller värdet (antalet valda portioner) som sedan ska beräknas i changeIngredients
-  const handleChange = (event) => {
-    props.calculate(event.target.value);
+  const handleChange = (event) => {    
+    if(event.target.value > 0) props.calculate(event.target.value);  
   };
   return (
     <article className="picture-and-info-container">
