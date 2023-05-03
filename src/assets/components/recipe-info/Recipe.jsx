@@ -291,10 +291,12 @@ const Instructions = (props) => {
     return stepArray;
   }
 
+  var steps = null
+
   if(props.steps !== null){
-  const steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
+  steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
   }
-  
+
   const checkBoxChange = (instructionElemID) =>{
 
     document.getElementById(instructionElemID).classList.toggle("instructionDone");
