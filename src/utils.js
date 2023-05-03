@@ -3,7 +3,7 @@ const key = "ce78851c6bc24bf4944626cc0c04848e";
 
 //getRecipeByFilter('dinner', '', 'vegetarian')
 
-//filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
+// filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
 
 // getRecipeSearch("Carbonara")
 
@@ -147,6 +147,13 @@ export async function getRecipeByFilter(mealtype, intolerances, diet, skip) {
   return allRecipes;
 }
 
+function intersect(arr1, arr2) {
+  const arr1Ids = arr1.map(element => {
+      return element.id
+  })
+  return arr2.filter(item => arr1Ids.includes(item.id))
+}
+
 export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
   var searchResults = []; //Där resultaten sen ska hamna
   var skip = 0;
@@ -165,16 +172,17 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
       );
       console.log(`filterGet: ${filterGet.length} skip: ${skip}`);
 
-      let ingredientGetIds = ingredientGet.map((element) => {
-        //Plockar ut id för enklare filtrering
-        return element.id;
-      });
+      var intersectingRecipes = intersect(ingredientGet, filterGet)
+      // let ingredientGetIds = ingredientGet.map((element) => {
+      //   //Plockar ut id för enklare filtrering
+      //   return element.id;
+      // });
 
-      var intersect = filterGet.filter((item) =>
-        ingredientGetIds.includes(item.id)
-      ); //plockar ut de objekt som finns i båda resultaten
+      // var intersectingRecipes = filterGet.filter((item) =>
+      //   ingredientGetIds.includes(item.id)
+      // ); //plockar ut de objekt som finns i båda resultaten
 
-      intersect.forEach((item) => {
+      intersectingRecipes.forEach((item) => {
         searchResults.push(item);
       });
 
@@ -184,7 +192,7 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         //Om filterGet är mindre än 100 har resultaten tagit slut hos API:et
         break;
       }
-    } while (searchResults.length < 100);
+    } while (searchResults.length < 20); //Kan inte vara 100. Vid enbart ingrediens och inga filter kommer den försöka tömma API:et vilket leder till 429.
     console.log(searchResults.length);
     return searchResults;
   } else {
