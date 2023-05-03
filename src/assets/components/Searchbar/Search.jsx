@@ -10,6 +10,8 @@ import { useSearchStringStore } from '../../hooks/useSearchStringStore';
 import { shallow } from 'zustand/shallow';
 
 
+
+
 function Search() {
   const [input, setInput] = useState("");
   const [listInputs, setlistInputs] = useState([]);
@@ -17,6 +19,7 @@ function Search() {
   const [listDiet, setlistDiet] = useState([]);
   const [listType, setlistType] = useState("");
   const [listIntolerances, setlistIntolerances] = useState([]);
+  
   const [searchString, setSearchString] = useSearchStringStore(
     (state) => [state.searchString, state.setSearchString],
     shallow
@@ -26,6 +29,10 @@ function Search() {
     shallow
   );
 
+
+  const checkToggle = () => {
+    setisCollapsed("0")
+  }
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
       event.preventDefault();
@@ -93,9 +100,11 @@ function Search() {
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
       
-      
+
         setSearchString({ingredients: listInputs.toString(), type: listType, intolerances: listIntolerances.toString(), diet: listDiet.toString(), call: "getIngredient"})
         setIsClicked()
+        
+         
       }
 
   // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en. Om sökinput ej finns, så får man felmeddelande
@@ -160,9 +169,11 @@ function Search() {
             <Button onClick={sendIngridients} variant="outline-dark">
               Search
             </Button>
-            <Accordion className="accordion-style">
-            <Accordion.Item eventKey="0">
+            
+            <Accordion onClick={checkToggle} defaultActiveKey="1" className="accordion-style">
+            <Accordion.Item alwaysOpen="0" eventKey="0">
             <Accordion.Header>Advanced search</Accordion.Header>
+           
             <Accordion.Body>
               <div className="smallText">
               <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
@@ -182,12 +193,13 @@ function Search() {
             </div>
             
             </Accordion.Body>
+            
         </Accordion.Item>
         </Accordion>
+        
         </form>
   
-          
-        
+  
         
       </Tab>
       <Tab eventKey="home" title="Recipes">
@@ -214,10 +226,11 @@ function Search() {
             Go!
           </Button>
 
-        <Accordion className="accordion-style">
+      <Accordion className="accordion-style">
       <Accordion.Item eventKey="0">
         <Accordion.Header>Advanced search</Accordion.Header>
-        <Accordion.Body>
+        
+        <Accordion.Body eventKey="0">
         <div className="smallText">
               <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
               <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
@@ -235,6 +248,7 @@ function Search() {
             </div>
             </div>
         </Accordion.Body>
+        
       </Accordion.Item>
       </Accordion>
 
