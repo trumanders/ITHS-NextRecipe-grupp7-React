@@ -33,8 +33,8 @@ export const ContactUs = () => {
     <>
         <br></br>
         <div>
-            <Col>
-                <h2>Contact Us</h2>
+            <Col className="d-flex justify-content-center">
+                <h2>Contact us</h2>
             </Col>
         </div>
         <br></br>
