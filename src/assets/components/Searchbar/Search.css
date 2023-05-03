@@ -19,7 +19,16 @@
   padding-top: 10px;
   max-width: 350px;
   z-index: 1;
+  
 }
+
+/* .accordion-body {
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+} */
 
 .accordion-button {
   padding: 10px !important;
@@ -97,6 +106,18 @@
 .smallText {
   font-size: 14px;
   text-align: left;
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.diet-boxes {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 @media screen and (min-width: 730px) {
@@ -107,11 +128,6 @@
   .search-form {
     padding-top: 15px;
     padding-bottom: 15px;
-  }
-
-  .diet-boxes {
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
 
   .accordion-style {
@@ -188,9 +204,20 @@
   }
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 470px){
   .searchpadding{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .smallText {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 374px){
+  .diet-boxes {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

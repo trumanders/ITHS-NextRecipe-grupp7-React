@@ -4,10 +4,13 @@ import React, {useEffect, useState} from 'react';
 import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
-import Accordion from 'react-bootstrap/Accordion';
 import { useClickStore } from '../../hooks/useClickStore';
 import { useSearchStringStore } from '../../hooks/useSearchStringStore';
 import { shallow } from 'zustand/shallow';
+import CustomAccordion from './Accordion'
+
+
+
 
 
 function Search() {
@@ -139,6 +142,10 @@ function Search() {
         setlistIntolerances([])
       }
 
+      const handleAccordionClick = () => {
+        setIsAccodionVisible(!isAccordionVisible)
+      }
+
   return (
     <div className="searchpadding">
     <Tabs
@@ -176,30 +183,9 @@ function Search() {
             <Button onClick={sendIngridients} variant="outline-dark">
               Search
             </Button>
-            <Accordion className="accordion-style">
-            <Accordion.Item eventKey="0">
-            <Accordion.Header>Advanced search</Accordion.Header>
-            <Accordion.Body>
-              <div className="smallText">
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
-              
-            <div className="diet-boxes">
-            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
-            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
-            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
-            </div>
-            <div>
-            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
-            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
-            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
-            </div>
-            </div>
             
-            </Accordion.Body>
-        </Accordion.Item>
-        </Accordion>
+            <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
+            
         </form>
   
           
@@ -231,31 +217,7 @@ function Search() {
             Go!
           </Button>
 
-        <Accordion className="accordion-style">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Advanced search</Accordion.Header>
-        <Accordion.Body>
-        <div className="smallText">
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
-              
-            <div className="diet-boxes">
-            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
-            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
-            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
-            </div>
-            <div>
-            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
-            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
-            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
-            </div>
-            </div>
-        </Accordion.Body>
-      </Accordion.Item>
-      </Accordion>
-
-        
+        <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
        
       </Tab>
     </Tabs>
@@ -264,3 +226,4 @@ function Search() {
 }
 
 export default Search;
+
