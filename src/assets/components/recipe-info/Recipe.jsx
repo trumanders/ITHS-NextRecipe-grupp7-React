@@ -50,13 +50,15 @@ export default function Recipe() {
   //Hämta liknande recept
   useEffect(() => {
     const fetchData = async () => {
-      //let id = 615761; //detta id ersätts sen av props
       let response = await getSimilarRecipes(recipe.id);
-      //console.log(response);
       setSimilars(response);
     };
     fetchData();
-    // console.log(similars);
+    //Scrolla upp till toppen när nya recept laddas, dvs när man klickat på ett av dem.
+    window.scrollTo({
+      top: 0,
+      behaviour: "auto",
+    });
   }, [recipe]);
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
@@ -183,7 +185,7 @@ const PictureAndInfo = (props) => {
     <article className="picture-and-info-container">
       <img
         className="recipe-picture"
-        src={props.image !== null ? props.image : defaultFood}
+        src={(props.image === null || props.image === undefined) ? defaultFood : props.image}
         alt="Image of recipe"
       />
       {/*Att styla sen med fontawsome*/}
