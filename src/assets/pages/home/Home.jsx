@@ -18,38 +18,53 @@ export async function loader() {
 }
 
 export default function Home() {
-  const [recipes, setRecipes] = useState([])
   const searchString = useSearchStringStore((state) => state.searchString)
   const {popularRecipes} = useLoaderData()
   const [isClicked, setIsClicked] = useClickStore(
     (state) => [state.isClicked, state.setIsClicked])
   const [prevClick, setPrevClick] = useState(0)
   const [title, setTitle] = useState("Popular Recipes")
+  const [recipes, setRecipes] = useState(popularRecipes)
+  const [hasResults, setHasResults] = useState(true)
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   if(isClicked > prevClick) {
+    setHasResults(true)
     switch (searchString.call) {
       case "getIngredient":
         const fetchIngredient = async() => {
           const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
+          if (response.length < 1) {
+            setHasResults(false)
+          } else {
           setRecipes(response)
-          setTitle(`Recipes with ${searchString.ingredients}`)
+          setTitle(`Found ${response.length} recipes with ${searchString.ingredients}`)
+          }
         }
         fetchIngredient()
         break
       case "getRecipeSearch":
         const fetchFreeSearch = async() => {
           const response = await getRecipeSearch(searchString.ingredients)
+          if (response.length < 1) {
+            setHasResults(false)
+            setRecipes([])
+          } else {
           setRecipes(response)
           setTitle(`Recipes with ${searchString.ingredients}`)
+          }
         }
         fetchFreeSearch()
         break
       case "getRandom":
         const fetchRandom = async() => {
           const response = await getRandomRecipes(searchString.ingredients)
+          if (response.length < 1) {
+            setHasResults(false)
+          } else {
           setRecipes(response)
           setTitle("Random Recipes")
+          }
         }
         fetchRandom()
         break
@@ -57,13 +72,13 @@ export default function Home() {
     setPrevClick(prevClick + 1)
   }
 
-  if(recipes.length === 0) {
-    setRecipes(popularRecipes)
-  }
-
   return(
   <>
   <Search />
+  {!hasResults &&
+  <div className="noResult">
+  <h3>Sorry, no results found.</h3>
+  </div>}
   {recipes.length > 0 && 
   <RecipeRepresentation recipes={recipes} title={title} />}
   </>

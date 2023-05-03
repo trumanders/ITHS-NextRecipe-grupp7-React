@@ -14,11 +14,21 @@
 
 .accordion-style {
   position: relative;
+  margin: auto;
   padding-bottom: 5px;
   padding-top: 10px;
   max-width: 350px;
   z-index: 1;
+  
 }
+
+/* .accordion-body {
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+} */
 
 .accordion-button {
   padding: 10px !important;
@@ -30,7 +40,19 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 5px;
-  height: 380px;
+  height: 420px;
+}
+
+.search-text {
+  max-width: 12rem;
+}
+
+.search-text:hover {
+  border: 3px solid #94c9a3;
+}
+
+.search-text-alert {
+  border: 2px solid red;
 }
 
 .textpadding {
@@ -38,8 +60,8 @@
   text-align: center;
 }
 
-.searchbar {
-  padding-bottom: 15px;
+.alertOutput {
+  color: red;
 }
 
 #itemContainer {
@@ -84,6 +106,18 @@
 .smallText {
   font-size: 14px;
   text-align: left;
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.diet-boxes {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 @media screen and (min-width: 730px) {
@@ -94,11 +128,6 @@
   .search-form {
     padding-top: 15px;
     padding-bottom: 15px;
-  }
-
-  .diet-boxes {
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
 
   .accordion-style {
@@ -114,11 +143,11 @@
   }
 
   .searchpadding {
-    padding-top: 20px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-top: 5px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-bottom: 40px;
-    height: 350px;
+    height: 380px;
   }
 
   .textpadding {
@@ -172,5 +201,23 @@
   .smallText {
     font-size: 15px;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 470px){
+  .searchpadding{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .smallText {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 374px){
+  .diet-boxes {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

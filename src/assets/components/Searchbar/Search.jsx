@@ -1,13 +1,16 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Search.css';
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
-import Accordion from 'react-bootstrap/Accordion';
 import { useClickStore } from '../../hooks/useClickStore';
 import { useSearchStringStore } from '../../hooks/useSearchStringStore';
 import { shallow } from 'zustand/shallow';
+import CustomAccordion from './Accordion'
+
+
+
 
 
 function Search() {
@@ -25,6 +28,18 @@ function Search() {
     (state) => [state.isClicked, state.setIsClicked],
     shallow
   );
+  const [alertMsgRecipe, setAlertMsgRecipe] = useState("")
+  const [alertMsgIngredient, setAlertMsgIngredient] = useState("")
+  const [isMobile, setMobile] = useState(window.innerWidth < 730);
+
+  const updateMedia = () => {
+    setMobile(window.innerWidth < 730);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, [isMobile]);
 
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
@@ -33,7 +48,7 @@ function Search() {
       
       if(listInputs.includes(item))
       {
-        alert("Ingredient already added.")
+        setAlertMsgIngredient("Ingredient already added.")
         setInput("")
         return;
       }
@@ -41,9 +56,10 @@ function Search() {
       {
         setlistInputs((ls) =>[...ls, item])
         setInput("")
+        setAlertMsgIngredient("")
       }
       else{
-        alert("No ingredient added")
+        setAlertMsgIngredient("No ingredient added")
       }
       
     }
@@ -104,11 +120,12 @@ function Search() {
     const recipeItem = recipeSearch;
     setrecipeSearch(recipeItem);
     if (recipeSearch === "") {
-      alert("You have not searched for anything");
+      setAlertMsgRecipe("Please type something to search for.");
       return;
     }
     setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
     setIsClicked();
+    setAlertMsgRecipe("")
   };
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
@@ -125,6 +142,10 @@ function Search() {
         setlistIntolerances([])
       }
 
+      const handleAccordionClick = () => {
+        setIsAccodionVisible(!isAccordionVisible)
+      }
+
   return (
     <div className="searchpadding">
     <Tabs
@@ -138,9 +159,11 @@ function Search() {
         
 
         <form onSubmit={handleSubmit} className="search-form">
-            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className="seach-input" onChange={(event)=>setInput(event.target.value)}/>
+        <div className="searchbar" style={ alertMsgIngredient !== "" ? {padding: 0} : {paddingBottom: 23}}>
+            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className={alertMsgIngredient !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setInput(event.target.value)}/>
             <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
-
+            <div className="alertOutput">{alertMsgIngredient}</div>
+          </div>
             <ul id="itemContainer">
               {listInputs.map((item) => {
                 return (
@@ -160,30 +183,9 @@ function Search() {
             <Button onClick={sendIngridients} variant="outline-dark">
               Search
             </Button>
-            <Accordion className="accordion-style">
-            <Accordion.Item eventKey="0">
-            <Accordion.Header>Advanced search</Accordion.Header>
-            <Accordion.Body>
-              <div className="smallText">
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
-              
-            <div className="diet-boxes">
-            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
-            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
-            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
-            </div>
-            <div>
-            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
-            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
-            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
-            </div>
-            </div>
             
-            </Accordion.Body>
-        </Accordion.Item>
-        </Accordion>
+            <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
+            
         </form>
   
           
@@ -194,9 +196,10 @@ function Search() {
       <p className="textpadding">Search recipes</p>
       
         <form onSubmit={sendRecipe} className="search">
-        <div className="searchbar">
-        <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" className="search-recipe" onChange={(event)=>setrecipeSearch(event.target.value)}/>
-            
+        <div className="searchbar" style={ alertMsgRecipe !== "" ? {padding: 0} : {paddingBottom: 23}}>
+        <input type="text" placeholder="Recipe" value={recipeSearch} name="tab2" 
+          className={alertMsgRecipe !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setrecipeSearch(event.target.value)} />
+        <div className="alertOutput">{alertMsgRecipe}</div>
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>Search</Button>
             
@@ -214,31 +217,7 @@ function Search() {
             Go!
           </Button>
 
-        <Accordion className="accordion-style">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Advanced search</Accordion.Header>
-        <Accordion.Body>
-        <div className="smallText">
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} /> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} /> Dinner </div>
-              
-            <div className="diet-boxes">
-            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} /> Vegetarian{"    "}</div>
-            <div><input type="checkbox" value="vegan" onChange={handleDietbox} /> Vegan{"    "}</div>
-            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} /> Pescetarian{"    "}</div>
-            </div>
-            <div>
-            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} /> Gluten free {"    "}</div>
-            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} /> Lacto-intolerant {"    "}</div>
-            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} /> Without peanuts{"    "}</div>
-            </div>
-            </div>
-        </Accordion.Body>
-      </Accordion.Item>
-      </Accordion>
-
-        
+        <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
        
       </Tab>
     </Tabs>
@@ -247,3 +226,4 @@ function Search() {
 }
 
 export default Search;
+
