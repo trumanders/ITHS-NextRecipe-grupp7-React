@@ -1,15 +1,23 @@
 .steps-list{
-    text-align: start;
-    list-style: none;
-    padding-left: 5px;
+ text-align: start;   
+ list-style: none;   
+ padding-left: 5px;    
 }
-
+    
 .steps-list-row{
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 3px;
+ display: flex;
+ align-items: baseline;
+ margin-bottom: 3px;
+}
+       
+.instructionDone{
+ color: var(--primary);
+}
+     
+.instruction{
+ margin-left: 20px;
 }
 
-.list-text{
-    margin-left: 20px;
+.instructionCheckBox{
+    accent-color: var(--primary);
 }
