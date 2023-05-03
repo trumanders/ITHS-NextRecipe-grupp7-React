@@ -7,13 +7,9 @@ export default function RecipeRepresentation(props) {
   const [currentPage, setCurrentPage] = useState(1);
   // const [recipes, setRecipes] = useState([]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await getPopularRecipes();
-  //     setRecipes(response);
-  //   }
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [props.recipes]);
 
   //Using Slice method to cut out one specific part of the recipes array which comes in as state
   // To use Slice method we need a starting point and a finishing point (The index of the first recipe in each page and the last one)
