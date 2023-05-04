@@ -455,14 +455,29 @@ function convertAmountAndUnit(amount, unit) {
     unit = "tsp";
   }
 
-  convAmount = nearestFourth(convAmount);
   // let result = "";
   // convAmount < 2
   //   ? (result = convAmount.toString() + " " + unit)
   //   : (result = convAmount.toString() + " " + unit + "s");
-  return convAmount.toString() + " " + unit;
+  return nearestFourth(convAmount) + " " + unit;
 }
 
 function nearestFourth(num) {
-  return Math.round(num * 4) / 4;
+  let nearestFourth = Math.round(num * 4) / 4;
+  let whole = Math.floor(nearestFourth);
+  let fraction = nearestFourth - whole;
+  let result = "";
+  if (whole !== 0) result = whole.toString() + " ";
+  switch (fraction) {
+    case 0.25:
+      result += "1/4";
+      break;
+    case 0.5:
+      result += "1/2";
+      break;
+    case 0.75:
+      result += "3/4";
+      break;
+  }
+  return result;
 }
