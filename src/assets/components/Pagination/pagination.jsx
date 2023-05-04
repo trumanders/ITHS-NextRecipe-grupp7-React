@@ -1,4 +1,5 @@
 import React from "react";
+import './pagination.css'
 
 //Taking props in from the parent component
 export default function Pagination({

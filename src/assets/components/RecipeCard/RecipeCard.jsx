@@ -15,7 +15,7 @@ function RecipeCard({ id, image, title }) {
         <Card.Body className="card-body" style={{ padding: "0" }}>
           <Card.Img
             variant="top"
-            src={image !== null ? image : defaultFood}
+            src={(image === null || image === undefined) ? defaultFood : image}
             className="card-image"
             style={{ padding: "0" }}
           />

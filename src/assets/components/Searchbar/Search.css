@@ -75,20 +75,19 @@
 }
 
 .searchItem {
-  position: relative;
   width: auto;
   height: 25px;
   border: 1px solid #0d6efd;
   margin: 5px 5px;
   background: #fff;
   border-radius: 5px;
-  padding: 0px 18px 0px 10px;
+  padding: 0px 10px;
 }
 
 .btn-close {
-  position: absolute;
-  top: 8px;
-  right: 4px;
+  position: relative;
+  top: 0px;
+  right: 0px;
   margin-left: 2px;
   width: 10px !important;
   height: 10px !important;

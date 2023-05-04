@@ -4,6 +4,7 @@ import {
     filterRecipes,
     getRecipeSearch,
     getRandomRecipes, 
+    getRecipeByIngredients,
 } from '../../../utils'
 import Search from '../../components/Searchbar/Search'
 import RecipeRepresentation from '../../components/RecipeRepresentation/RecipeRepresentation'
@@ -33,7 +34,11 @@ export default function Home() {
     switch (searchString.call) {
       case "getIngredient":
         const fetchIngredient = async() => {
-          const response = await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
+          //Om inga val är gjorda i 'advanced search' behöver inte två endpoints anropas.
+          const response = searchString.type === "" && searchString.intolerances === "" && searchString.diet === "" ? 
+          await getRecipeByIngredients(searchString.ingredients) : 
+          await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
+
           if (response.length < 1) {
             setHasResults(false)
           } else {

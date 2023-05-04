@@ -75,36 +75,36 @@ function Search() {
     }
 
     // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-     const handleDietbox =(event) =>{
+    //  const handleDietbox =(event) =>{
       
-       const{value, checked} = event.target
+    //    const{value, checked} = event.target
        
-       if(checked)
-       {
-        setlistDiet(diets => [...diets,value])
-       }
-       else(
-        setlistDiet(diets => {
-          return [...diets.filter(dietValue => dietValue !== value)]
-        })
-       )
+    //    if(checked)
+    //    {
+    //     setlistDiet(diets => [...diets,value])
+    //    }
+    //    else(
+    //     setlistDiet(diets => {
+    //       return [...diets.filter(dietValue => dietValue !== value)]
+    //     })
+    //    )
 
-      }
+    //   }
       // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-      const handleIntolerances =(event) => {
-        const{value, checked} = event.target
+      // const handleIntolerances =(event) => {
+      //   const{value, checked} = event.target
        
-       if(checked)
-       {
-        setlistIntolerances(intolerances => [...intolerances,value])
-       }
-       else(
-        setlistIntolerances(diets => {
-          return [...diets.filter(intolerances => intolerances !== value)]
-        })
-       )
+      //  if(checked)
+      //  {
+      //   setlistIntolerances(intolerances => [...intolerances,value])
+      //  }
+      //  else(
+      //   setlistIntolerances(diets => {
+      //     return [...diets.filter(intolerances => intolerances !== value)]
+      //   })
+      //  )
 
-      }
+      // }
      
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
@@ -140,10 +140,6 @@ function Search() {
         setlistDiet([])
         setlistType("")
         setlistIntolerances([])
-      }
-
-      const handleAccordionClick = () => {
-        setIsAccodionVisible(!isAccordionVisible)
       }
 
   return (
@@ -184,8 +180,7 @@ function Search() {
               Search
             </Button>
             
-            <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
-            
+            <CustomAccordion listType={listType} setlistType={setlistType} listDiet={listDiet} setlistDiet={setlistDiet} listIntolerances={listIntolerances} setlistIntolerances={setlistIntolerances} />
         </form>
   
           
@@ -217,7 +212,7 @@ function Search() {
             Go!
           </Button>
 
-        <CustomAccordion setlistType={setlistType} handleDietbox={handleDietbox} handleIntolerances={handleIntolerances} />
+        <CustomAccordion listType={listType} setlistType={setlistType} listDiet={listDiet} setlistDiet={setlistDiet} listIntolerances={listIntolerances} setlistIntolerances={setlistIntolerances} />
        
       </Tab>
     </Tabs>
