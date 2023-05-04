@@ -172,15 +172,8 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
       );
       console.log(`filterGet: ${filterGet.length} skip: ${skip}`);
 
+      //Jämför de två resultat-seten och plockar ut de som finns med i båda.
       var intersectingRecipes = intersect(ingredientGet, filterGet)
-      // let ingredientGetIds = ingredientGet.map((element) => {
-      //   //Plockar ut id för enklare filtrering
-      //   return element.id;
-      // });
-
-      // var intersectingRecipes = filterGet.filter((item) =>
-      //   ingredientGetIds.includes(item.id)
-      // ); //plockar ut de objekt som finns i båda resultaten
 
       intersectingRecipes.forEach((item) => {
         searchResults.push(item);

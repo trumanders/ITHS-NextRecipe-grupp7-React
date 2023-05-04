@@ -18,12 +18,3 @@ export default function listenForOutsideClicks(
       })
     }
   }
-
-//   export function removeListenForOutsideClicks(setListening){
-//     return () => {
-//     setListening(false)
-//     ;[`click`, `touchstart`].forEach((type) => {
-//     document.removeEventListener('click', (evt))
-//     })
-//     }
-//   }

@@ -1,7 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import listenForOutsideClicks from './listenForOutsideClicks';
-// import { removeListenForOutsideClicks } from './listenForOutsideClicks';
 import './Accordion.css';
 
 
@@ -41,23 +40,8 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
        )
 
     }
-
+    //Sätter igång funktionen som kollar om man klickar utanför adv.search-rutan och då stänger densamma
     useEffect(listenForOutsideClicks(listening, setListening, menuRef, setIsAccordionVisible))
-
-    // useEffect((setI) => {
-    //     if (listening) return
-    //     if (!menuRef.current) return
-    //     setListening(true)
-    //     ;[`click`, `touchstart`].forEach((type) => {
-    //       document.addEventListener(`click`, (evt) => {
-    //         const cur = menuRef.current
-    //         const node = evt.target
-    //         if (cur === null || cur.contains(node)) return
-    //         setIsAccordionVisible(false)
-    //       })
-    //     })
-    //     return removeEventListener('click', setListening(false))
-    //   })
 
     const toggle = (isAccordionVisible) => {
         return setIsAccordionVisible(!isAccordionVisible)
