@@ -1,63 +1,14 @@
 import React, {useRef, useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import listenForOutsideClicks from './listenForOutsideClicks';
+// import { removeListenForOutsideClicks } from './listenForOutsideClicks';
 import './Accordion.css';
 
-const allMealTypes = [
-    { name: "breakfast" },
-    { name: "lunch" },
-    { name: "dinner" },
-]
-const allIntolerances = [
-    { name: "gluten", checked: false },
-    { name: "dairy", checked: false },
-    { name: "egg", checked: false },
-]
-const allDiets = [
-    { name: "vegetarian", checked: false },
-    { name: "vegan", checked: false },
-    { name: "pescatarian", checked: false },
-]
-
-export const Checkbox = ({ value, type, isChecked, label, checkHandler, index}) => {
-    return (
-        <div>
-          <input
-            value={value}
-            type={type}
-            id={`${type}-${index}`}
-            checked={isChecked}
-            onChange={checkHandler}
-          />
-          <label htmlFor={`${type}-${index}`}>{label}</label>
-        </div>
-    )
-}
 
 export default function CustomAccordion({listType, setlistType, listDiet, setlistDiet, listIntolerances, setlistIntolerances}){
-    const [isAccordionVisible, setIsAccodionVisible] = useState(false)
+    const [isAccordionVisible, setIsAccordionVisible] = useState(false)
     const menuRef = useRef(null)
     const [listening, setListening] = useState(false)
-
-    // const updateCheckStatusInt = index => {
-    //     setIntolerances(
-    //       intolerances.map((intolerance, currentIndex) =>
-    //         currentIndex === index
-    //           ? { ...intolerance, checked: !intolerance.checked }
-    //           : intolerance
-    //       )
-    //     )
-    // }
-
-    // const updateCheckStatusDiet = index => {
-    //     setDiets(
-    //       diets.map((diet, currentIndex) =>
-    //         currentIndex === index
-    //           ? { ...diet, checked: !diet.checked }
-    //           : diet
-    //       )
-    //     )
-    // }
 
     // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
     const handleDietbox =(event) =>{
@@ -91,10 +42,25 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
     }
 
-    useEffect(listenForOutsideClicks(listening, setListening, menuRef, setIsAccodionVisible))
+    useEffect(listenForOutsideClicks(listening, setListening, menuRef, setIsAccordionVisible))
+
+    // useEffect((setI) => {
+    //     if (listening) return
+    //     if (!menuRef.current) return
+    //     setListening(true)
+    //     ;[`click`, `touchstart`].forEach((type) => {
+    //       document.addEventListener(`click`, (evt) => {
+    //         const cur = menuRef.current
+    //         const node = evt.target
+    //         if (cur === null || cur.contains(node)) return
+    //         setIsAccordionVisible(false)
+    //       })
+    //     })
+    //     return removeEventListener('click', setListening(false))
+    //   })
 
     const toggle = (isAccordionVisible) => {
-        return setIsAccodionVisible(!isAccordionVisible)
+        return setIsAccordionVisible(!isAccordionVisible)
       }
 
     return (
