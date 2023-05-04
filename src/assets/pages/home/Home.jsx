@@ -30,7 +30,7 @@ export default function Home() {
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   if(isClicked > prevClick) {
-    setHasResults(true)
+    // setHasResults(true)
     switch (searchString.call) {
       case "getIngredient":
         const fetchIngredient = async() => {
@@ -55,6 +55,7 @@ export default function Home() {
             setHasResults(false)
             setRecipes([])
           } else {
+            setHasResults(true)
           setRecipes(response)
           setTitle(`Recipes with ${searchString.ingredients}`)
           }
@@ -67,6 +68,7 @@ export default function Home() {
           if (response.length < 1) {
             setHasResults(false)
           } else {
+            setHasResults(true)
           setRecipes(response)
           setTitle("Random Recipes")
           }

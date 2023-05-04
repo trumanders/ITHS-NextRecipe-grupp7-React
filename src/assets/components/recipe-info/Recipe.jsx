@@ -167,6 +167,9 @@ export default function Recipe() {
             )}
           </div>
 
+          <div className="similar-title">
+          <h3>Similar recipes</h3>
+          </div>
           <div className="similar-recipes">
             {similars.map((rec) => (
               <RecipeCard
