@@ -1,6 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import listenForOutsideClicks from './listenForOutsideClicks';
+import './Accordion.css';
 
 const allMealTypes = [
     { name: "breakfast" },
@@ -98,7 +99,7 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
     return (
         <div className='accordion-style' ref={menuRef}>
-              <Button type='button' onClick={() => {toggle(isAccordionVisible)}}>Advanced search</Button>
+              <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Advanced search</Button>
               {isAccordionVisible &&
 
               <div className="smallText">
