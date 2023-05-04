@@ -181,7 +181,6 @@ function Search() {
             </Button>
             
             <CustomAccordion listType={listType} setlistType={setlistType} listDiet={listDiet} setlistDiet={setlistDiet} listIntolerances={listIntolerances} setlistIntolerances={setlistIntolerances} />
-            <p>{listType}, {listIntolerances}</p>
         </form>
   
           
