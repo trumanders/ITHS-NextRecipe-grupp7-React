@@ -126,6 +126,7 @@ function Search() {
     setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
     setIsClicked();
     setAlertMsgRecipe("")
+    setrecipeSearch("")
   };
 
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kan behandlas i URL:en.
