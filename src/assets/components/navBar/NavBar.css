@@ -21,12 +21,12 @@ button {
 }
 
 .Logotype {
-  display: none;
+  display: block;
   position: absolute;
   height: 75px;
   box-sizing: border-box;
-  left: 20px;
   overflow: hidden;
+  right: 0px;
 }
 
 .NavBar ul {
@@ -94,6 +94,7 @@ button {
 @media screen and (min-width: 730px) {
   .Logotype {
     display: block;
+    left: 20px;
   }
 
   .NaviIntro {
