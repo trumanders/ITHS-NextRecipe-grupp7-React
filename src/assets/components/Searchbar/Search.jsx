@@ -74,6 +74,9 @@ function Search() {
       })
     }
 
+    //Testning av commit'''''''''''''''''''
+
+
     // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
     //  const handleDietbox =(event) =>{
       
