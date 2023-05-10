@@ -42,6 +42,7 @@ export default function Home() {
           if (response.length < 1) {
             setHasResults(false)
           } else {
+            setHasResults(true)
           setRecipes(response)
           setTitle(`Found ${response.length} recipes with ${searchString.ingredients}`)
           }

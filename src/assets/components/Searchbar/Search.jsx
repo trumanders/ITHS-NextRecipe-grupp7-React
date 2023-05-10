@@ -10,9 +10,6 @@ import { shallow } from 'zustand/shallow';
 import CustomAccordion from './Accordion'
 
 
-
-
-
 function Search() {
   const [input, setInput] = useState("");
   const [listInputs, setlistInputs] = useState([]);
@@ -74,37 +71,6 @@ function Search() {
       })
     }
 
-    // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-    //  const handleDietbox =(event) =>{
-      
-    //    const{value, checked} = event.target
-       
-    //    if(checked)
-    //    {
-    //     setlistDiet(diets => [...diets,value])
-    //    }
-    //    else(
-    //     setlistDiet(diets => {
-    //       return [...diets.filter(dietValue => dietValue !== value)]
-    //     })
-    //    )
-
-    //   }
-      // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-      // const handleIntolerances =(event) => {
-      //   const{value, checked} = event.target
-       
-      //  if(checked)
-      //  {
-      //   setlistIntolerances(intolerances => [...intolerances,value])
-      //  }
-      //  else(
-      //   setlistIntolerances(diets => {
-      //     return [...diets.filter(intolerances => intolerances !== value)]
-      //   })
-      //  )
-
-      // }
      
       // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
       const sendIngridients = () => {
@@ -152,12 +118,9 @@ function Search() {
     >
       <Tab eventKey="take-what-you-have" title="Take what you have">
         <p className="textpadding">Here you will find recipes based on what ingridients you have at home.</p>
-
-        
-
         <form onSubmit={handleSubmit} className="search-form">
         <div className="searchbar" style={ alertMsgIngredient !== "" ? {padding: 0} : {paddingBottom: 23}}>
-            <input type="text" placeholder="Add your ingridients" value={input} name="tab1" className={alertMsgIngredient !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setInput(event.target.value)}/>
+            <input type="text" placeholder="Add your ingredients" value={input} name="tab1" className={alertMsgIngredient !== "" ? "search-text-alert" : "search-text"} onChange={(event)=>setInput(event.target.value)}/>
             <Button className='addBtn' variant="dark" type="button" onClick={handleSubmit}>Add</Button>
             <div className="alertOutput">{alertMsgIngredient}</div>
           </div>
