@@ -4,6 +4,7 @@ import "./NutritionTable.css";
 import "./Ingredient.css";
 import "./Instructions.css";
 import "./Steps.css";
+import "./BackButton.css"
 import { getRecipeById, getSimilarRecipes } from "../../../utils";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
@@ -11,6 +12,8 @@ import { BiDish } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import {Route, Link, Routes, useNavigate} from 'react-router-dom';
 
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -73,10 +76,19 @@ export default function Recipe() {
     setServings(pickedServings);
   }
 
+  const navigate = useNavigate();
+  const goBack = () => {
+		navigate(-1);
+	}
+
   if (recipe != null && similars != null) {
     return (
       <>
-        <h2>{recipe.title}</h2>
+        <Button className="BackButton" onClick={goBack} >Back to Searchresults</Button> 
+        <br></br>
+        <br></br>
+        <h2>{recipe.title}</h2> 
+              
         <div className="recipe-container">
           <div className="picture-pictureInfo-and-nutritionTable-container">
             <div className="recipe-section-pictureAndInfo">
@@ -87,6 +99,7 @@ export default function Recipe() {
                 serving={servings}
               />
             </div>
+            
             <>
               {/* Kollar om mobile version */}
               {isTablet ? (

@@ -1,0 +1,11 @@
+.BackButton{
+    float: right;
+    background-color: var(--primary) !important;
+    border: none !important;
+    color: var(--off-white);  
+}
+.BackButton:hover{
+    background-color: var(--off-white) !important;
+    border: 1px solid var(--primary) !important;
+    color: var(--primary) !important;
+}
