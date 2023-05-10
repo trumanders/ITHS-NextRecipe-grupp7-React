@@ -13,7 +13,7 @@ import { useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
-import {Route, Link, Routes, useNavigate} from 'react-router-dom';
+import {useNavigate, browserHistory} from 'react-router-dom';
 
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -78,7 +78,7 @@ export default function Recipe() {
 
   const navigate = useNavigate();
   const goBack = () => {
-		navigate(-1);
+		navigate(browserHistory);
 	}
 
   if (recipe != null && similars != null) {
@@ -87,8 +87,7 @@ export default function Recipe() {
         <Button className="BackButton" onClick={goBack} >Back to Searchresults</Button> 
         <br></br>
         <br></br>
-        <h2>{recipe.title}</h2> 
-              
+        <h2>{recipe.title}</h2>       
         <div className="recipe-container">
           <div className="picture-pictureInfo-and-nutritionTable-container">
             <div className="recipe-section-pictureAndInfo">
