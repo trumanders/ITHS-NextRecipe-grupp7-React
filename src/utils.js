@@ -3,7 +3,7 @@ const key = "fab9f1e7670c48479e11b994a1023259";
 
 //getRecipeByFilter('dinner', '', 'vegetarian')
 
-// filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
+filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
 
 // getRecipeSearch("Carbonara")
 
@@ -190,8 +190,10 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         break;
       }
     } while (searchResults.length < 20); //Kan inte vara 100. Vid enbart ingrediens och inga filter kommer den försöka tömma API:et vilket leder till 429.
-    console.log(searchResults.length);
-    return searchResults;
+    // console.log(searchResults.length);
+    const matchingIngredients = intersect(searchResults, ingredientGet)
+    // console.log(matchingIngredients)
+    return matchingIngredients;
   } else {
     const filterGet = await getRecipeByFilter(
       mealtype,
