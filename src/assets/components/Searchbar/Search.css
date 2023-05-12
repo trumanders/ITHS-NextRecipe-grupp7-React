@@ -100,6 +100,14 @@
   padding: 0px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
+
+  background-color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+}
+
+.addBtn:hover {
+  background-color: var(--off-white) !important;
+  color: var(--primary) !important;
 }
 
 .smallText {
@@ -168,6 +176,12 @@
     padding: 0px;
   }
 
+  .sendSearchBtn{
+    background-color: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
+    padding: 15px;
+  }
+
   .searchItem {
     width: auto;
     height: 25px;
@@ -192,9 +206,6 @@
     height: 30px;
     margin-bottom: 5px;
     margin-left: 5px;
-    padding: 0px !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
   }
 
   .smallText {
