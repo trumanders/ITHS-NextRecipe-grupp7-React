@@ -76,38 +76,6 @@ function Search() {
     });
   };
 
-  // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-  //  const handleDietbox =(event) =>{
-
-  //    const{value, checked} = event.target
-
-  //    if(checked)
-  //    {
-  //     setlistDiet(diets => [...diets,value])
-  //    }
-  //    else(
-  //     setlistDiet(diets => {
-  //       return [...diets.filter(dietValue => dietValue !== value)]
-  //     })
-  //    )
-
-  //   }
-  // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-  // const handleIntolerances =(event) => {
-  //   const{value, checked} = event.target
-
-  //  if(checked)
-  //  {
-  //   setlistIntolerances(intolerances => [...intolerances,value])
-  //  }
-  //  else(
-  //   setlistIntolerances(diets => {
-  //     return [...diets.filter(intolerances => intolerances !== value)]
-  //   })
-  //  )
-
-  // }
-
   // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingredienser från input.
   const sendIngredients = () => {
     setSearchString({
@@ -127,7 +95,6 @@ function Search() {
     setrecipeSearch(recipeItem);
     if (recipeSearch === "") {
       setEmptyTextWarning(true);
-      // setAlertMsgRecipe("Please type something to search for.");
       return;
     } else {
       setEmptyTextWarning(false);
@@ -151,6 +118,10 @@ function Search() {
     setlistIntolerances([]);
   };
 
+  function onTabClick() {
+    setEmptyTextWarning(false);
+  }
+
   return (
     <div className="searchpadding">
       <Tabs
@@ -158,21 +129,18 @@ function Search() {
         className="justify-content-center"
         onClick={setNull}
       >
-        <Tab eventKey="take-what-you-have" title="Take what you have">
+        <Tab
+          eventKey="take-what-you-have"
+          title="Take what you have"
+          onExit={onTabClick}
+        >
           <p className="textpadding">
             Here you will find recipes based on what ingredients you have at
             home.
           </p>
 
           <form onSubmit={handleSubmit} className="search-form">
-            <div
-              className="searchbar"
-              // style={
-              //   alertMsgIngredient !== ""
-              //     ? { padding: 0 }
-              //     : { paddingBottom: 23 }
-              // }
-            >
+            <div className="searchbar">
               <input
                 type="text"
                 placeholder="Add your ingredients"
@@ -223,28 +191,19 @@ function Search() {
             />
           </form>
         </Tab>
-        <Tab eventKey="home" title="Recipes">
+        <Tab eventKey="home" title="Recipes" onExit={onTabClick}>
           <p className="textpadding">Search recipes</p>
 
           <form onSubmit={sendRecipe} className="search-form">
-            <div
-              className="searchbar"
-              // style={
-              //   alertMsgRecipe !== "" ? { padding: 0 } : { paddingBottom: 23 }
-              // }
-            >
+            <div className="searchbar">
               <input
                 className={emptyTextWarning ? "search-text-alert" : null}
                 type="text"
                 placeholder="Enter something..."
                 value={recipeSearch}
                 name="tab2"
-                // className={
-                //   alertMsgRecipe !== "" ? "search-text-alert" : "search-text"
-                // }
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
-              {/* <div className="alertOutput">{alertMsgRecipe}</div> */}
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
               Search
@@ -252,7 +211,7 @@ function Search() {
           </form>
         </Tab>
 
-        <Tab eventKey="contact" title="Random recipe">
+        <Tab eventKey="contact" title="Random recipe" onExit={onTabClick}>
           <p className="textpadding">
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
