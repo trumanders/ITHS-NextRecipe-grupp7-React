@@ -68,17 +68,16 @@ function Search() {
     }
     if (input) {
       setlistInputs((ls) => [...ls, item]);
-      console.log(input);
-      console.log(item);
-      console.log(listInputs);
-      updateIngredients(listInputs);
       setInput("");
-
       setAlertMsgIngredient("");
     } else {
       setAlertMsgIngredient("No ingredient added");
     }
   };
+
+  useEffect(() => {
+    updateIngredients(listInputs);
+  }, [listInputs]);
 
   // Funktion för att ta bort ingredienserna från listan.
   const deleteInput = (value) => {
