@@ -3,7 +3,6 @@ import "./NavBar.css";
 import { Burger } from "./burger.jsx";
 import { Link } from "react-router-dom";
 import logo from '../../pictures/logo.png'
-import pngegg from './pngegg.png'
 
 function NavBar(){
     const [visible, setVisible] = useState(false);
@@ -20,13 +19,10 @@ function NavBar(){
 
   return (
     <div className="NavBar">
-        <a href="../../"><img src={logo} className="Logotype" alt="Logotype"/></a>
+        {isMobile ? (<img src={logo} className="Logotype" alt="Logotype"/>) :
+        (<a href="/"><img src={logo} className="Logotype" alt="Logotype"/></a>)}
         <div className="NaviIntro">
-            <button onClick={() => setVisible(!visible)}><Burger></Burger></button>
-            <p>Nail Soup</p>
-            <div className="searchIcon">
-                <img src={pngegg} alt="Search recipe" />
-            </div>
+          <button className="menuButton" onClick={() => setVisible(!visible)}><Burger></Burger></button>
         </div>
             {!isMobile || visible ? (
         <ul>
