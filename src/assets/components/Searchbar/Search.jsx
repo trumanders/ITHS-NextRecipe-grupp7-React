@@ -12,19 +12,11 @@ import { useIngredientStore } from "../../hooks/useIngredientStore";
 
 function Search() {
   const [input, setInput] = useState("");
-
-  const [searchString, setSearchString] = useSearchStringStore(
-    (state) => [state.searchString, state.setSearchString],
-    shallow
-  );
-
   const [ingredients, updateIngredients] = useIngredientStore((state) => [
     state.ingredients,
     state.updateIngredients,
   ]);
-
   const [listInputs, setlistInputs] = useState(ingredients);
-
   const [recipeSearch, setrecipeSearch] = useState("");
   const [listDiet, setlistDiet] = useState([]);
   const [listType, setlistType] = useState("");
@@ -72,7 +64,7 @@ function Search() {
       }
       
     }
-  };
+  
 
   useEffect(() => {
     updateIngredients(listInputs);

@@ -24,7 +24,7 @@ const router = createBrowserRouter(
         element={<Recipe />}
         loader={recipeLoader}
       />
-      <Route index element={<Home />} loader={startLoader} />
+      <Route index element={<Home />} /*loader={startLoader}*/ />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
