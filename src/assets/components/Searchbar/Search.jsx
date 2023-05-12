@@ -50,7 +50,7 @@ function Search() {
       : ingredientArr;
   }
 
-  // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
+  // Funktion för addera ingredienser till lista med felhantering mot dubbla inputs
   const handleSubmit = (event) => {
     event.preventDefault();
     const item = input;
@@ -69,7 +69,7 @@ function Search() {
     }
   };
 
-  // Funktion för att ta bort ingridienserna från listan.
+  // Funktion för att ta bort ingredienserna från listan.
   const deleteInput = (value) => {
     setlistInputs((oldValues) => {
       return oldValues.filter((item) => item !== value);
@@ -108,8 +108,8 @@ function Search() {
 
   // }
 
-  // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingridenser från input.
-  const sendIngridients = () => {
+  // Gör om värden till strängar, som sedan kan skickas till searchStore och som sedan kanbehandlas i URL:en. Även felhantering om det ej finns ingredienser från input.
+  const sendIngredients = () => {
     setSearchString({
       ingredients: listInputs.toString(),
       type: listType,
@@ -157,7 +157,7 @@ function Search() {
       >
         <Tab eventKey="take-what-you-have" title="Take what you have">
           <p className="textpadding">
-            Here you will find recipes based on what ingridients you have at
+            Here you will find recipes based on what ingredients you have at
             home.
           </p>
 
@@ -172,7 +172,7 @@ function Search() {
             >
               <input
                 type="text"
-                placeholder="Add your ingridients"
+                placeholder="Add your ingredients"
                 value={input}
                 name="tab1"
                 className={
@@ -192,7 +192,6 @@ function Search() {
               </Button>
               <div className="alertOutput">{alertMsgIngredient}</div>
             </div>
-
             <ul id="itemContainer">
               {listInputs.map((item) => {
                 return (
@@ -209,9 +208,10 @@ function Search() {
               })}
             </ul>
 
-            <Button onClick={sendIngridients} variant="outline-dark">
+            <Button onClick={sendIngredients} variant="outline-dark">
               Search
             </Button>
+
             <CustomAccordion
               listType={listType}
               setlistType={setlistType}
