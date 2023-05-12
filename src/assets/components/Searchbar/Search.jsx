@@ -8,7 +8,6 @@ import { useClickStore } from "../../hooks/useClickStore";
 import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
-
 import { useIngredientStore } from "../../hooks/useIngredientStore";
 
 function Search() {
@@ -47,14 +46,6 @@ function Search() {
     window.addEventListener("resize", updateMedia);
     return () => window.removeEventListener("resize", updateMedia);
   }, [isMobile]);
-
-  // Gör om searchString till en array. Om arrayen innehåller en tom sträng, returnera en tom array.
-  // function convertToArray(str) {
-  //   const ingredientArr = str.split(",").map((item) => item);
-  //   return ingredientArr.length === 1 && ingredientArr[0] === ""
-  //     ? []
-  //     : ingredientArr;
-  // }
 
   // Funktion för addera ingredienser till lista med felhantering mot dubbla inputs
   const handleSubmit = (event) => {
