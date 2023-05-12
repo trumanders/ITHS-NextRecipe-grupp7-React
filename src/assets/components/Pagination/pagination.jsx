@@ -24,12 +24,15 @@ export default function Pagination({
     // Also checking if the page is smaller than the total number of pages, then we can use Next button 
     return(<> 
        <div className="pagination">
+        <div className="Next-Previous">
           {currentPage!==1 &&(
             <button className="pageBtn" onClick={handlePreviousPage}>Previous</button>
           )}
           {currentPage!== totalPages && (
             <button  className="pageBtn" onClick={handleNextPage}>Next</button>
           )}
+        </div>
+          <p>Page {currentPage} of {totalPages}</p>
       </div>
     </>)
 }

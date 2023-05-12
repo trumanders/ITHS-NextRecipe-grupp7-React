@@ -57,45 +57,87 @@ export default function Home() {
             await getRecipeByIngredients(searchString.ingredients) : 
             await filterRecipes(searchString.ingredients, searchString.type, searchString.intolerances, searchString.diet)
 
+          if (
+            searchString.ingredients === "" &&
+            searchString.type === "" &&
+            searchString.intolerances === "" &&
+            searchString.diet === ""
+          ) {
+            const response = await getAllRecipes();
+            setHasResults(true);
+            setRecipes(response);
+            setTitle(`All Recipes`);
+          } else if (
+            searchString.type === "" &&
+            searchString.intolerances === "" &&
+            searchString.diet === ""
+          ) {
+            const response = await getRecipeByIngredients(
+              searchString.ingredients
+            );
             if (response.length < 1) {
-              setHasResults(false)
+              setHasResults(false);
             } else {
-              setHasResults(true)
-              setSearchResult(response)
-              searchString.ingredients !== "" ? setSearchTitle(`Found ${response.length} recipes with ${searchString.ingredients}`) : setSearchTitle(`Found ${response.length} recipes without ingredient search`)
+              setHasResults(true);
+              setRecipes(response);
+              setTitle(
+                `Found ${response.length} recipes with ${searchString.ingredients}`
+              );
+            }
+          } else {
+            const response = await filterRecipes(
+              searchString.ingredients,
+              searchString.type,
+              searchString.intolerances,
+              searchString.diet
+            );
+            if (response.length < 1) {
+              setHasResults(false);
+            } else {
+              setHasResults(true);
+              setRecipes(response);
+              setTitle(
+                `Found ${response.length} recipes with ${searchString.ingredients}`
+              );
             }
           }
-          fetchIngredient()
-          break
-        case "getRecipeSearch":
-          const fetchFreeSearch = async() => {
-            const response = await getRecipeSearch(searchString.ingredients)
-            if (response.length < 1) {
-              setHasResults(false)
-              setSearchResult([])
-            } else {
-              setHasResults(true)
-              setSearchResult(response)
-              setSearchTitle(`Recipes with ${searchString.ingredients}`)
-            }
+        };
+        fetchIngredient();
+        break;
+      case "getRecipeSearch":
+        const fetchFreeSearch = async () => {
+          const response = await getRecipeSearch(searchString.ingredients);
+          const allRecipes = await getAllRecipes();
+          if (response.length < 1) {
+            setHasResults(false);
+            setRecipes([]);
+            setTitle(`Recipes with ${searchString.ingredients}`);
+          } else {
+            setHasResults(true);
+            setRecipes(response);
+            setTitle(
+              `Found ${response.length} recipes with ${searchString.ingredients}`
+            );
           }
-          fetchFreeSearch()
-          break
-        case "getRandom":
-          const fetchRandom = async() => {
-            const response = await getRandomRecipes(searchString.ingredients)
-            if (response.length < 1) {
-              setHasResults(false)
-            } else {
-              setHasResults(true)
-              setSearchResult(response)
-              setSearchTitle("Random Recipes")
-            }
+        };
+        fetchFreeSearch();
+        break;
+      case "getRandom":
+        const fetchRandom = async () => {
+          const response = await getRandomRecipes(searchString.ingredients);
+          if (response.length < 1) {
+            setHasResults(false);
+          } else {
+            setHasResults(true);
+            setRecipes(response);
+            setTitle("Random Recipes");
           }
-          fetchRandom()
-          break
-      }
-      setPrevClick()
+        };
+        fetchRandom();
+        break;
+    }
+
+    setPrevClick(prevClick + 1);
   }
 
   return(
