@@ -5,6 +5,7 @@ import {
   getRecipeSearch,
   getRandomRecipes,
   getRecipeByIngredients,
+  getAllRecipes,
 } from "../../../utils";
 import Search from "../../components/Searchbar/Search";
 import RecipeRepresentation from "../../components/RecipeRepresentation/RecipeRepresentation";
@@ -37,25 +38,50 @@ export default function Home() {
       case "getIngredient":
         const fetchIngredient = async () => {
           //Om inga val är gjorda i 'advanced search' behöver inte två endpoints anropas.
-          const response =
+
+          if (
+            searchString.ingredients === "" &&
             searchString.type === "" &&
             searchString.intolerances === "" &&
             searchString.diet === ""
-              ? await getRecipeByIngredients(searchString.ingredients)
-              : await filterRecipes(
-                  searchString.ingredients,
-                  searchString.type,
-                  searchString.intolerances,
-                  searchString.diet
-                );
-
-          if (response.length < 1) {
-            setHasResults(false);
-          } else {
+          ) {
+            const response = await getAllRecipes();
+            setHasResults(true);
             setRecipes(response);
-            setTitle(
-              `Found ${response.length} recipes with ${searchString.ingredients}`
+            setTitle(`All Recipes`);
+          } else if (
+            searchString.type === "" &&
+            searchString.intolerances === "" &&
+            searchString.diet === ""
+          ) {
+            const response = await getRecipeByIngredients(
+              searchString.ingredients
             );
+            if (response.length < 1) {
+              setHasResults(false);
+            } else {
+              setHasResults(true);
+              setRecipes(response);
+              setTitle(
+                `Found ${response.length} recipes with ${searchString.ingredients}`
+              );
+            }
+          } else {
+            const response = await filterRecipes(
+              searchString.ingredients,
+              searchString.type,
+              searchString.intolerances,
+              searchString.diet
+            );
+            if (response.length < 1) {
+              setHasResults(false);
+            } else {
+              setHasResults(true);
+              setRecipes(response);
+              setTitle(
+                `Found ${response.length} recipes with ${searchString.ingredients}`
+              );
+            }
           }
         };
         fetchIngredient();
@@ -63,13 +89,17 @@ export default function Home() {
       case "getRecipeSearch":
         const fetchFreeSearch = async () => {
           const response = await getRecipeSearch(searchString.ingredients);
+          const allRecipes = await getAllRecipes();
           if (response.length < 1) {
             setHasResults(false);
             setRecipes([]);
+            setTitle(`Recipes with ${searchString.ingredients}`);
           } else {
             setHasResults(true);
             setRecipes(response);
-            setTitle(`Recipes with ${searchString.ingredients}`);
+            setTitle(
+              `Found ${response.length} recipes with ${searchString.ingredients}`
+            );
           }
         };
         fetchFreeSearch();
@@ -88,6 +118,7 @@ export default function Home() {
         fetchRandom();
         break;
     }
+
     setPrevClick(prevClick + 1);
   }
 
@@ -97,9 +128,13 @@ export default function Home() {
       {!hasResults && (
         <div className="noResult">
           <h3>Sorry, no results found.</h3>
+          <RecipeRepresentation
+            recipes={popularRecipes}
+            title="Popular Recipes"
+          />
         </div>
       )}
-      {recipes.length > 0 && (
+      {recipes.length > 0 && hasResults && (
         <RecipeRepresentation recipes={recipes} title={title} />
       )}
     </>
