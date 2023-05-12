@@ -12,7 +12,6 @@ import { useIngredientStore } from "../../hooks/useIngredientStore";
 
 function Search() {
   const [input, setInput] = useState("");
-
   const [searchString, setSearchString] = useSearchStringStore(
     (state) => [state.searchString, state.setSearchString],
     shallow
@@ -24,12 +23,10 @@ function Search() {
   ]);
 
   const [listInputs, setlistInputs] = useState(ingredients);
-
   const [recipeSearch, setrecipeSearch] = useState("");
   const [listDiet, setlistDiet] = useState([]);
   const [listType, setlistType] = useState("");
   const [listIntolerances, setlistIntolerances] = useState([]);
-
   const [isClicked, setIsClicked] = useClickStore(
     (state) => [state.isClicked, state.setIsClicked],
     shallow
@@ -37,6 +34,7 @@ function Search() {
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("");
   const [alertMsgIngredient, setAlertMsgIngredient] = useState("");
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
+  const [emptyTextWarning, setEmptyTextWarning] = useState(false);
 
   const updateMedia = () => {
     setMobile(window.innerWidth < 730);
@@ -54,15 +52,16 @@ function Search() {
 
     if (listInputs.includes(item)) {
       setAlertMsgIngredient("Ingredient already added.");
-      setInput("");
+      // setInput("");
       return;
     }
     if (input) {
       setlistInputs((ls) => [...ls, item]);
       setInput("");
-      setAlertMsgIngredient("");
+      setAlertMsgIngredient(" ");
+      setEmptyTextWarning(false);
     } else {
-      setAlertMsgIngredient("No ingredient added");
+      setEmptyTextWarning(true);
     }
   };
 
@@ -127,8 +126,11 @@ function Search() {
     const recipeItem = recipeSearch;
     setrecipeSearch(recipeItem);
     if (recipeSearch === "") {
-      setAlertMsgRecipe("Please type something to search for.");
+      setEmptyTextWarning(true);
+      // setAlertMsgRecipe("Please type something to search for.");
       return;
+    } else {
+      setEmptyTextWarning(false);
     }
     setSearchString({ ingredients: recipeSearch, call: "getRecipeSearch" });
     setIsClicked();
@@ -165,23 +167,19 @@ function Search() {
           <form onSubmit={handleSubmit} className="search-form">
             <div
               className="searchbar"
-              style={
-                alertMsgIngredient !== ""
-                  ? { padding: 0 }
-                  : { paddingBottom: 23 }
-              }
+              // style={
+              //   alertMsgIngredient !== ""
+              //     ? { padding: 0 }
+              //     : { paddingBottom: 23 }
+              // }
             >
               <input
                 type="text"
                 placeholder="Add your ingredients"
                 value={input}
                 name="tab1"
-                className={
-                  alertMsgIngredient !== ""
-                    ? "search-text-alert"
-                    : "search-text"
-                }
                 onChange={(event) => setInput(event.target.value)}
+                className={emptyTextWarning ? "search-text-alert" : null}
               />
               <Button
                 className="addBtn"
@@ -228,24 +226,25 @@ function Search() {
         <Tab eventKey="home" title="Recipes">
           <p className="textpadding">Search recipes</p>
 
-          <form onSubmit={sendRecipe} className="search">
+          <form onSubmit={sendRecipe} className="search-form">
             <div
               className="searchbar"
-              style={
-                alertMsgRecipe !== "" ? { padding: 0 } : { paddingBottom: 23 }
-              }
+              // style={
+              //   alertMsgRecipe !== "" ? { padding: 0 } : { paddingBottom: 23 }
+              // }
             >
               <input
+                className={emptyTextWarning ? "search-text-alert" : null}
                 type="text"
-                placeholder="Recipe"
+                placeholder="Enter something..."
                 value={recipeSearch}
                 name="tab2"
-                className={
-                  alertMsgRecipe !== "" ? "search-text-alert" : "search-text"
-                }
+                // className={
+                //   alertMsgRecipe !== "" ? "search-text-alert" : "search-text"
+                // }
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
-              <div className="alertOutput">{alertMsgRecipe}</div>
+              {/* <div className="alertOutput">{alertMsgRecipe}</div> */}
             </div>
             <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
               Search
