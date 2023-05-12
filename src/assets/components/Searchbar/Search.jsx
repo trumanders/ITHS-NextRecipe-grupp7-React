@@ -120,6 +120,7 @@ function Search() {
 
   function onTabClick() {
     setEmptyTextWarning(false);
+    setAlertMsgIngredient(false);
   }
 
   return (
