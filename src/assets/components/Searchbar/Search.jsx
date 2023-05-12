@@ -21,8 +21,8 @@ function Search() {
     (state) => [state.searchString, state.setSearchString],
     shallow
   );
-  const [isClicked, setIsClicked] = useClickStore(
-    (state) => [state.isClicked, state.setIsClicked],
+  const setIsClicked = useClickStore(
+    (state) => state.setIsClicked,
     shallow
   );
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("")
@@ -41,7 +41,7 @@ function Search() {
   // Funktion för addera ingridienser till lista med felhantering mot dubbla inputs
     const handleSubmit=(event)=> {
       event.preventDefault();
-      const item = input
+      const item = input.toLowerCase()
       
       if(listInputs.includes(item))
       {
@@ -110,7 +110,7 @@ function Search() {
       }
 
   return (
-    <div className="searchpadding">
+    <section id='search-section' className="searchpadding">
     <Tabs
       id="searchtabs"
       className="justify-content-center"
@@ -180,7 +180,7 @@ function Search() {
        
       </Tab>
     </Tabs>
-    </div>
+    </section>
   );
 }
 
