@@ -9,6 +9,8 @@ import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 
+import { useIngredientStore } from "../../hooks/useIngredientStore";
+
 function Search() {
   const [input, setInput] = useState("");
 
@@ -17,9 +19,13 @@ function Search() {
     shallow
   );
 
-  const [listInputs, setlistInputs] = useState(
-    convertToArray(searchString.ingredients)
-  );
+  const [ingredients, updateIngredients] = useIngredientStore((state) => [
+    state.ingredients,
+    state.updateIngredients,
+  ]);
+
+  const [listInputs, setlistInputs] = useState(ingredients);
+
   const [recipeSearch, setrecipeSearch] = useState("");
   const [listDiet, setlistDiet] = useState([]);
   const [listType, setlistType] = useState("");
@@ -43,12 +49,12 @@ function Search() {
   }, [isMobile]);
 
   // Gör om searchString till en array. Om arrayen innehåller en tom sträng, returnera en tom array.
-  function convertToArray(str) {
-    const ingredientArr = str.split(",").map((item) => item);
-    return ingredientArr.length === 1 && ingredientArr[0] === ""
-      ? []
-      : ingredientArr;
-  }
+  // function convertToArray(str) {
+  //   const ingredientArr = str.split(",").map((item) => item);
+  //   return ingredientArr.length === 1 && ingredientArr[0] === ""
+  //     ? []
+  //     : ingredientArr;
+  // }
 
   // Funktion för addera ingredienser till lista med felhantering mot dubbla inputs
   const handleSubmit = (event) => {
@@ -62,7 +68,12 @@ function Search() {
     }
     if (input) {
       setlistInputs((ls) => [...ls, item]);
+      console.log(input);
+      console.log(item);
+      console.log(listInputs);
+      updateIngredients(listInputs);
       setInput("");
+
       setAlertMsgIngredient("");
     } else {
       setAlertMsgIngredient("No ingredient added");
@@ -196,9 +207,11 @@ function Search() {
               {listInputs.map((item) => {
                 return (
                   <li className="searchItem" key={item}>
-                    <span>
-                      {item} {"  "}
-                    </span>
+                    {item !== "" ? (
+                      <span>
+                        {item} {"  "}
+                      </span>
+                    ) : null}
                     <CloseButton
                       type="Button"
                       onClick={() => deleteInput(item)}
