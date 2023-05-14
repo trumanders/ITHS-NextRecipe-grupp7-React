@@ -6,5 +6,5 @@ export const useSearchResultStore = create((set) => ({
     searchIngredients: [],
     setSearchResult: (newSearchResult) => set((state) => ({ searchResult: newSearchResult })),
     setSearchTitle: (newSearchTitle) => set((state) => ({ searchTitle: newSearchTitle })),
-    setSearchIngredients: (newSearchIngredients) => set((state) => ({ searchIngredients: newSearchIngredients })),
+    setSearchIngredients: (newSearchIngredients) => set(({ searchIngredients: newSearchIngredients })),
 }))

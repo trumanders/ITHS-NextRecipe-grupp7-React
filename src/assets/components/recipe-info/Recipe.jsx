@@ -62,6 +62,7 @@ export default function Recipe() {
       top: 0,
       behaviour: "auto",
     });
+    console.log(searchIngredients)
   }, [recipe]);
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
@@ -291,7 +292,7 @@ const Ingredient = (props) => {
       <ul className="list-ingredients">
         {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
         {props.ingredients.map((ingredient, index) => (
-          <li key={index} className={props.pantry.includes(ingredient.id) ? "list-row-green" : "list-row"}>
+          <li key={index} className={props.pantry === undefined ? "list-row" : props.pantry.includes(ingredient.id) ? "list-row-green" : "list-row"}>
             <div className="ingredient-name">
               <b>{ingredient.nameClean}</b>
             </div>

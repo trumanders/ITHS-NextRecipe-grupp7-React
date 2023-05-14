@@ -47,7 +47,8 @@ export default function Home() {
       if(isClicked > prevClick){
       searchPressed()}
     },[isClicked])
-
+    
+//plockar ut idn på ingredienserna och lägger dem i searchResultStore
   const getIngredients = (recipes) => {
     const ingredients = recipes.map(recipe => recipe.usedIngredients)
     const ingredientIds = ingredients.map(array => array.map(ingredient => {return ingredient.id}))
