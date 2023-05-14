@@ -13,6 +13,7 @@ import { useSearchStringStore } from '../../hooks/useSearchStringStore'
 import { useSearchResultStore } from '../../hooks/useSearchResultStore'
 import { useClickStore } from '../../hooks/useClickStore'
 import { useLoaderData } from 'react-router-dom'
+import LoaderSpinner from '../../components/LoaderSpinner/LoaderSpinner'
 
 //Laddar populära recept innan rendering
 // export async function loader() {
@@ -31,13 +32,16 @@ export default function Home() {
   const [searchResult, searchTitle, setSearchResult, setSearchTitle, setSearchIngredients] = useSearchResultStore(
     (state) => [state.searchResult, state.searchTitle, state.setSearchResult, state.setSearchTitle, state.setSearchIngredients]
   );
+  const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
       const fetchData = async() => {
+        setIsLoading(true)
         //Only fetches popular recipes when searchResult is empty to prevent re-fetching
         if(searchResult.length <= 0){
           const response = await getPopularRecipes()
           setSearchResult(response)
+          setIsLoading(false)
         }
       }
       fetchData()
@@ -61,6 +65,7 @@ export default function Home() {
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   const searchPressed = () => {
+    setIsLoading(true)
     switch (searchString.call) {
       case "getIngredient":
         const fetchIngredient = async() => {
@@ -74,6 +79,7 @@ export default function Home() {
           const response = await getAllRecipes();
           setHasResults(true);
           setSearchResult(response);
+          setIsLoading(false)
           setSearchTitle(`All Recipes`);
           setSearchIngredients([])
         } else if (
@@ -89,6 +95,7 @@ export default function Home() {
           } else {
             setHasResults(true);
             setSearchResult(response);
+            setIsLoading(false)
             searchString.ingredients !== "" ? setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`) : setSearchTitle(
                 `Found ${response.length} recipes without ingredient search`
@@ -108,6 +115,7 @@ export default function Home() {
           } else {
             setHasResults(true);
             setSearchResult(response);
+            setIsLoading(false)
             setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`
             );
@@ -128,6 +136,7 @@ export default function Home() {
           } else {
             setHasResults(true);
             setSearchResult(response);
+            setIsLoading(false)
             setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`
             );
@@ -146,24 +155,34 @@ export default function Home() {
             setSearchResult(response);
             setSearchTitle("Random Recipes");
             setSearchIngredients([])
+            setIsLoading(false)
           }
         };
         fetchRandom();
         break;
     }
-
     setPrevClick(prevClick + 1);
   }
+
+  // const loader = {
+  //   display: "flex",
+    
+  // }
 
   return(
   <>
   <Search />
+  <div style={{display: "flex", justifyContent: "center"}}>
+  {isLoading && 
+  <LoaderSpinner />}
+  </div>
   {!hasResults &&
   <div className="noResult">
   <h3>Sorry, no results found.</h3>
   </div>}
   {searchResult !== undefined && searchResult.length > 0 && 
   <RecipeRepresentation recipes={searchResult} title={searchTitle} />}
-  </>
+
+</>
   )
 }
