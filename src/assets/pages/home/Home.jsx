@@ -47,7 +47,7 @@ export default function Home() {
       if(isClicked > prevClick){
       searchPressed()}
     },[isClicked])
-    
+
 //plockar ut idn på ingredienserna och lägger dem i searchResultStore
   const getIngredients = (recipes) => {
     const ingredients = recipes.map(recipe => recipe.usedIngredients)
@@ -75,6 +75,7 @@ export default function Home() {
           setHasResults(true);
           setSearchResult(response);
           setSearchTitle(`All Recipes`);
+          setSearchIngredients([])
         } else if (
           searchString.type === "" &&
           searchString.intolerances === "" &&
@@ -110,6 +111,7 @@ export default function Home() {
             setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`
             );
+            setSearchIngredients([])
           }
         }
       };
@@ -129,6 +131,7 @@ export default function Home() {
             setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`
             );
+            setSearchIngredients([])
           }
         };
         fetchFreeSearch();
@@ -142,6 +145,7 @@ export default function Home() {
             setHasResults(true);
             setSearchResult(response);
             setSearchTitle("Random Recipes");
+            setSearchIngredients([])
           }
         };
         fetchRandom();

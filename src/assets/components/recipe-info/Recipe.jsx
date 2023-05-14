@@ -28,7 +28,7 @@ export default function Recipe() {
     window.innerWidth < 900
   ); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
   const [servings, setServings] = useState(recipe.servings);
-  const searchIngredients = useSearchResultStore((state) => state.searchIngredients)
+  
   const [pantry, setPantry] = useState([])
   const updateMediaToTablet = () => {
     setTablet(window.innerWidth < 900);
@@ -62,7 +62,7 @@ export default function Recipe() {
       top: 0,
       behaviour: "auto",
     });
-    console.log(searchIngredients)
+    // console.log(searchIngredients)
   }, [recipe]);
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
@@ -133,7 +133,7 @@ export default function Recipe() {
                     <Accordion.Header>Ingredients</Accordion.Header>
                     <Accordion.Body>
                       <div className="recipe-section-nutritionTable">
-                        <Ingredient ingredients={recipe.extendedIngredients} pantry={searchIngredients} />
+                        <Ingredient ingredients={recipe.extendedIngredients} />
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -279,20 +279,15 @@ const NutritionTable = (props) => {
 
 //Komponent som håller ingredienser och mått
 const Ingredient = (props) => {
-  // console.log(props.pantry)
-  // const pantryIds = props.pantry.map(item => {
-  //   return item.id
-  // })
-  // const isInPantry = (ingredient) => {
-  //   return pantryIds.includes(ingredient.id)
-  // }
+  const searchIngredients = useSearchResultStore((state) => state.searchIngredients)
+ 
   return (
     <div className="ingredients-container">
       <h2>Ingredients</h2>
       <ul className="list-ingredients">
         {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
         {props.ingredients.map((ingredient, index) => (
-          <li key={index} className={props.pantry === undefined ? "list-row" : props.pantry.includes(ingredient.id) ? "list-row-green" : "list-row"}>
+          <li key={index} className={searchIngredients === undefined ? "list-row" : searchIngredients.includes(ingredient.id) ? "list-row-green" : "list-row"}>
             <div className="ingredient-name">
               <b>{ingredient.nameClean}</b>
             </div>
