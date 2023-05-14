@@ -36,9 +36,10 @@ export default function Home() {
 
     useEffect(() => {
       const fetchData = async() => {
-        setIsLoading(true)
+        
         //Only fetches popular recipes when searchResult is empty to prevent re-fetching
         if(searchResult.length <= 0){
+          setIsLoading(true)
           const response = await getPopularRecipes()
           setSearchResult(response)
           setIsLoading(false)
@@ -52,14 +53,14 @@ export default function Home() {
       searchPressed()}
     },[isClicked])
 
-//plockar ut idn på ingredienserna och lägger dem i searchResultStore
+//plockar ut idn på ingredienserna och lägger dem i searchResultStore för att kunna användas i Recipe.jsx
   const getIngredients = (recipes) => {
     const ingredients = recipes.map(recipe => recipe.usedIngredients)
     const ingredientIds = ingredients.map(array => array.map(ingredient => {return ingredient.id}))
     var ids = []
     ingredientIds.forEach(arr => arr.map(item => ids.push(item)))
     const unique = [...new Set(ids)]
-    console.log(unique)
+    //console.log(unique)
     setSearchIngredients(unique)
   }
 
@@ -119,7 +120,7 @@ export default function Home() {
             setSearchTitle(
               `Found ${response.length} recipes with ${searchString.ingredients}`
             );
-            setSearchIngredients([])
+            getIngredients(response)
           }
         }
       };
@@ -163,11 +164,6 @@ export default function Home() {
     }
     setPrevClick(prevClick + 1);
   }
-
-  // const loader = {
-  //   display: "flex",
-    
-  // }
 
   return(
   <>
