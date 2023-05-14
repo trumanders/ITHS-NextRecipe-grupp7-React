@@ -11,7 +11,7 @@ import { BiDish } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 import Accordion from "react-bootstrap/Accordion";
-
+import { useSearchResultStore } from "../../hooks/useSearchResultStore";
 import RecipeCard from "../RecipeCard/RecipeCard";
 
 export async function loader({ params }) {
@@ -28,7 +28,8 @@ export default function Recipe() {
     window.innerWidth < 900
   ); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
   const [servings, setServings] = useState(recipe.servings);
-
+  const searchIngredients = useSearchResultStore((state) => state.searchIngredients)
+  const [pantry, setPantry] = useState([])
   const updateMediaToTablet = () => {
     setTablet(window.innerWidth < 900);
   };
@@ -131,7 +132,7 @@ export default function Recipe() {
                     <Accordion.Header>Ingredients</Accordion.Header>
                     <Accordion.Body>
                       <div className="recipe-section-nutritionTable">
-                        <Ingredient ingredients={recipe.extendedIngredients} />
+                        <Ingredient ingredients={recipe.extendedIngredients} pantry={searchIngredients} />
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -277,13 +278,20 @@ const NutritionTable = (props) => {
 
 //Komponent som håller ingredienser och mått
 const Ingredient = (props) => {
+  // console.log(props.pantry)
+  // const pantryIds = props.pantry.map(item => {
+  //   return item.id
+  // })
+  // const isInPantry = (ingredient) => {
+  //   return pantryIds.includes(ingredient.id)
+  // }
   return (
     <div className="ingredients-container">
       <h2>Ingredients</h2>
       <ul className="list-ingredients">
         {/* list-row" för att kunna arrangera olika information av samma ingrediens med hjälp av flex */}
         {props.ingredients.map((ingredient, index) => (
-          <li key={index} className="list-row">
+          <li key={index} className={props.pantry.includes(ingredient.id) ? "list-row-green" : "list-row"}>
             <div className="ingredient-name">
               <b>{ingredient.nameClean}</b>
             </div>

@@ -28,8 +28,8 @@ export default function Home() {
   // const [title, setTitle] = useState("Popular Recipes")
   // const [recipes, setRecipes] = useState([])
   const [hasResults, setHasResults] = useState(true)
-  const [searchResult, searchTitle, setSearchResult, setSearchTitle] = useSearchResultStore(
-    (state) => [state.searchResult, state.searchTitle, state.setSearchResult, state.setSearchTitle]
+  const [searchResult, searchTitle, setSearchResult, setSearchTitle, setSearchIngredients] = useSearchResultStore(
+    (state) => [state.searchResult, state.searchTitle, state.setSearchResult, state.setSearchTitle, state.setSearchIngredients]
   );
 
     useEffect(() => {
@@ -47,6 +47,16 @@ export default function Home() {
       if(isClicked > prevClick){
       searchPressed()}
     },[isClicked])
+
+  const getIngredients = (recipes) => {
+    const ingredients = recipes.map(recipe => recipe.usedIngredients)
+    const ingredientIds = ingredients.map(array => array.map(ingredient => {return ingredient.id}))
+    var ids = []
+    ingredientIds.forEach(arr => arr.map(item => ids.push(item)))
+    const unique = [...new Set(ids)]
+    console.log(unique)
+    setSearchIngredients(unique)
+  }
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   const searchPressed = () => {
@@ -81,6 +91,8 @@ export default function Home() {
               `Found ${response.length} recipes with ${searchString.ingredients}`) : setSearchTitle(
                 `Found ${response.length} recipes without ingredient search`
             );
+            //plockar ut idn på ingredienserna och lägger dem i searchResultStore
+            getIngredients(response)
           }
         } else {
           const response = await filterRecipes(
