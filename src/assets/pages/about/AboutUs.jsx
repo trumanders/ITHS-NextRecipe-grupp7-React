@@ -19,7 +19,7 @@ function AboutUs() {
         <h2 className="aboutTitle">About Us</h2>
         <div className ="aboutRow">
             <div className={IsMobile ? "aboutCol" : "aboutCol about60percent"}>
-                <p className="aboutText"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p className="aboutText"> Welcome to Nail Soup, the result of a thrilling adventure embarked upon by a team of passionate individuals. We are a group of seven developers and two project leaders who, in the midst of our careers, decided to pursue a new path and embrace the exciting world of app development. Our journey began with this very app, which started as a school project. With only a basic understanding of JavaScript and no prior knowledge of React, we dove headfirst into the world of coding, learning and implementing simultaneously.</p>           
             </div>
             <div className={IsMobile ? "aboutCol" : "aboutCol about40percent"}>
                 <img className="aboutImg" src="/src/assets/pictures/breakfast.jpg" alt="" />
@@ -30,12 +30,22 @@ function AboutUs() {
                 <img className="aboutImg" src="/src/assets/pictures/noodlesrice.jpg" alt="" />
             </div>
             <div className={IsMobile ? "aboutCol" : "aboutCol about60percent"}>
-                <p className="aboutText"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                <p className="aboutText"> At its core, Nail Soup is a recipe finder app that aims to make your daily cooking experience easier and more enjoyable. We understand the struggle of staring at a seemingly empty fridge and wondering what to cook. That's why our app allows you to search for recipes based on the ingredients you already have at home.
+
+                But that's not all. Nail Soup also offers a random search feature for those times when you're feeling adventurous or simply need inspiration. Additionally, you can search for recipes based on specific criteria such as meal type, dietary preferences, intolerances and get suggestions for similar recipes. 
+
+                When it comes to nutrition, we've got you covered too. Our app provides detailed nutritional information for each recipe, allowing you to make informed decisions about your meals. </p>
             </div>
         </div>
         <div className="aboutRow">
             <div className={IsMobile ? "aboutCol" : "aboutCol about60percent"}>
-                <p className="aboutText"> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                <p className="aboutText">We understand that cooking involves precise measurements, and that's why we've incorporated a feature that lets you customize ingredient sizes according to your specific requirements. No need to reach for a separate calculator or leave the app. Nail Soup takes care of the calculations for you, ensuring that your cooking experience remains seamless and hassle-free.
+
+                    Cooking can be a juggling act, trying to follow instructions while keeping an eye on multiple tasks. We've simplified this process for you. Our app allows you to check off each step as you complete it, with the text color changing to help you easily identify where you are in the recipe. It's as simple as a quick swipe of the eye.
+
+                    But our journey doesn't end here. We firmly believe in the power of constant progress and improvement. We are open to feedback and suggestions, as we strive to create an app that truly caters to your needs and makes your cooking adventures even more delightful.
+
+                    Join us on this exciting culinary journey with Nail Soup. Let us be your companion in the kitchen, simplifying your cooking experience one recipe at a time.</p>
             </div>
             <div className={IsMobile ? "aboutCol" : "aboutCol about40percent"}>
                 <img className="aboutImg" src="/src/assets/pictures/saladbowl.jpg" alt="" />

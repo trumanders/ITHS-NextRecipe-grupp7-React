@@ -63,7 +63,7 @@ export default function Home() {
               setHasResults(true);
               setRecipes(response);
               setTitle(
-                `Found ${response.length} recipes with ${searchString.ingredients}`
+                `Found ${response.length} recipes`
               );
             }
           } else {
