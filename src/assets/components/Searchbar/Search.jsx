@@ -78,7 +78,7 @@ function Search() {
   const sendIngredients = () => {
     setSearchString({
       ingredients: listInputs.toString(),
-      type: listType,
+      type: listType.toString(),
       intolerances: listIntolerances.toString(),
       diet: listDiet.toString(),
       call: "getIngredient",

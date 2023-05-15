@@ -3,7 +3,7 @@ const key = "fab9f1e7670c48479e11b994a1023259";
 
 //getRecipeByFilter('dinner', '', 'vegetarian')
 
-// filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
+ //filterRecipes('blueberry', 'breakfast,lunch', '','')
 
 // getRecipeSearch("Carbonara")
 

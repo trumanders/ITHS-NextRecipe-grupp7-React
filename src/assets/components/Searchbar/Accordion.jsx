@@ -54,9 +54,9 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
               <div className="smallText">
                 <div>
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
+              <div><input type="checkbox" name="type" value="breakfast" onChange={listType === "breakfast" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
+              <div><input type="checkbox" name="type" value="lunch" onChange={listType === "lunch" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
+              <div><input type="checkbox" name="type" value="dinner" onChange={listType === "dinner" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
               </div>
             <div className='diet-boxes'>
             <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} checked={listDiet.includes("vegetarian")}/> Vegetarian{"    "}</div>
