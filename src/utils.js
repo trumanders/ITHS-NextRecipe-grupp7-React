@@ -190,7 +190,7 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         break;
       }
     } while (searchResults.length < 20); //Kan inte vara 100. Vid enbart ingrediens och inga filter kommer den försöka tömma API:et vilket leder till 429.
-    console.log(searchResults.length);
+    console.log(searchResults); //Att ändra tillbaka
     return searchResults;
   } else {
     const filterGet = await getRecipeByFilter(

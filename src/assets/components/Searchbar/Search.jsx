@@ -25,7 +25,7 @@ function Search() {
   const [listInputs, setlistInputs] = useState(ingredients);
   const [recipeSearch, setrecipeSearch] = useState("");
   const [listDiet, setlistDiet] = useState([]);
-  const [listType, setlistType] = useState("");
+  const [listType, setlistType] = useState([]);
   const [listIntolerances, setlistIntolerances] = useState([]);
   const [isClicked, setIsClicked] = useClickStore(
     (state) => [state.isClicked, state.setIsClicked],
@@ -80,7 +80,7 @@ function Search() {
   const sendIngredients = () => {
     setSearchString({
       ingredients: listInputs.toString(),
-      type: listType,
+      type: listType.toString(),
       intolerances: listIntolerances.toString(),
       diet: listDiet.toString(),
       call: "getIngredient",

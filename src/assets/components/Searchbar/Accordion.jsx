@@ -9,6 +9,22 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
     const menuRef = useRef(null)
     const [listening, setListening] = useState(false)
 
+    const handleListType =(event) =>{
+      
+      const{value, checked} = event.target
+      
+      if(checked)
+      {
+       setlistType(types => [...types,value])
+      }
+      else(
+        setlistType(types => {
+         return [...types.filter(typeValue => typeValue !== value)]
+       })
+      )
+
+  }
+
     // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
     const handleDietbox =(event) =>{
       
@@ -54,9 +70,9 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
               <div className="smallText">
                 <div>
-              <div><input type="radio" name="type" value="breakfast" onChange={event =>setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
-              <div><input type="radio" name="type" value="lunch" onChange={event =>setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
-              <div><input type="radio" name="type" value="dinner" onChange={event =>setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
+              <div><input type="checkbox" name="type" value="breakfast" onChange={handleListType} checked={listType.includes("breakfast")}/> Breakfast {"    "}</div>
+              <div><input type="checkbox" name="type" value="lunch" onChange={handleListType} checked={listType.includes("lunch")} /> Lunch {"    "}</div>
+              <div><input type="checkbox" name="type" value="dinner" onChange={handleListType} checked={listType.includes("dinner")} /> Dinner </div>
               </div>
             <div className='diet-boxes'>
             <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} checked={listDiet.includes("vegetarian")}/> Vegetarian{"    "}</div>
