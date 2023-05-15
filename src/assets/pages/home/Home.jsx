@@ -12,6 +12,7 @@ import RecipeRepresentation from "../../components/RecipeRepresentation/RecipeRe
 import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { useClickStore } from "../../hooks/useClickStore";
 import { useLoaderData } from "react-router-dom";
+import AdCarousel from "../../components/Advertisement/Ad";
 
 //Laddar populära recept innan rendering
 export async function loader() {
@@ -125,6 +126,7 @@ export default function Home() {
   return (
     <>
       <Search />
+      <AdCarousel/>
       {!hasResults && (
         <div className="noResult">
           <h3>Sorry, no results found.</h3>
