@@ -6,10 +6,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Home, { loader as startLoader } from "./assets/pages/home/Home";
-import Recipe, {
-  loader as recipeLoader,
-} from "./assets/components/recipe-info/Recipe";
+import Home /*{loader as startLoader}*/ from './assets/pages/home/Home'
+import Recipe, {loader as recipeLoader} from "./assets/components/recipe-info/Recipe"
 import { ContactUs } from "./assets/pages/contact/ContactForm";
 import AboutUs from "./assets/pages/about/AboutUs";
 import "./index.css";
@@ -26,7 +24,7 @@ const router = createBrowserRouter(
         element={<Recipe />}
         loader={recipeLoader}
       />
-      <Route index element={<Home />} loader={startLoader} />
+      <Route index element={<Home />} /*loader={startLoader}*/ />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

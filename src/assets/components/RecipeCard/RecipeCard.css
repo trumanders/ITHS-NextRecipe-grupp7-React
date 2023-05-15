@@ -7,7 +7,18 @@
 }
 
 .card-body {
+  /* position: relative; */
   height: 12rem;
+  background-color: var(--primary);
+  border-radius: 5px;
+}
+
+.card-body-large {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* position: relative; */
+  height: 14rem;
   background-color: var(--primary);
   border-radius: 5px;
 }
@@ -16,6 +27,17 @@
   color: black;
   font-size: 0.75rem;
   margin-top: 3px;
+}
+
+.card-text {
+  /* position:absolute; */
+  color: black;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-align: center;
+  /* margin-left: 0.75rem; */
+  bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .card-image {
