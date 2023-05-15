@@ -15,6 +15,7 @@ import { useClickStore } from "../../hooks/useClickStore";
 import { useLoaderData } from "react-router-dom";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 import AdCarousel from "../../components/Advertisement/Ad";
+import './Home.css'
 
 //Laddar populära recept innan rendering
 // export async function loader() {
@@ -117,11 +118,11 @@ export default function Home() {
           ) {
             const response = await getRecipeByIngredients(ingredients);
             response.length < 1 ? handleEmptyResponse() : 
-              handleResponse(response, `Found ${response.length} recipes`, true);
+              handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`, true);
           } else {
             const response = await filterRecipes(ingredients,type,intolerances,diet);
             response.length < 1 ? handleEmptyResponse() : 
-              handleResponse(response, `Found ${response.length} recipes`, (ingredients !== "")) //Om man inte skrivit i ingredienser sköts val av endpoint i filterRecipes() men getIngredients behöver ändå rätt info.
+              handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`, (ingredients !== "")) //Om man inte skrivit i ingredienser sköts val av endpoint i filterRecipes() men getIngredients behöver ändå rätt info.
           }
         };
         fetchIngredient();
@@ -130,7 +131,7 @@ export default function Home() {
         const fetchFreeSearch = async () => {
           const response = await getRecipeSearch(ingredients);
           response.length < 1 ? handleEmptyResponse() : 
-            handleResponse(response, `Found ${response.length} recipes`);
+            handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`);
         };
         fetchFreeSearch();
         break;
@@ -147,12 +148,13 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div className="home">
+      <div className={isLoading ? "loader" : "noLoader"}>
+        <LoaderSpinner />
+      </div>
       <Search />
       <AdCarousel />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        {isLoading && <LoaderSpinner />}
-      </div>
+      
       {!hasResults && (
         <div className="noResult">
           <h3>Sorry, no results found.</h3>
@@ -161,6 +163,6 @@ export default function Home() {
       {searchResult !== undefined && searchResult.length > 0 && (
         <RecipeRepresentation recipes={searchResult} title={searchTitle} />
       )}
-    </>
+    </div>
   );
 }

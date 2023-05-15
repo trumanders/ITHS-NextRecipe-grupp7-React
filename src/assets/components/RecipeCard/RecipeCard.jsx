@@ -20,7 +20,7 @@ function RecipeCard({ id, image, title, usedIngredientCount, missedIngredientCou
             style={{ padding: "0" }}
           />
           <Card.Title className="card-title">{title}</Card.Title>
-          {usedIngredientCount !== undefined &&
+          {usedIngredientCount !== undefined && usedIngredientCount !== 0 &&
           <Card.Text className='card-text'>
        Used Ingredients: {usedIngredientCount}
        <br/>
