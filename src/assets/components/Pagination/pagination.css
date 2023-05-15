@@ -1,0 +1,10 @@
+.pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Next-Previous{
+    display: flex;
+    justify-content: center;
+}

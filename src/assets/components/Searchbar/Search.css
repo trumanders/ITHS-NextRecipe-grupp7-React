@@ -14,11 +14,20 @@
 
 .accordion-style {
   position: relative;
+  margin: auto;
   padding-bottom: 5px;
   padding-top: 10px;
   max-width: 350px;
   z-index: 1;
 }
+
+/* .accordion-body {
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+} */
 
 .accordion-button {
   padding: 10px !important;
@@ -30,7 +39,19 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 5px;
-  height: 380px;
+  height: 420px;
+}
+
+.search-text {
+  max-width: 12rem;
+}
+
+.search-text:hover {
+  border: 3px solid #94c9a3;
+}
+
+.search-text-alert {
+  border: 2px solid red;
 }
 
 .textpadding {
@@ -38,8 +59,8 @@
   text-align: center;
 }
 
-.searchbar {
-  padding-bottom: 15px;
+.alertOutput {
+  color: red;
 }
 
 #itemContainer {
@@ -53,20 +74,19 @@
 }
 
 .searchItem {
-  position: relative;
   width: auto;
   height: 25px;
   border: 1px solid #0d6efd;
   margin: 5px 5px;
   background: #fff;
   border-radius: 5px;
-  padding: 0px 18px 0px 10px;
+  padding: 0px 10px;
 }
 
 .btn-close {
-  position: absolute;
-  top: 8px;
-  right: 4px;
+  position: relative;
+  top: 0px;
+  right: 0px;
   margin-left: 2px;
   width: 10px !important;
   height: 10px !important;
@@ -79,11 +99,30 @@
   padding: 0px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
+
+  background-color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+}
+
+.addBtn:hover {
+  background-color: var(--off-white) !important;
+  color: var(--primary) !important;
 }
 
 .smallText {
   font-size: 14px;
   text-align: left;
+  background-color: var(--off-white);
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.diet-boxes {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 @media screen and (min-width: 730px) {
@@ -94,11 +133,6 @@
   .search-form {
     padding-top: 15px;
     padding-bottom: 15px;
-  }
-
-  .diet-boxes {
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
 
   .accordion-style {
@@ -114,11 +148,11 @@
   }
 
   .searchpadding {
-    padding-top: 20px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-top: 5px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-bottom: 40px;
-    height: 350px;
+    height: 380px;
   }
 
   .textpadding {
@@ -138,6 +172,12 @@
     justify-content: center;
     margin: 0px auto 15px;
     padding: 0px;
+  }
+
+  .sendSearchBtn {
+    background-color: var(--primary) !important;
+    border: 1px solid var(--primary) !important;
+    padding: 15px;
   }
 
   .searchItem {
@@ -164,13 +204,28 @@
     height: 30px;
     margin-bottom: 5px;
     margin-left: 5px;
-    padding: 0px !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
   }
 
   .smallText {
     font-size: 15px;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .searchpadding {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .smallText {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .diet-boxes {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

@@ -3,14 +3,14 @@ import "./PictureAndInfo.css";
 import "./NutritionTable.css";
 import "./Ingredient.css";
 import "./Instructions.css";
-import "./Steps.css"
+import "./Steps.css";
 import { getRecipeById, getSimilarRecipes } from "../../../utils";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
 import { BiDish } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
-import Accordion from 'react-bootstrap/Accordion';
+import Accordion from "react-bootstrap/Accordion";
 
 import RecipeCard from "../RecipeCard/RecipeCard";
 
@@ -24,7 +24,9 @@ export default function Recipe() {
   // const [recipe, setRecipe] = useState(null);
   const [similars, setSimilars] = useState();
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
-  const [isTablet, setTablet] = useState(window.innerWidth < 900); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
+  const [isTablet, setTablet] = useState(
+    window.innerWidth < 900
+  ); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
   const [servings, setServings] = useState(recipe.servings);
 
   const updateMediaToTablet = () => {
@@ -50,13 +52,15 @@ export default function Recipe() {
   //Hämta liknande recept
   useEffect(() => {
     const fetchData = async () => {
-      //let id = 615761; //detta id ersätts sen av props
       let response = await getSimilarRecipes(recipe.id);
-      //console.log(response);
       setSimilars(response);
     };
     fetchData();
-    // console.log(similars);
+    //Scrolla upp till toppen när nya recept laddas, dvs när man klickat på ett av dem.
+    window.scrollTo({
+      top: 0,
+      behaviour: "auto",
+    });
   }, [recipe]);
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
@@ -89,18 +93,21 @@ export default function Recipe() {
                 /*Om Mobilversion*/
                 <div className="showMorebtn">
                   {/* Sätt en knapp för att visa nutritions*/}
-                    <Accordion>
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Nutritions</Accordion.Header>
-                            <Accordion.Body>
-                                <div className="recipe-section-nutritionTable">
-                                    <NutritionTable
-                                        nutritionValues={recipe.nutrition.nutrients.slice(0, 9)}
-                                    />
-                                </div>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
+                  <Accordion>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Nutritions</Accordion.Header>
+                      <Accordion.Body>
+                        <div className="recipe-section-nutritionTable">
+                          <NutritionTable
+                            nutritionValues={recipe.nutrition.nutrients.slice(
+                              0,
+                              9
+                            )}
+                          />
+                        </div>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
                 </div>
               ) : (
                 /* Om inte mobilversion */
@@ -116,20 +123,20 @@ export default function Recipe() {
           <div className="recipe-section-ingredients">
             {/* Kollar om mobile version */}
             {isMobile ? (
-                 <div className="showMorebtn">
-                 {/* Sätt en knapp för att visa nutritions*/}
-                 
-                   <Accordion>
-                       <Accordion.Item eventKey="0">
-                           <Accordion.Header>Ingredients</Accordion.Header>
-                           <Accordion.Body>
-                               <div className="recipe-section-nutritionTable">
-                                    <Ingredient ingredients={recipe.extendedIngredients} />
-                               </div>
-                           </Accordion.Body>
-                       </Accordion.Item>
-                   </Accordion>
-               </div>
+              <div className="showMorebtn">
+                {/* Sätt en knapp för att visa nutritions*/}
+
+                <Accordion>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Ingredients</Accordion.Header>
+                    <Accordion.Body>
+                      <div className="recipe-section-nutritionTable">
+                        <Ingredient ingredients={recipe.extendedIngredients} />
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </div>
             ) : (
               /* Om inte mobilversion */
               <Ingredient ingredients={recipe.extendedIngredients} />
@@ -139,24 +146,30 @@ export default function Recipe() {
           <div className="recipe-section-instructions">
             {/* Kollar om mobile version */}
             {isMobile ? (
-                <div className="showMorebtn">    
-                    <Accordion>
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Steps</Accordion.Header>
-                            <Accordion.Body>
-                                <div className="recipe-section-nutritionTable">
-                                    <Instructions steps={recipe.instructions} />
-                                </div>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
-                </div>
+              <div className="showMorebtn">
+                <Accordion>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Steps</Accordion.Header>
+                    <Accordion.Body>
+                      <div className="recipe-section-nutritionTable">
+                        <Instructions
+                          steps={recipe.instructions}
+                          recipeID={recipe.id}
+                        />
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </div>
             ) : (
               /* Om inte mobilversion */
-              <Instructions steps={recipe.instructions} />
+              <Instructions steps={recipe.instructions} recipeID={recipe.id} />
             )}
           </div>
 
+          <div className="similar-title">
+          <h3>Similar recipes</h3>
+          </div>
           <div className="similar-recipes">
             {similars.map((rec) => (
               <RecipeCard
@@ -177,13 +190,17 @@ export default function Recipe() {
 const PictureAndInfo = (props) => {
   //calculate är propertyn som håller värdet (antalet valda portioner) som sedan ska beräknas i changeIngredients
   const handleChange = (event) => {
-    props.calculate(event.target.value);
+    if (event.target.value > 0) props.calculate(event.target.value);
   };
   return (
     <article className="picture-and-info-container">
       <img
         className="recipe-picture"
-        src={props.image !== null ? props.image : defaultFood}
+        src={
+          props.image === null || props.image === undefined
+            ? defaultFood
+            : props.image
+        }
         alt="Image of recipe"
       />
       {/*Att styla sen med fontawsome*/}
@@ -271,7 +288,9 @@ const Ingredient = (props) => {
               <b>{ingredient.nameClean}</b>
             </div>
             <div className="amount-unit">
-              <span>{ingredient.amount}</span> <span>{ingredient.unit}</span>
+              <span>
+                {convertAmountAndUnit(ingredient.amount, ingredient.unit)}
+              </span>
             </div>
           </li>
         ))}
@@ -283,25 +302,65 @@ const Ingredient = (props) => {
 
 //Komponent som håller i stegen
 const Instructions = (props) => {
-
-  const beautifySteps = () =>{/* För bättre kontroll av instruktioner */
-    let steps = ({html: props.steps.replaceAll(/((<p>)|(<\/p>)|(<ol>)|(<ul>)|(<\/ol>)|(<\/ul>)|(<li>)|(<\/li>))/g, "").replaceAll(/((\.)(\s))/g,`.`).replaceAll(/(\s\s+)/g,"").replace(/(\.)([A-Z])/g, `$1<br/>$2`).replaceAll(/\r\n|\r|\n/gm,"<br/>")});
+  const beautifySteps = () => {
+    /* För bättre kontroll av instruktioner */
+    let steps = {
+      html: props.steps
+        .replaceAll(
+          /((<p>)|(<\/p>)|(<ol>)|(<ul>)|(<\/ol>)|(<\/ul>)|(<li>)|(<\/li>))/g,
+          ""
+        )
+        .replaceAll(/((\.)(\s))/g, `.`)
+        .replaceAll(/(\s\s+)/g, "")
+        .replace(/(\.)([A-Z])/g, `$1<br/>$2`)
+        .replaceAll(/\r\n|\r|\n/gm, "<br/>"),
+    };
 
     const stepArray = steps.html.split("<br>")[0].split("<br/>");
     return stepArray;
+  };
+
+  var steps = null;
+
+  if (props.steps !== null) {
+    steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
   }
 
-  const steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
-  
+  const checkBoxChange = (instructionElemID) => {
+    document
+      .getElementById(instructionElemID)
+      .classList.toggle("instructionDone");
+  };
+
   return (
     <div className="instructions-container">
       <h2>Steps</h2>
       {props.steps !== null ? (
         <ul className="steps-list">
-          {steps.map((row, index) => (
-            <li key={index} className="steps-list-row">
-              <input type="checkbox"/>{' '}
-              <div className="list-text">{row}</div>
+          {steps.map((instructionRow, index) => (
+            <li key={props.recipeID + "_" + index}>
+              <label
+                htmlFor={props.recipeID + "_" + index}
+                className="steps-list-row"
+              >
+                <input
+                  id={props.recipeID + "_" + index}
+                  key={props.recipeID + "_" + index}
+                  type="checkbox"
+                  className="instructionCheckBox"
+                  onChange={() =>
+                    checkBoxChange(
+                      props.recipeID + "_" + index + "_instruction"
+                    )
+                  }
+                />{" "}
+                <div
+                  id={props.recipeID + "_" + index + "_instruction"}
+                  className="instruction"
+                >
+                  {instructionRow}
+                </div>
+              </label>
             </li>
           ))}
         </ul>
@@ -313,3 +372,115 @@ const Instructions = (props) => {
     </div>
   );
 };
+
+function convertAmountAndUnit(amount, unit) {
+  const cupToTbspFactor = 16;
+  const tbspToTspFactor = 3;
+  let convAmount = amount;
+
+  if (
+    unit === "lb" ||
+    unit === "Lb" ||
+    unit === "pound" ||
+    unit === "Pound" ||
+    unit === "lbs" ||
+    unit === "Lbs" ||
+    unit === "pounds" ||
+    unit === "Pounds"
+  )
+    unit = "lb";
+
+  if (
+    unit === "ounce" ||
+    unit === "oz" ||
+    unit === "Ounce" ||
+    unit === "Oz" ||
+    unit === "ounces" ||
+    unit === "Ounces"
+  )
+    unit = "oz";
+
+  if (unit === "cup" || unit === "Cup" || unit === "cups" || unit === "Cups")
+    unit = "cup";
+
+  if (
+    unit === "tsp" ||
+    unit === "Tsp" ||
+    unit === "tsps" ||
+    unit === "Tsps" ||
+    unit === "teaspoon" ||
+    unit === "teaspoons" ||
+    unit === "Teaspoon" ||
+    unit === "Teaspoons"
+  )
+    unit = "tsp";
+
+  if (
+    unit === "tbsp" ||
+    unit === "Tbsp" ||
+    unit === "tbsps" ||
+    unit === "Tbsps" ||
+    unit === "tablespoon" ||
+    unit === "tablespoons" ||
+    unit === "Tablespoon" ||
+    unit === "Tablsespoons"
+  )
+    unit = "tbsp";
+
+  if (unit === "cup" && amount < 0.25) {
+    convAmount = amount * cupToTbspFactor;
+    unit = "tbsp";
+  } else if (unit === "lb" && amount < 0.25) {
+    convAmount = amount * cupToTbspFactor;
+    unit = "oz";
+  } else if (unit === "tbsp") {
+    if (amount > cupToTbspFactor) {
+      convAmount /= cupToTbspFactor;
+      unit = "cup";
+    }
+    if (amount < 0.25) {
+      convAmount = amount * tbspToTspFactor;
+      unit = "tsp";
+    }
+  } else if (unit === "tsp") {
+    if (amount > tbspToTspFactor) {
+      convAmount = amount / tbspToTspFactor;
+      unit = "tbsp";
+    }
+    if (amount > (tbspToTspFactor * cupToTbspFactor) / 2) {
+      convAmount = amount / (tbspToTspFactor * cupToTbspFactor);
+      unit = "cup";
+    }
+  }
+
+  if (unit === "tbsp" && convAmount < 0.5) {
+    convAmount = convAmount * tbspToTspFactor;
+    unit = "tsp";
+  }
+
+  // let result = "";
+  // convAmount < 2
+  //   ? (result = convAmount.toString() + " " + unit)
+  //   : (result = convAmount.toString() + " " + unit + "s");
+  return nearestFourth(convAmount) + " " + unit;
+}
+
+function nearestFourth(num) {
+  let nearestFourth = Math.round(num * 4) / 4;
+  let whole = Math.floor(nearestFourth);
+  let fraction = nearestFourth - whole;
+  let result = "";
+  if (whole !== 0) result = whole.toString() + " ";
+  switch (fraction) {
+    case 0.25:
+      result += "1/4";
+      break;
+    case 0.5:
+      result += "1/2";
+      break;
+    case 0.75:
+      result += "3/4";
+      break;
+  }
+  return result;
+}

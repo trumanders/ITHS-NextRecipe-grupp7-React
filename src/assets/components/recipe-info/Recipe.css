@@ -29,7 +29,9 @@
     /* SLUT: Bild & Tabell samma rad */
 }
 
-
+.similar-title {
+    margin-top: 10px;
+}
 .similar-recipes{
     display: flex;
     flex-wrap: wrap;

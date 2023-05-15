@@ -1,9 +1,9 @@
-.contactButton{
+.adv-button{
     background-color: var(--primary) !important;
     border: none !important;
-    color: var(--off-white);    
+    color: var(--off-white);   
 }
-.contactButton:hover{
+.adv-button:hover{
     background-color: var(--off-white) !important;
     border: 1px solid var(--primary) !important;
     color: var(--primary) !important;

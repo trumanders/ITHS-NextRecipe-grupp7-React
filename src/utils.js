@@ -1,9 +1,9 @@
-const key = "ce78851c6bc24bf4944626cc0c04848e";
+const key = "fab9f1e7670c48479e11b994a1023259";
 // getPopularRecipes()
 
 //getRecipeByFilter('dinner', '', 'vegetarian')
 
-//filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
+// filterRecipes('beef,tomato', 'dinner', 'gluten', 'paleo')
 
 // getRecipeSearch("Carbonara")
 
@@ -46,41 +46,45 @@ export async function getAllRecipes() {
 }
 
 export async function getRandomRecipes(tags) {
-    let url = tags !== ",," ? `https://api.spoonacular.com/recipes/random?number=10&tags=${tags}` : `https://api.spoonacular.com/recipes/random?number=100`
+  let url =
+    tags !== ",,"
+      ? `https://api.spoonacular.com/recipes/random?number=100&tags=${tags}`
+      : `https://api.spoonacular.com/recipes/random?number=100`;
 
-    const response = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Api-Key': `${key}`
-        }
-    })
-    
-    var data = await response.json()
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-Api-Key": `${key}`,
+    },
+  });
 
-    console.log(data)
-    
-    return data.recipes
+  var data = await response.json();
+
+  console.log(data);
+
+  return data.recipes;
 }
 
 export async function getRecipeSearch(searchString) {
-    let fetchResults = []
+  let fetchResults = [];
 
-    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchString}&number=100`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Api-Key': `${key}`
-        }
-    })
-    var data = await response.json()
+  const response = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?query=${searchString}&number=100`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Api-Key": `${key}`,
+      },
+    }
+  );
+  var data = await response.json();
 
-    data.results.forEach(item => {
-        fetchResults.push(
-            item
-        )
-    })
+  data.results.forEach((item) => {
+    fetchResults.push(item);
+  });
 
-    console.log(fetchResults)
-    return fetchResults
+  console.log(fetchResults);
+  return fetchResults;
 }
 
 export async function getPopularRecipes() {
@@ -147,6 +151,13 @@ export async function getRecipeByFilter(mealtype, intolerances, diet, skip) {
   return allRecipes;
 }
 
+function intersect(arr1, arr2) {
+  const arr1Ids = arr1.map((element) => {
+    return element.id;
+  });
+  return arr2.filter((item) => arr1Ids.includes(item.id));
+}
+
 export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
   var searchResults = []; //Där resultaten sen ska hamna
   var skip = 0;
@@ -165,16 +176,10 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
       );
       console.log(`filterGet: ${filterGet.length} skip: ${skip}`);
 
-      let ingredientGetIds = ingredientGet.map((element) => {
-        //Plockar ut id för enklare filtrering
-        return element.id;
-      });
+      //Jämför de två resultat-seten och plockar ut de som finns med i båda.
+      var intersectingRecipes = intersect(ingredientGet, filterGet);
 
-      var intersect = filterGet.filter((item) =>
-        ingredientGetIds.includes(item.id)
-      ); //plockar ut de objekt som finns i båda resultaten
-
-      intersect.forEach((item) => {
+      intersectingRecipes.forEach((item) => {
         searchResults.push(item);
       });
 
@@ -184,7 +189,7 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
         //Om filterGet är mindre än 100 har resultaten tagit slut hos API:et
         break;
       }
-    } while (searchResults.length < 10);
+    } while (searchResults.length < 20); //Kan inte vara 100. Vid enbart ingrediens och inga filter kommer den försöka tömma API:et vilket leder till 429.
     console.log(searchResults.length);
     return searchResults;
   } else {
@@ -230,8 +235,8 @@ export async function getSimilarRecipes(id) {
 
   //Eftersom similarRecipes inte levereras med bild plockas id:n ut från similar-resultaten och hela recepten hämtas.
   const ids = data.map((item) => {
-    return item.id
-  })
+    return item.id;
+  });
 
   const responseTwo = await fetch(
     `https://api.spoonacular.com/recipes/informationBulk?ids=${ids.toString()}`,
