@@ -3,7 +3,7 @@ import "./RecipeCard.css";
 import { useNavigate } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 
-function RecipeCard({ id, image, title }) {
+function RecipeCard({ id, image, title, usedIngredientCount, missedIngredientCount }) {
   const navigate = useNavigate();
   function clickHandler() {
     navigate(`/recipe/${id}`);
@@ -12,7 +12,7 @@ function RecipeCard({ id, image, title }) {
     <button onClick={clickHandler}>
       {/* <div className="card-container"> */}
       <Card className="card" key={id}>
-        <Card.Body className="card-body" style={{ padding: "0" }}>
+        <Card.Body className={usedIngredientCount ? "card-body-large" : "card-body"} style={{ padding: "0" }}>
           <Card.Img
             variant="top"
             src={(image === null || image === undefined) ? defaultFood : image}
@@ -20,11 +20,12 @@ function RecipeCard({ id, image, title }) {
             style={{ padding: "0" }}
           />
           <Card.Title className="card-title">{title}</Card.Title>
-          {/* <Card.Text className='card-text'>
-       Servings: {servings}
+          {usedIngredientCount !== undefined &&
+          <Card.Text className='card-text'>
+       Used Ingredients: {usedIngredientCount}
        <br/>
-       Ready in minutes: {readyInMinutes}
-      </Card.Text> */}
+       Missing Ingredients: {missedIngredientCount}
+      </Card.Text>}
         </Card.Body>
       </Card>
       {/* </div> */}

@@ -3,12 +3,16 @@
     padding-left: 0;
 }
 
-.list-row{
+.list-row-green{
     display: flex;
     justify-content: space-between;
+    padding-right: 5px;
+    background-color: lightgreen;
 }
 
 .list-row{
+    display: flex;
+    justify-content: space-between;
     padding-right: 5px;
 }
 

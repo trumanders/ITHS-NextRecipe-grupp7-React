@@ -12,23 +12,21 @@ import { useIngredientStore } from "../../hooks/useIngredientStore";
 
 function Search() {
   const [input, setInput] = useState("");
-  const [searchString, setSearchString] = useSearchStringStore(
-    (state) => [state.searchString, state.setSearchString],
-    shallow
-  );
-
   const [ingredients, updateIngredients] = useIngredientStore((state) => [
     state.ingredients,
     state.updateIngredients,
   ]);
-
   const [listInputs, setlistInputs] = useState(ingredients);
   const [recipeSearch, setrecipeSearch] = useState("");
   const [listDiet, setlistDiet] = useState([]);
   const [listType, setlistType] = useState("");
   const [listIntolerances, setlistIntolerances] = useState([]);
-  const [isClicked, setIsClicked] = useClickStore(
-    (state) => [state.isClicked, state.setIsClicked],
+  const [searchString, setSearchString] = useSearchStringStore(
+    (state) => [state.searchString, state.setSearchString],
+    shallow
+  );
+  const setIsClicked = useClickStore(
+    (state) => state.setIsClicked,
     shallow
   );
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("");
@@ -48,7 +46,7 @@ function Search() {
   // Funktion för addera ingredienser till lista med felhantering mot dubbla inputs
   const handleSubmit = (event) => {
     event.preventDefault();
-    const item = input;
+    const item = input.toLowerCase();
 
     if (listInputs.includes(item)) {
       setAlertMsgIngredient("Ingredient already added.");
@@ -63,7 +61,7 @@ function Search() {
     } else {
       setEmptyTextWarning(true);
     }
-  };
+  }
 
   useEffect(() => {
     updateIngredients(listInputs);
@@ -80,7 +78,7 @@ function Search() {
   const sendIngredients = () => {
     setSearchString({
       ingredients: listInputs.toString(),
-      type: listType,
+      type: listType.toString(),
       intolerances: listIntolerances.toString(),
       diet: listDiet.toString(),
       call: "getIngredient",
