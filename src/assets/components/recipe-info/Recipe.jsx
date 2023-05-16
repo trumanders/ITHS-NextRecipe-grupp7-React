@@ -326,7 +326,8 @@ const Instructions = (props) => {
 
   var steps = null;
 
-  if (props.steps !== null) {
+  if (props.steps !== null && props.steps.length !== 0) {
+    console.log(props.steps.length);
     steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
   }
 
@@ -339,7 +340,7 @@ const Instructions = (props) => {
   return (
     <div className="instructions-container">
       <h2>Steps</h2>
-      {props.steps !== null ? (
+      {props.steps !== null && props.steps.length !== 0 ? (
         <ul className="steps-list">
           {steps.map((instructionRow, index) => (
             <li key={props.recipeID + "_" + index}>
