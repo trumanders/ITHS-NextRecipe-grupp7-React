@@ -327,7 +327,7 @@ const Instructions = (props) => {
   var steps = null;
 
   if (props.steps !== null && props.steps.length !== 0) {
-    console.log(props.steps.length);
+    //console.log(props.steps.length);
     steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
   }
 
