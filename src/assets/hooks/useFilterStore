@@ -1,0 +1,17 @@
+import { create } from "zustand";
+
+export const useMealTypeStore = create((set) => ({
+  mealType: [],
+  updateMealType: (newMealType) =>
+    set({ mealType: newMealType }),
+}));
+export const useDietStore = create((set) => ({
+    diet: [],
+    updateDiet: (newDiet) =>
+      set({ diet: newDiet }),
+  }));
+  export const useIntoleranceStore = create((set) => ({
+    intolerance: [],
+    updateIntolerance: (newIntolerance) =>
+      set({ intolerance: newIntolerance }),
+  }));

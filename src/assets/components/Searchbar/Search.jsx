@@ -9,6 +9,7 @@ import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
+import { useMealTypeStore,useDietStore, useIntoleranceStore} from "../../hooks/useFilterStore";
 
 function Search() {
   const [input, setInput] = useState("");
@@ -16,11 +17,23 @@ function Search() {
     state.ingredients,
     state.updateIngredients,
   ]);
+  const [mealType, updateMealType] = useMealTypeStore((state) => [
+    state.mealType,
+    state.updateMealType,
+  ]);
+  const [diet, updateDiet] = useDietStore((state) => [
+    state.diet,
+    state.updateDiet,
+  ]);
+  const [intolerance, updateIntolerance] = useIntoleranceStore((state) => [
+    state.intolerance,
+    state.updateIntolerance,
+  ]);
   const [listInputs, setlistInputs] = useState(ingredients);
   const [recipeSearch, setrecipeSearch] = useState("");
-  const [listDiet, setlistDiet] = useState([]);
-  const [listType, setlistType] = useState("");
-  const [listIntolerances, setlistIntolerances] = useState([]);
+  const [listDiet, setlistDiet] = useState(diet);
+  const [listType, setlistType] = useState(mealType);
+  const [listIntolerances, setlistIntolerances] = useState(intolerance);
   const [searchString, setSearchString] = useSearchStringStore(
     (state) => [state.searchString, state.setSearchString],
     shallow
@@ -66,6 +79,15 @@ function Search() {
   useEffect(() => {
     updateIngredients(listInputs);
   }, [listInputs]);
+  useEffect(() => {
+    updateMealType(listType);
+  }, [listType]);
+  useEffect(() => {
+    updateDiet(listDiet);
+  }, [listDiet]);
+  useEffect(() => {
+    updateIntolerance(listIntolerances);
+  }, [listIntolerances]);
 
   // Funktion för att ta bort ingredienserna från listan.
   const deleteInput = (value) => {
