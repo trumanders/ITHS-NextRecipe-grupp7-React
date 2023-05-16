@@ -1,7 +1,7 @@
 import React from "react";
 import './pagination.css'
 
-//Taking props in from the parent component
+//Taking props in from the parent component (recipeResresentation)
 export default function Pagination({
     recipesPerPage,
     totalRecipes,

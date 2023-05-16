@@ -20,7 +20,7 @@ export default function RecipeRepresentation(props) {
   const indexOfFirstRecipeInCurrentPage = indexOfLastRecipeInCurrentPage - recipesPerPage;
   const currentRecipes = props.recipes.slice(indexOfFirstRecipeInCurrentPage, indexOfLastRecipeInCurrentPage);   
 
-  // seting the current state by using this function and passing in the page as prop
+  // seting the current state by using this function and passing in the page as prop (coming from the pagination component's callback function: onPageChange)
   function handleOnPageChange(page){
     setCurrentPage(page);
   }
