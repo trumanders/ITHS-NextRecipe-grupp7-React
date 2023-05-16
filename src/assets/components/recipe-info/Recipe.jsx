@@ -8,6 +8,7 @@ import { getRecipeById, getSimilarRecipes } from "../../../utils";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
 import { BiDish } from "react-icons/bi";
+import { BiHome } from "react-icons/bi"
 import { Await, defer, useAsyncValue, useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 import Accordion from "react-bootstrap/Accordion";
@@ -327,6 +328,15 @@ const Ingredient = (props) => {
               <b>{ingredient.nameClean}</b>
             </div>
             <div className="amount-unit">
+            {searchIngredients.includes(ingredient.id) &&
+            <div className="atHome">
+              <span>
+                <b>
+                  <BiHome />
+                </b>{"   "}
+              </span>
+              </div>
+              }
               <span>
                 {convertAmountAndUnit(ingredient.amount, ingredient.unit)}
               </span>

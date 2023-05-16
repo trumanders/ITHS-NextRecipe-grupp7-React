@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     padding-right: 5px;
-    background-color: lightgreen;
+    background-color: var(--primary);
 }
 
 .list-row{
@@ -31,10 +31,17 @@ h2{
 }
 
 .amount-unit{
+    position: relative;
     width: 30%;
     text-align: left;
 }
 
 .recipe-section-ingredients{
     margin-bottom: 10px;
+}
+
+.atHome {
+    position: absolute;
+    left: -25px;
+    top: -2px;
 }
