@@ -7,3 +7,7 @@
     background-color: var(--off-white) !important;
     color: var(--primary) !important;
 }
+
+.filterOptCheckbox{
+    accent-color: var(--primary);
+}
