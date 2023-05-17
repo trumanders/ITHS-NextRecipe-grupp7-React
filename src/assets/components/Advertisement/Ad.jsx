@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
+import './Ad.css'
 
 const adPhotos = [
   "image1.jpg",
