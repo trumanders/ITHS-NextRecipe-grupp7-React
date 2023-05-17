@@ -48,28 +48,27 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
       }
 
     return (
-        <div className='accordion-style' ref={menuRef}>
-              <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Filters</Button>
-              {isAccordionVisible &&
-
-              <div className="smallText">
-                <div>
+      <div className='accordion-style' ref={menuRef}>
+        <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Filters</Button>
+        {isAccordionVisible &&
+          <div className="smallText">
+            <div>
               <div><input type="checkbox" name="type" value="breakfast" onChange={listType === "breakfast" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
               <div><input type="checkbox" name="type" value="lunch" onChange={listType === "lunch" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
               <div><input type="checkbox" name="type" value="dinner" onChange={listType === "dinner" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
-              </div>
+            </div>
             <div className='diet-boxes'>
-            <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} checked={listDiet.includes("vegetarian")}/> Vegetarian{"    "}</div>
-            <div><input type="checkbox" value="vegan" onChange={handleDietbox} checked={listDiet.includes("vegan")}/> Vegan{"    "}</div>
-            <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} checked={listDiet.includes("pescetarian")}/> Pescetarian{"    "}</div>
+              <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} checked={listDiet.includes("vegetarian")}/> Vegetarian{"    "}</div>
+              <div><input type="checkbox" value="vegan" onChange={handleDietbox} checked={listDiet.includes("vegan")}/> Vegan{"    "}</div>
+              <div><input type="checkbox" value="pescetarian" onChange={handleDietbox} checked={listDiet.includes("pescetarian")}/> Pescetarian{"    "}</div>
             </div>
             <div>
-            <div><input type="checkbox" value="gluten" onChange={handleIntolerances} checked={listIntolerances.includes("gluten")}/> Gluten free {"    "}</div>
-            <div><input type="checkbox" value="dairy" onChange={handleIntolerances} checked={listIntolerances.includes("dairy")}/> Lacto-intolerant {"    "}</div>
-            <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} checked={listIntolerances.includes("peanut,tree nut")}/> Without peanuts{"    "}</div>
+              <div><input type="checkbox" value="gluten" onChange={handleIntolerances} checked={listIntolerances.includes("gluten")}/> Gluten free {"    "}</div>
+              <div><input type="checkbox" value="dairy" onChange={handleIntolerances} checked={listIntolerances.includes("dairy")}/> Lacto-intolerant {"    "}</div>
+              <div><input type="checkbox" value="peanut,tree nut" onChange={handleIntolerances} checked={listIntolerances.includes("peanut,tree nut")}/> Without peanuts{"    "}</div>
             </div>
-            </div>
+          </div>
         }
-            </div>
+      </div>
     )
 }
