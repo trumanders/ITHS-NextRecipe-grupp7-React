@@ -26,6 +26,8 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
  
     }
 
+  
+
     const handleIntolerances =(event) => {
         const{value, checked} = event.target
        
@@ -47,16 +49,16 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
         return setIsAccordionVisible(!isAccordionVisible)
       }
 
-    return (
+      return (
         <div className='accordion-style' ref={menuRef}>
               <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Advanced search</Button>
               {isAccordionVisible &&
 
               <div className="smallText">
                 <div>
-              <div><input type="checkbox" name="type" value="breakfast" onChange={listType === "breakfast" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
-              <div><input type="checkbox" name="type" value="lunch" onChange={listType === "lunch" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
-              <div><input type="checkbox" name="type" value="dinner" onChange={listType === "dinner" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
+              <div><input type="checkbox" value="breakfast" onChange={listType === "breakfast" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "breakfast"}/> Breakfast {"    "}</div>
+              <div><input type="checkbox" value="lunch" onChange={listType === "lunch" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "lunch"} /> Lunch {"    "}</div>
+              <div><input type="checkbox" value="dinner" onChange={listType === "dinner" ? event => setlistType("") : event => setlistType(event.target.value)} checked={listType === "dinner"} /> Dinner </div>
               </div>
             <div className='diet-boxes'>
             <div><input type="checkbox" value="vegetarian" onChange={handleDietbox} checked={listDiet.includes("vegetarian")}/> Vegetarian{"    "}</div>
