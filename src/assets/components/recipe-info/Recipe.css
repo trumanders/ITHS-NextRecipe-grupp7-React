@@ -9,6 +9,20 @@
     margin-bottom: 10px;
 }
 
+.top-spinner {
+    width: 100%;
+    height: 60%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.similar-spinner {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
 /* .recipe-section-pictureAndInfo, .recipe-section-nutritionTable, .recipe-section-ingredients, .recipe-section-instructions{
     border: 1px dashed black;
 } */
