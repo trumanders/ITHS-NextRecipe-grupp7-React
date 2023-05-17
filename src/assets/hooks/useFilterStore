@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export const useMealTypeStore = create((set) => ({
-  mealType: [],
+  mealType: "",
   updateMealType: (newMealType) =>
     set({ mealType: newMealType }),
 }));
