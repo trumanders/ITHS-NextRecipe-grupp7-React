@@ -176,9 +176,7 @@ function Search() {
               })}
             </ul>
 
-            <Button onClick={sendIngredients} variant="outline-dark">
-              Search
-            </Button>
+            <button className="searchButton" onClick={sendIngredients}><h3>Search</h3></button>
 
             <CustomAccordion
               listType={listType}
@@ -204,9 +202,7 @@ function Search() {
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
             </div>
-            <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
-              Search
-            </Button>
+            <button className="searchButton" onClick={sendRecipe}>Search</button>
           </form>
         </Tab>
 
@@ -214,10 +210,7 @@ function Search() {
           <p className="textpadding">
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
-
-          <Button variant="outline-dark" onClick={sendRandom} type="Button">
-            Go!
-          </Button>
+          <button className="searchButton" onClick={sendRandom}>Go!</button>
 
           <CustomAccordion
             listType={listType}

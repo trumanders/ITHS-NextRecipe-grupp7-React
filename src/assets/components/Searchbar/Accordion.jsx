@@ -49,7 +49,7 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
     return (
         <div className='accordion-style' ref={menuRef}>
-              <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Advanced search</Button>
+              <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Filters</Button>
               {isAccordionVisible &&
 
               <div className="smallText">
