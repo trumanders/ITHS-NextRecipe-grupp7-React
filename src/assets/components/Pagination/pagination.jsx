@@ -11,7 +11,7 @@ export default function Pagination({
     //Calculating the total amount of pages, using Math.ceil to round up the resulted number 
     const totalPages = Math.ceil(totalRecipes / recipesPerPage); 
       
-    //Current page is a state in parent component and is sent to here as a prop 
+    //the onPageChange callback is called with the current page incremented by 1 or decremented by 1 which would set the current page moving to the next or previous page
     function handleNextPage(){
         onPageChange(currentPage + 1);
     }
