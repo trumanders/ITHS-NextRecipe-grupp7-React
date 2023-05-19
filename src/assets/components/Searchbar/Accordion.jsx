@@ -26,6 +26,8 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
  
     }
 
+  
+
     const handleIntolerances =(event) => {
         const{value, checked} = event.target
        
