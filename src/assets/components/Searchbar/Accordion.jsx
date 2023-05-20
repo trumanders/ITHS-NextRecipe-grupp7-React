@@ -6,7 +6,7 @@ import './Accordion.css';
 
 export default function CustomAccordion({listType, setlistType, listDiet, setlistDiet, listIntolerances, setlistIntolerances}){
     const [isAccordionVisible, setIsAccordionVisible] = useState(false)
-    const menuRef = useRef(null)
+    const filterRef = useRef(null)
     const [listening, setListening] = useState(false)
 
     // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
@@ -43,14 +43,14 @@ export default function CustomAccordion({listType, setlistType, listDiet, setlis
 
     }
     //Sätter igång funktionen som kollar om man klickar utanför adv.search-rutan och då stänger densamma
-    useEffect(listenForOutsideClicks(listening, setListening, menuRef, setIsAccordionVisible))
+    useEffect(listenForOutsideClicks(listening, setListening, filterRef, setIsAccordionVisible))
 
     const toggle = (isAccordionVisible) => {
         return setIsAccordionVisible(!isAccordionVisible)
       }
 
       return (
-        <div className='accordion-style' ref={menuRef}>
+        <div className='accordion-style' ref={filterRef}>
               <Button className="adv-button" type='button' onClick={() => {toggle(isAccordionVisible)}}>Advanced search</Button>
               {isAccordionVisible &&
 

@@ -83,7 +83,7 @@ export async function getRecipeSearch(searchString) {
     fetchResults.push(item);
   });
 
-  console.log(fetchResults);
+  // console.log(fetchResults);
   return fetchResults;
 }
 

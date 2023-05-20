@@ -11,7 +11,7 @@ import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
 import { useMealTypeStore,useDietStore, useIntoleranceStore} from "../../hooks/useFilterStore";
 
-function Search() {
+function Search({ isLoading }) {
   const [input, setInput] = useState("");
   const [ingredients, updateIngredients] = useIngredientStore((state) => [
     state.ingredients,
@@ -198,7 +198,7 @@ function Search() {
               })}
             </ul>
 
-            <Button onClick={sendIngredients} variant="outline-dark">
+            <Button disabled={isLoading} onClick={sendIngredients} variant="outline-dark">
               Search
             </Button>
 
@@ -226,7 +226,7 @@ function Search() {
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
             </div>
-            <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
+            <Button variant="outline-dark" type="Button" disabled={isLoading} onClick={sendRecipe}>
               Search
             </Button>
           </form>
@@ -237,7 +237,7 @@ function Search() {
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
 
-          <Button variant="outline-dark" onClick={sendRandom} type="Button">
+          <Button variant="outline-dark" disabled={isLoading} onClick={sendRandom} type="Button">
             Go!
           </Button>
 

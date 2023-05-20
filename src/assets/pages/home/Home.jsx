@@ -33,7 +33,7 @@ export default function Home() {
   ]);
   // const [title, setTitle] = useState("Popular Recipes")
   // const [recipes, setRecipes] = useState([])
-  const [hasResults, setHasResults] = useState(true);
+  //const [hasResults, setHasResults] = useState(true);
   const [
     searchResult,
     searchTitle,
@@ -83,7 +83,7 @@ export default function Home() {
   };
 
   const handleResponse = (response, title, ingredients  = false) => {
-    setHasResults(true);
+    //setHasResults(true);
     setSearchResult(response);
     setSearchTitle(title);
     ingredients ? getIngredients(response) : setSearchIngredients([]);
@@ -91,8 +91,9 @@ export default function Home() {
 
   }
   const handleEmptyResponse = () => {
-    setHasResults(false);
+    //setHasResults(false);
     setIsLoading(false);
+    setSearchTitle("Sorry, no results found matching your query.");
   }
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
@@ -149,17 +150,12 @@ export default function Home() {
 
   return (
     <div className="home">
+      
+      <Search isLoading={isLoading}/>
+      <AdCarousel />
       <div className={isLoading ? "loader" : "noLoader"}>
         <LoaderSpinner />
       </div>
-      <Search />
-      <AdCarousel />
-      
-      {!hasResults && (
-        <div className="noResult">
-          <h3>Sorry, no results found.</h3>
-        </div>
-      )}
       {searchResult !== undefined && searchResult.length > 0 && (
         <RecipeRepresentation recipes={searchResult} title={searchTitle} />
       )}
