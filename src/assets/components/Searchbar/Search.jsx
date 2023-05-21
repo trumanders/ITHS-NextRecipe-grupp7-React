@@ -198,7 +198,11 @@ function Search() {
               })}
             </ul>
 
-            <button className="searchButton" onClick={sendIngredients}>
+            <button
+              type="button"
+              className="searchButton"
+              onClick={sendIngredients}
+            >
               <h4>Search</h4>
             </button>
 
