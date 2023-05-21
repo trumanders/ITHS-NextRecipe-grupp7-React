@@ -191,17 +191,6 @@
     padding: 15px;
   }
 
-  .searchButton {
-    border: 1px solid var(--primary);
-    border-radius: 7px;
-    padding: 5px;
-    width: 150px;
-
-    background: var(--primary);
-    color: white;
-    transition: color 150ms;
-  }
-
   .searchButton:hover {
     background-color: white;
     color: var(--primary);
