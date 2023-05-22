@@ -9,7 +9,11 @@ import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
-import { useMealTypeStore,useDietStore, useIntoleranceStore} from "../../hooks/useFilterStore";
+import {
+  useMealTypeStore,
+  useDietStore,
+  useIntoleranceStore,
+} from "../../hooks/useFilterStore";
 
 function Search() {
   const [input, setInput] = useState("");
@@ -38,10 +42,7 @@ function Search() {
     (state) => [state.searchString, state.setSearchString],
     shallow
   );
-  const setIsClicked = useClickStore(
-    (state) => state.setIsClicked,
-    shallow
-  );
+  const setIsClicked = useClickStore((state) => state.setIsClicked, shallow);
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("");
   const [alertMsgIngredient, setAlertMsgIngredient] = useState("");
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
@@ -74,7 +75,7 @@ function Search() {
     } else {
       setEmptyTextWarning(true);
     }
-  }
+  };
 
   useEffect(() => {
     updateIngredients(listInputs);
@@ -168,7 +169,6 @@ function Search() {
                 value={input}
                 name="tab1"
                 onChange={(event) => setInput(event.target.value)}
-                className={emptyTextWarning ? "search-text-alert" : null}
               />
               <Button
                 className="addBtn"
@@ -198,9 +198,13 @@ function Search() {
               })}
             </ul>
 
-            <Button onClick={sendIngredients} variant="outline-dark">
-              Search
-            </Button>
+            <button
+              type="button"
+              className="searchButton"
+              onClick={sendIngredients}
+            >
+              <h4>Search</h4>
+            </button>
 
             <CustomAccordion
               listType={listType}
@@ -226,9 +230,9 @@ function Search() {
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
             </div>
-            <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
+            <button className="searchButton" onClick={sendRecipe}>
               Search
-            </Button>
+            </button>
           </form>
         </Tab>
 
@@ -236,10 +240,9 @@ function Search() {
           <p className="textpadding">
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
-
-          <Button variant="outline-dark" onClick={sendRandom} type="Button">
+          <button className="searchButton" onClick={sendRandom}>
             Go!
-          </Button>
+          </button>
 
           <CustomAccordion
             listType={listType}

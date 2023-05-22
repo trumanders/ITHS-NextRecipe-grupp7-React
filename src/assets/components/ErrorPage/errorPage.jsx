@@ -1,7 +1,7 @@
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError(); // Built-in hook from react-router, used to access the error information related to a route. If there is no error, it returns undefined.
   console.error(error);
 
   return (
