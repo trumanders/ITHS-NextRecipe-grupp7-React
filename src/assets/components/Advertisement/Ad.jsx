@@ -4,7 +4,8 @@ import './Ad.css'
 import obey from '../../pictures/AdObey.png'
 import korv from '../../pictures/AdKorv.png'
 import food from '../../pictures/AdFood.png'
-import hamb from '../../pictures/adNailSoup.jpg'
+import breadButterAd from '../../pictures/breadButterAd.jpg'
+import foody from '../../pictures/foody.jpg'
 
 // window.innerWidth < 720 ? setadList(adMobilePhotos) : setadList(adPhotos)
  const adPhotos = [
@@ -13,8 +14,15 @@ import hamb from '../../pictures/adNailSoup.jpg'
 
  const adMobilePhotos = [
   obey,
-  korv
- ]
+  korv,
+  food,
+  breadButterAd,
+  foody,
+  "image6.jpg",
+  "image7.jpg",
+  "image8.jpg",
+  "image9.jpg",
+];
 
 const AdCarousel = () => {
   const[isMobile, setisMobile] = useState(window.innerWidth < 720)

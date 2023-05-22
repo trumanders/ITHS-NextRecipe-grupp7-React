@@ -16,6 +16,7 @@ import { useLoaderData } from "react-router-dom";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 import AdCarousel from "../../components/Advertisement/Ad";
 import './Home.css'
+import nails from '../../pictures/nails.jpeg'
 
 //Laddar populära recept innan rendering
 // export async function loader() {
