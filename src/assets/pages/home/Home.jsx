@@ -66,7 +66,7 @@ export default function Home() {
       searchPressed();
     }
   }, [isClicked]);
-
+  
   //plockar ut idn på ingredienserna och lägger dem i searchResultStore för att kunna användas i Recipe.jsx
   const getIngredients = (recipes) => {
     const ingredients = recipes.map((recipe) => recipe.usedIngredients);
