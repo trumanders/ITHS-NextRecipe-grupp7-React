@@ -1,3 +1,10 @@
 .carousel-indicators {
     z-index: 0!important;
+    
 }
+
+carousel-item > img {
+    max-height: 3rem;
+    max-width: 80vw;
+} 
+

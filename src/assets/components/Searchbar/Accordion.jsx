@@ -1,58 +1,56 @@
 import React, { useRef, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import listenForOutsideClicks from "./listenForOutsideClicks";
+import { listenForOutsideClicks } from "../../../utils";
 import "./Accordion.css";
 
-export default function CustomAccordion({
-  listType,
-  setlistType,
-  listDiet,
-  setlistDiet,
-  listIntolerances,
-  setlistIntolerances,
-}) {
-  const [isAccordionVisible, setIsAccordionVisible] = useState(false);
-  const menuRef = useRef(null);
-  const [listening, setListening] = useState(false);
 
-  // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
-  const handleDietbox = (event) => {
-    const { value, checked } = event.target;
+export default function CustomAccordion({listType, setlistType, listDiet, setlistDiet, listIntolerances, setlistIntolerances}){
+    const [isAccordionVisible, setIsAccordionVisible] = useState(false)
+    const filterRef = useRef(null)
+    const [listening, setListening] = useState(false)
 
-    if (checked) {
-      setlistDiet((diets) => [...diets, value]);
-    } else
-      setlistDiet((diets) => {
-        return [...diets.filter((dietValue) => dietValue !== value)];
-      });
-  };
+    // Funktion för att ta emot flera värden från checkboxar, om checkad läggs värdet till i listan, om inte så tas värdet bort.
+    const handleDietbox =(event) =>{
+      
+        const{value, checked} = event.target
+        
+        if(checked)
+        {
+         setlistDiet(diets => [...diets,value])
+        }
+        else(
+         setlistDiet(diets => {
+           return [...diets.filter(dietValue => dietValue !== value)]
+         })
+        )
+ 
+    }
 
-  const handleIntolerances = (event) => {
-    const { value, checked } = event.target;
+  
 
-    if (checked) {
-      setlistIntolerances((intolerances) => [...intolerances, value]);
-    } else
-      setlistIntolerances((diets) => {
-        return [...diets.filter((intolerances) => intolerances !== value)];
-      });
-  };
-  //Sätter igång funktionen som kollar om man klickar utanför adv.search-rutan och då stänger densamma
-  useEffect(
-    listenForOutsideClicks(
-      listening,
-      setListening,
-      menuRef,
-      setIsAccordionVisible
-    )
-  );
+    const handleIntolerances =(event) => {
+        const{value, checked} = event.target
+       
+       if(checked)
+       {
+        setlistIntolerances(intolerances => [...intolerances,value])
+       }
+       else(
+        setlistIntolerances(diets => {
+          return [...diets.filter(intolerances => intolerances !== value)]
+        })
+       )
+
+    }
+    //Sätter igång funktionen som kollar om man klickar utanför adv.search-rutan och då stänger densamma
+    useEffect(listenForOutsideClicks(listening, setListening, filterRef, setIsAccordionVisible))
 
   const toggle = (isAccordionVisible) => {
     return setIsAccordionVisible(!isAccordionVisible);
   };
 
   return (
-    <div className="accordion-style" ref={menuRef}>
+    <div className="accordion-style" ref={filterRef}>
       <Button
         className="adv-button"
         type="button"

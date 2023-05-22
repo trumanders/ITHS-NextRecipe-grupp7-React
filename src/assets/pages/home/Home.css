@@ -1,9 +1,6 @@
-.home {
-    position: relative;
-}
+
 
 .loader {
-    position: absolute;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +16,6 @@
 
 @media screen and (max-width: 535px) {
     .loader {
-        position: absolute;
         display:flex;
         justify-content: center;
         align-items: center;

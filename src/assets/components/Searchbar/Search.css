@@ -6,7 +6,7 @@
   border: 1px solid var(--primary);
   border-radius: 7px;
   padding: 5px;
-  width: 150px;
+  width: 120px;
 
   background: var(--primary);
   color: white;
@@ -17,6 +17,23 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+.search-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-btn {
+  position: relative;
+  width: 180px;
+}
+
+.spinner {
+  position:absolute;
+  right: -7px;
+  top: 8px;
+}
+
 
 .diet-boxes {
   padding-top: 3px;

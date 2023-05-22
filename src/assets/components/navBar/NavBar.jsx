@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./NavBar.css";
 import { Burger } from "./burger.jsx";
 import { Link } from "react-router-dom";
-import logo from '../../pictures/logo.png'
+import logo from '../../pictures/logo.png';
+import { listenForOutsideClicks } from "../../../utils";
 
 function NavBar(){
     const [visible, setVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 730);
-
+    const menuRef = useRef(null);
+    const [listening, setListening] = useState(false)
     const updateMedia = () => {
         setIsMobile(window.innerWidth < 730)
     }
@@ -17,8 +19,11 @@ function NavBar(){
         return () => window.removeEventListener("resize", updateMedia);
     }, [isMobile]);
 
+    //Sätter igång funktionen som kollar om man klickar utanför burgar-menyn och då stänger densamma
+    useEffect(listenForOutsideClicks(listening, setListening, menuRef, setVisible))
+
   return (
-    <div className="NavBar">
+    <div className="NavBar" ref={menuRef}>
         {isMobile ? (<img src={logo} className="Logotype" alt="Logotype"/>) :
         (<a href="/"><img src={logo} className="Logotype" alt="Logotype"/></a>)}
         <div className="NaviIntro">
