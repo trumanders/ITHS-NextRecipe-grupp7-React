@@ -9,7 +9,11 @@ import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
-import { useMealTypeStore,useDietStore, useIntoleranceStore} from "../../hooks/useFilterStore";
+import { 
+  useMealTypeStore,
+  useDietStore, 
+  useIntoleranceStore, 
+} from "../../hooks/useFilterStore";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 function Search({ isLoading }) {
@@ -40,9 +44,8 @@ function Search({ isLoading }) {
     shallow
   );
   const setIsClicked = useClickStore(
-    (state) => state.setIsClicked,
-    shallow
-  );
+    (state) => state.setIsClicked, 
+    shallow);
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("");
   const [alertMsgIngredient, setAlertMsgIngredient] = useState("");
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
@@ -75,7 +78,7 @@ function Search({ isLoading }) {
     } else {
       setEmptyTextWarning(true);
     }
-  }
+  };
 
   useEffect(() => {
     updateIngredients(listInputs);
@@ -169,7 +172,6 @@ function Search({ isLoading }) {
                 value={input}
                 name="tab1"
                 onChange={(event) => setInput(event.target.value)}
-                className={emptyTextWarning ? "search-text-alert" : null}
               />
               <Button
                 className="addBtn"
@@ -199,14 +201,18 @@ function Search({ isLoading }) {
               })}
             </ul>
             <div className="search-btn-container">
-            <div className="search-btn">
-              <Button disabled={isLoading} onClick={sendIngredients} variant="outline-dark">
-                Search
-              </Button>
+              <div className="search-btn">
+                <button
+                  type="button"
+                  className="searchButton"
+                  disabled={isLoading} onClick={sendIngredients}
+                >
+                  <h4>Search</h4>
+                </button>
               
-              <div className={isLoading ? "spinner" : "noLoader"}>
-              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
-              </div>
+                <div className={isLoading ? "spinner" : "noLoader"}>
+                  <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+                </div>
               </div>
             </div>
 
@@ -236,9 +242,9 @@ function Search({ isLoading }) {
             </div>
             <div className="search-btn-container">
             <div className="search-btn">
-              <Button variant="outline-dark" type="Button" disabled={isLoading} onClick={sendRecipe}>
+              <button className="searchButton" disabled={isLoading} onClick={sendRecipe}>
                 Search
-              </Button>
+              </button>
               <div className={isLoading ? "spinner" : "noLoader"}>
               <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
               </div>
@@ -253,15 +259,14 @@ function Search({ isLoading }) {
           </p>
           <div className="search-btn-container">
             <div className="search-btn">
-              <Button variant="outline-dark" disabled={isLoading} onClick={sendRandom} type="Button">
+              <button className="searchButton" onClick={sendRandom}>
                 Go!
-              </Button>
+              </button>
               <div className={isLoading ? "spinner" : "noLoader"}>
               <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
               </div>
             </div>
           </div>
-
           <CustomAccordion
             listType={listType}
             setlistType={setlistType}

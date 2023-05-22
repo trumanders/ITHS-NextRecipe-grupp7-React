@@ -2,6 +2,17 @@
   align-items: center;
 }
 
+.searchButton {
+  border: 1px solid var(--primary);
+  border-radius: 7px;
+  padding: 5px;
+  width: 150px;
+
+  background: var(--primary);
+  color: white;
+  transition: color 150ms;
+}
+
 .search-form {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -195,6 +206,11 @@
     background-color: var(--primary) !important;
     border: 1px solid var(--primary) !important;
     padding: 15px;
+  }
+
+  .searchButton:hover {
+    background-color: white;
+    color: var(--primary);
   }
 
   .searchItem {
