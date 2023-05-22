@@ -150,16 +150,19 @@ export default function Home() {
   };
 
   return (
-    <div className="home">
-      
-      <Search isLoading={isLoading}/>
-      <AdCarousel />
-      <div className={isLoading ? "loader" : "noLoader"}>
-        <LoaderSpinner />
-      </div>
-      {searchResult !== undefined && searchResult.length > 0 && (
-        <RecipeRepresentation recipes={searchResult} title={searchTitle} />
-      )}
-    </div>
+    <main className="home">
+      <section className="upper">
+        <Search isLoading={isLoading}/>
+        <AdCarousel />
+      </section>
+      <section className="lower">
+        {/* <div className={isLoading ? "loader" : "noLoader"}>
+          <LoaderSpinner />
+        </div> */}
+        {searchResult !== undefined && searchResult.length > 0 && (
+          <RecipeRepresentation recipes={searchResult} title={searchTitle} />
+        )}
+      </section>
+    </main>
   );
 }

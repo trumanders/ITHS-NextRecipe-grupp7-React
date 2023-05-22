@@ -10,6 +10,7 @@ import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
 import { useMealTypeStore,useDietStore, useIntoleranceStore} from "../../hooks/useFilterStore";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 function Search({ isLoading }) {
   const [input, setInput] = useState("");
@@ -197,10 +198,17 @@ function Search({ isLoading }) {
                 );
               })}
             </ul>
-
-            <Button disabled={isLoading} onClick={sendIngredients} variant="outline-dark">
-              Search
-            </Button>
+            <div className="search-btn-container">
+            <div className="search-btn">
+              <Button disabled={isLoading} onClick={sendIngredients} variant="outline-dark">
+                Search
+              </Button>
+              
+              <div className={isLoading ? "spinner" : "noLoader"}>
+              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+              </div>
+              </div>
+            </div>
 
             <CustomAccordion
               listType={listType}
@@ -226,9 +234,16 @@ function Search({ isLoading }) {
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
             </div>
-            <Button variant="outline-dark" type="Button" disabled={isLoading} onClick={sendRecipe}>
-              Search
-            </Button>
+            <div className="search-btn-container">
+            <div className="search-btn">
+              <Button variant="outline-dark" type="Button" disabled={isLoading} onClick={sendRecipe}>
+                Search
+              </Button>
+              <div className={isLoading ? "spinner" : "noLoader"}>
+              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+              </div>
+            </div>
+          </div>
           </form>
         </Tab>
 
@@ -236,10 +251,16 @@ function Search({ isLoading }) {
           <p className="textpadding">
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
-
-          <Button variant="outline-dark" disabled={isLoading} onClick={sendRandom} type="Button">
-            Go!
-          </Button>
+          <div className="search-btn-container">
+            <div className="search-btn">
+              <Button variant="outline-dark" disabled={isLoading} onClick={sendRandom} type="Button">
+                Go!
+              </Button>
+              <div className={isLoading ? "spinner" : "noLoader"}>
+              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+              </div>
+            </div>
+          </div>
 
           <CustomAccordion
             listType={listType}
