@@ -207,7 +207,7 @@ function Search({ isLoading }) {
                   className="searchButton"
                   disabled={isLoading} onClick={sendIngredients}
                 >
-                  <h4>Search</h4>
+                  <b>Search</b>
                 </button>
               
                 <div className={isLoading ? "spinner" : "noLoader"}>
@@ -243,7 +243,7 @@ function Search({ isLoading }) {
             <div className="search-btn-container">
             <div className="search-btn">
               <button className="searchButton" disabled={isLoading} onClick={sendRecipe}>
-                Search
+                <b>Search</b>
               </button>
               <div className={isLoading ? "spinner" : "noLoader"}>
               <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
@@ -260,7 +260,7 @@ function Search({ isLoading }) {
           <div className="search-btn-container">
             <div className="search-btn">
               <button className="searchButton" onClick={sendRandom}>
-                Go!
+                <b>Go!</b>
               </button>
               <div className={isLoading ? "spinner" : "noLoader"}>
               <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />

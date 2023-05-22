@@ -1,7 +1,6 @@
 import nails from './assets/pictures/nails.jpeg'
 
 const key = "fab9f1e7670c48479e11b994a1023259";
-getRecipeById(143564)
 
 //#region helperfunctions
 function intersect(arr1, arr2) {
@@ -275,7 +274,7 @@ export async function getSimilarRecipes(id) {
   return dataTwo;
 }
 //#endregion
-
+//#region mock data
 const nailSoup = [{
   id: 1312,
   title: 'Nail Soup',
@@ -512,3 +511,4 @@ const nailSoupInfo = {
   analyzedInstructions: [ { name: '', steps: [] } ],
   originalId: null
 }
+//#endregion

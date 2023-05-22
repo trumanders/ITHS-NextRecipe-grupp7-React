@@ -6,7 +6,7 @@
   border: 1px solid var(--primary);
   border-radius: 7px;
   padding: 5px;
-  width: 150px;
+  width: 120px;
 
   background: var(--primary);
   color: white;
@@ -25,12 +25,12 @@
 
 .search-btn {
   position: relative;
-  width: 160px;
+  width: 180px;
 }
 
 .spinner {
   position:absolute;
-  right: 1px;
+  right: -7px;
   top: 8px;
 }
 
