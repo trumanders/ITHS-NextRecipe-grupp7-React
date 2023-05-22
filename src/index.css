@@ -47,6 +47,8 @@ body button {
   margin: 0px auto;
   padding: 25px;
   position: static;
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
