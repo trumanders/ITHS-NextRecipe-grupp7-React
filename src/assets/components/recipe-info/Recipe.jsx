@@ -15,6 +15,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useSearchResultStore } from "../../hooks/useSearchResultStore";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
+import nails from '../../pictures/nails.jpeg'
 
 export async function loader({ params }) {
   const recipe = getRecipeById(params.recipeId);
