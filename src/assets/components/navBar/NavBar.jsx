@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import "./NavBar.css";
 import { Burger } from "./burger.jsx";
 import { Link } from "react-router-dom";
-import logo from '../../pictures/logo.png'
-import listenForOutsideClicks from "../Searchbar/listenForOutsideClicks";
+import logo from '../../pictures/logo.png';
+import { listenForOutsideClicks } from "../../../utils";
 
 function NavBar(){
     const [visible, setVisible] = useState(false);
@@ -23,10 +23,10 @@ function NavBar(){
     useEffect(listenForOutsideClicks(listening, setListening, menuRef, setVisible))
 
   return (
-    <div className="NavBar">
+    <div className="NavBar" ref={menuRef}>
         {isMobile ? (<img src={logo} className="Logotype" alt="Logotype"/>) :
         (<a href="/"><img src={logo} className="Logotype" alt="Logotype"/></a>)}
-        <div className="NaviIntro" ref={menuRef}>
+        <div className="NaviIntro">
           <button className="menuButton" onClick={() => setVisible(!visible)}><Burger></Burger></button>
         </div>
             {!isMobile || visible ? (

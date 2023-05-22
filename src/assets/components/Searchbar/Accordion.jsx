@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
 import Button from 'react-bootstrap/Button'
-import listenForOutsideClicks from './listenForOutsideClicks';
+import {listenForOutsideClicks} from "../../../utils";
 import './Accordion.css';
 
 

@@ -1,15 +1,35 @@
 const key = "fab9f1e7670c48479e11b994a1023259";
-// getPopularRecipes()
 
-//getRecipeByFilter('dinner', '', 'vegetarian')
+//#region helperfunctions
+function intersect(arr1, arr2) {
+  const arr1Ids = arr1.map((element) => {
+    return element.id;
+  });
+  return arr2.filter((item) => arr1Ids.includes(item.id));
+}
 
- //filterRecipes('blueberry', 'breakfast,lunch', '','')
-
-// getRecipeSearch("Carbonara")
-
-//  getRandomRecipes("vegetarian, gluten, dinner")
-// getSimilarRecipes(615761)
-
+export function listenForOutsideClicks(
+  listening,
+  setListening,
+  menuRef,
+  setIsAccordionVisible,
+) {
+  return () => {
+    if (listening) return
+    if (!menuRef.current) return
+    setListening(true)
+    ;[`click`, `touchstart`].forEach((type) => {
+      document.addEventListener(`click`, (evt) => {
+        const cur = menuRef.current
+        const node = evt.target
+        if (cur === null || cur.contains(node)) return
+        setIsAccordionVisible(false)
+      })
+    })
+  }
+}
+//#endregion
+//#region API-calls
 export async function getAllRecipes() {
   let allRecipes = [];
   let number = 100; //antal som ska hämtas
@@ -59,8 +79,6 @@ export async function getRandomRecipes(tags) {
   });
 
   var data = await response.json();
-
-  console.log(data);
 
   return data.recipes;
 }
@@ -151,12 +169,6 @@ export async function getRecipeByFilter(mealtype, intolerances, diet, skip) {
   return allRecipes;
 }
 
-function intersect(arr1, arr2) {
-  const arr1Ids = arr1.map((element) => {
-    return element.id;
-  });
-  return arr2.filter((item) => arr1Ids.includes(item.id));
-}
 
 export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
   var searchResults = []; //Där resultaten sen ska hamna
@@ -184,11 +196,8 @@ export async function filterRecipes(ingredients, mealtype, intolerances, diet) {
       });
 
       skip += 100; //100 adderas till hur många vi ska hoppa över i nästa hämtning
-
-      if (filterGet.length < 100 || skip > 4900) {
         //Om filterGet är mindre än 100 har resultaten tagit slut hos API:et
-        break;
-      }
+      if (filterGet.length < 100 || skip > 4900) break;
     } while (searchResults.length < 20); //Kan inte vara 100. Vid enbart ingrediens och inga filter kommer den försöka tömma API:et vilket leder till 429.
     // console.log(searchResults.length);
     const matchingIngredients = intersect(searchResults, ingredientGet)
@@ -254,3 +263,4 @@ export async function getSimilarRecipes(id) {
 
   return dataTwo;
 }
+//#endregion

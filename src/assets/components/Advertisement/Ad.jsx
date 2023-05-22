@@ -1,11 +1,14 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import './Ad.css'
+import obey from '../../pictures/AdObey.png'
+import korv from '../../pictures/AdKorv.png'
+import food from '../../pictures/AdFood.png'
 
 const adPhotos = [
-  "image1.jpg",
-  "image2.jpg",
-  "image3.jpg",
+  obey,
+  korv,
+  food,
   "image4.jpg",
   "image5.jpg",
   "image6.jpg",
