@@ -11,10 +11,7 @@ function Layout() {
   return (
     <div className="layoutNew">      
       <NavBar /> 
-      <div id="wrapper">
-        <PageContainer />
-      </div>
-      
+      <PageContainer /> 
     </div>
   )
 }
