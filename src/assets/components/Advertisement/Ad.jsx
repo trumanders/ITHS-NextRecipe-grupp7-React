@@ -14,6 +14,7 @@ const adPhotos = [
 ];
 
 const AdCarousel = () => {
+  
   return (
     <Carousel style={{ margin: "25px" }}>
       {adPhotos.map((photo, index) => (
@@ -23,6 +24,7 @@ const AdCarousel = () => {
       ))}
     </Carousel>
   );
+  
 };
 
 export default AdCarousel;
