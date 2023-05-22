@@ -4,13 +4,15 @@ import './Ad.css'
 import obey from '../../pictures/AdObey.png'
 import korv from '../../pictures/AdKorv.png'
 import food from '../../pictures/AdFood.png'
+import breadButterAd from '../../pictures/breadButterAd.jpg'
+import foody from '../../pictures/foody.jpg'
 
 const adPhotos = [
   obey,
   korv,
   food,
-  "image4.jpg",
-  "image5.jpg",
+  breadButterAd,
+  foody,
   "image6.jpg",
   "image7.jpg",
   "image8.jpg",
