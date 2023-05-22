@@ -75,6 +75,7 @@ body a:active {
 }
 
 .layoutNew{
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
