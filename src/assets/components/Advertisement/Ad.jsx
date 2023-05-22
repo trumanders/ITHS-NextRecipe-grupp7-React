@@ -36,13 +36,15 @@ useEffect(() => {
 if(isMobile)
 {
   return (
-    <Carousel style={{ margin: "25px" }}>
-      {adMobilePhotos.map((photo, index) => (
-        <Carousel.Item key={index}>
-          <img src={photo} alt={`Ad Photo ${index + 1}`} className="img" />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <div className="adContainer">
+      <Carousel style={{ margin: "25px" }}>
+        {adMobilePhotos.map((photo, index) => (
+          <Carousel.Item key={index}>
+            <img src={photo} alt={`Ad Photo ${index + 1}`} className="img" />
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
   );
       }
   else{
@@ -56,8 +58,5 @@ if(isMobile)
     </Carousel> 
     );
     }
-  
 }
-
-
 export default AdCarousel;
