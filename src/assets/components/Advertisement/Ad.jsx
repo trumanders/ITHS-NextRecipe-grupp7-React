@@ -5,7 +5,7 @@ import obey from "../../pictures/AdObey.png";
 import korv from "../../pictures/AdKorv.png";
 import food from "../../pictures/AdFood.png";
 import hamb from "../../pictures/adNailSoup.jpg";
-import admobile from "../../pictures/adNailSoupMobile.jpg";
+import admobile from "../../pictures/AdNailSoupMobile.jpg";
 
 // window.innerWidth < 720 ? setadList(adMobilePhotos) : setadList(adPhotos)
 const adPhotos = [
