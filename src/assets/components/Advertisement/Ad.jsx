@@ -9,15 +9,21 @@ import admobile from '../../pictures/adNailSoupMobile.jpg'
 
 // window.innerWidth < 720 ? setadList(adMobilePhotos) : setadList(adPhotos)
  const adPhotos = [
-    hamb,
-    hamb,
-    hamb
+    { picture: hamb,
+      link: "https://www.byggmax.se/spik-och-skruv/spik"
+    },
+    { picture: hamb,
+      link: "https://www.biltema.se/bygg/fastelement/spik/"
+    }
  ]
 
  const adMobilePhotos = [
-   admobile,
-   admobile,
-   admobile
+  { picture: admobile,
+    link: "https://www.byggmax.se/spik-och-skruv/spik"
+  },
+  { picture: admobile,
+    link: "https://www.biltema.se/bygg/fastelement/spik/"
+  }
  ]
 
 const AdCarousel = () => {
@@ -37,9 +43,9 @@ if(isMobile)
 {
   return (
     <Carousel style={{ margin: "25px" }}>
-      {adMobilePhotos.map((photo, index) => (
+      {adMobilePhotos.map((ad, index) => (
         <Carousel.Item key={index}>
-          <img src={photo} alt={`Ad Photo ${index + 1}`} className="img" />
+          <a href={ad.link} target="_blank" rel="noopener noreferrer"><img src={ad.picture} alt={`Ad Photo ${index + 1}`} className="img" /></a>
         </Carousel.Item>
       ))}
     </Carousel>
@@ -48,9 +54,9 @@ if(isMobile)
   else{
     return(
     <Carousel style={{ margin: "25px" }}>
-      {adPhotos.map((photo, index) => (
+      {adPhotos.map((ad, index) => (
         <Carousel.Item key={index}>
-          <img src={photo} alt={`Ad Photo ${index + 1}`} className="img" />
+          <a href={ad.link} target="_blank" rel="noopener noreferrer"><img src={ad.picture} alt={`Ad Photo ${index + 1}`} className="img" /></a>
         </Carousel.Item>
       ))}
     </Carousel> 
