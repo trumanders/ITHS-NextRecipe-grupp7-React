@@ -16,6 +16,7 @@
      
 .instruction{
  margin-left: 20px;
+ flex: 1;
 }
 
 .instructionCheckBox{
