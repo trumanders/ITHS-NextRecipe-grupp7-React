@@ -39,7 +39,7 @@ const AdCarousel = () => {
               <img
                 src={ad.picture}
                 alt={`Ad Photo ${index + 1}`}
-                className="img"
+                className="imgcarousel"
               />
             </a>
           </Carousel.Item>
@@ -55,7 +55,7 @@ const AdCarousel = () => {
               <img
                 src={ad.picture}
                 alt={`Ad Photo ${index + 1}`}
-                className="img"
+                className="imgcarousel"
               />
             </a>
           </Carousel.Item>
