@@ -8,28 +8,50 @@ import { getRecipeById, getSimilarRecipes } from "../../../utils";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
 import { BiDish } from "react-icons/bi";
-import { useLoaderData } from "react-router-dom";
+import { BiHome } from "react-icons/bi"
+import { Await, defer, useAsyncValue, useLoaderData } from "react-router-dom";
 import defaultFood from "../../pictures/defaultFood.jpeg";
 import Accordion from "react-bootstrap/Accordion";
 import { useSearchResultStore } from "../../hooks/useSearchResultStore";
 import RecipeCard from "../RecipeCard/RecipeCard";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
+import nails from '../../pictures/nails.jpeg'
 
 export async function loader({ params }) {
-  const recipe = await getRecipeById(params.recipeId);
-  return { recipe };
+  const recipe = getRecipeById(params.recipeId);
+  return defer({ recipe });
 }
 
 export default function Recipe() {
-  const { recipe } = useLoaderData();
-  // const [recipe, setRecipe] = useState(null);
+    const { recipe } = useLoaderData();
+
+    return (
+      <main>
+        <React.Suspense
+          fallback={
+            <LoaderSpinner wrapperClass={"top-spinner"} radius={"3"}/>}
+        >
+          <Await
+            resolve={recipe}
+            errorElement={
+              <p>Error loading recipe</p>
+            }
+          >
+            <RecipeView />
+          </Await>
+        </React.Suspense>
+      </main>
+    )
+}
+
+function RecipeView() {
+  const recipe = useAsyncValue();
   const [similars, setSimilars] = useState();
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
   const [isTablet, setTablet] = useState(
     window.innerWidth < 900
   ); /* Nutrition table går under receptbild och info (gömd under fällbarknapp) */
   const [servings, setServings] = useState(recipe.servings);
-  
-  const [pantry, setPantry] = useState([])
   const updateMediaToTablet = () => {
     setTablet(window.innerWidth < 900);
   };
@@ -53,8 +75,10 @@ export default function Recipe() {
   //Hämta liknande recept
   useEffect(() => {
     const fetchData = async () => {
-      let response = await getSimilarRecipes(recipe.id);
+      if(recipe.id !== undefined){
+      let response = getSimilarRecipes(recipe.id);
       setSimilars(response);
+      }
     };
     fetchData();
     //Scrolla upp till toppen när nya recept laddas, dvs när man klickat på ett av dem.
@@ -62,7 +86,6 @@ export default function Recipe() {
       top: 0,
       behaviour: "auto",
     });
-    // console.log(searchIngredients)
   }, [recipe]);
 
   //Ändrar ingredienserna efter antalet portioner som är valt (mängd ingredienser / portioner * valt antal portioner)
@@ -172,16 +195,30 @@ export default function Recipe() {
           <div className="similar-title">
           <h3>Similar recipes</h3>
           </div>
-          <div className="similar-recipes">
-            {similars.map((rec) => (
-              <RecipeCard
-                id={rec.id}
-                image={rec.image}
-                title={rec.title}
-                key={rec.id}
-              />
-            ))}
-          </div>
+          {/* Visar egen spinner medan similar recipes laddar */}
+          <React.Suspense
+            fallback={<LoaderSpinner wrapperClass="similar-spinner"/>}
+          >
+            <Await
+              resolve={similars}
+              errorElement={
+                <p>Error loading similar recipes</p>
+              }
+            >
+              {(similars) => (
+                <div className="similar-recipes">
+                {similars.map((rec) => (
+                  <RecipeCard
+                    id={rec.id}
+                    image={rec.image}
+                    title={rec.title}
+                    key={rec.id}
+                  />
+                ))}
+              </div>
+              )}
+            </Await>
+          </React.Suspense>
         </div>
       </>
     );
@@ -292,6 +329,15 @@ const Ingredient = (props) => {
               <b>{ingredient.nameClean}</b>
             </div>
             <div className="amount-unit">
+            {searchIngredients.includes(ingredient.id) &&
+            <div className="atHome">
+              <span>
+                <b>
+                  <BiHome />
+                </b>{"   "}
+              </span>
+              </div>
+              }
               <span>
                 {convertAmountAndUnit(ingredient.amount, ingredient.unit)}
               </span>
@@ -326,7 +372,8 @@ const Instructions = (props) => {
 
   var steps = null;
 
-  if (props.steps !== null) {
+  if (props.steps !== null && props.steps.length !== 0) {
+    //console.log(props.steps.length);
     steps = beautifySteps(); /* Sparar undan instrukstionsstegen som array */
   }
 
@@ -339,7 +386,7 @@ const Instructions = (props) => {
   return (
     <div className="instructions-container">
       <h2>Steps</h2>
-      {props.steps !== null ? (
+      {props.steps !== null && props.steps.length !== 0 ? (
         <ul className="steps-list">
           {steps.map((instructionRow, index) => (
             <li key={props.recipeID + "_" + index}>

@@ -7,6 +7,7 @@ function RecipeCard({ id, image, title, usedIngredientCount, missedIngredientCou
   const navigate = useNavigate();
   function clickHandler() {
     navigate(`/recipe/${id}`);
+
   }
   return (
     <button onClick={clickHandler}>
@@ -19,8 +20,8 @@ function RecipeCard({ id, image, title, usedIngredientCount, missedIngredientCou
             className="card-image"
             style={{ padding: "0" }}
           />
-          <Card.Title className="card-title">{title}</Card.Title>
-          {usedIngredientCount !== undefined &&
+          <Card.Title className="card-title">{title.length > 65 ? title.substr(0, 50).concat("...") : title}</Card.Title>
+          {usedIngredientCount !== undefined && usedIngredientCount !== 0 &&
           <Card.Text className='card-text'>
        Used Ingredients: {usedIngredientCount}
        <br/>

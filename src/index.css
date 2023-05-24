@@ -47,6 +47,9 @@ body button {
   margin: 0px auto;
   padding: 25px;
   position: static;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 /*
@@ -71,4 +74,10 @@ body a:active {
 @media screen and (min-width: 760px) {
   #wrapper {
   }
+}
+
+.layoutNew{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

@@ -15,6 +15,8 @@ import { useClickStore } from "../../hooks/useClickStore";
 import { useLoaderData } from "react-router-dom";
 import LoaderSpinner from "../../components/LoaderSpinner/LoaderSpinner";
 import AdCarousel from "../../components/Advertisement/Ad";
+import './Home.css'
+import nails from '../../pictures/nails.jpeg'
 
 //Laddar populära recept innan rendering
 // export async function loader() {
@@ -32,7 +34,7 @@ export default function Home() {
   ]);
   // const [title, setTitle] = useState("Popular Recipes")
   // const [recipes, setRecipes] = useState([])
-  const [hasResults, setHasResults] = useState(true);
+  //const [hasResults, setHasResults] = useState(true);
   const [
     searchResult,
     searchTitle,
@@ -78,107 +80,68 @@ export default function Home() {
     var ids = [];
     ingredientIds.forEach((arr) => arr.map((item) => ids.push(item)));
     const unique = [...new Set(ids)];
-    //console.log(unique)
     setSearchIngredients(unique);
   };
+
+  const handleResponse = (response, title, ingredients  = false) => {
+    //setHasResults(true);
+    setSearchResult(response);
+    setSearchTitle(title);
+    ingredients ? getIngredients(response) : setSearchIngredients([]);
+    setIsLoading(false);
+
+  }
+  const handleEmptyResponse = () => {
+    //setHasResults(false);
+    setIsLoading(false);
+    setSearchTitle("Sorry, no results found matching your query.");
+  }
 
   //När man trycker på ""search" kollar den vilken tab man gör det i och hämtar recept utifrån det.
   const searchPressed = () => {
     setIsLoading(true);
-    switch (searchString.call) {
+    const { ingredients, type, intolerances, diet, call } = searchString;
+    switch (call) {
       case "getIngredient":
         const fetchIngredient = async () => {
           //Om inga val är gjorda i 'advanced search' behöver inte två endpoints anropas.
           if (
-            searchString.ingredients === "" &&
-            searchString.type === "" &&
-            searchString.intolerances === "" &&
-            searchString.diet === ""
+            ingredients === "" &&
+            type === "" &&
+            intolerances === "" &&
+            diet === ""
           ) {
             const response = await getAllRecipes();
-            setHasResults(true);
-            setSearchResult(response);
-            setIsLoading(false);
-            setSearchTitle(`All Recipes`);
-            setSearchIngredients([]);
+            handleResponse(response, "All Recipes");
           } else if (
-            searchString.type === "" &&
-            searchString.intolerances === "" &&
-            searchString.diet === ""
+            type === "" &&
+            intolerances === "" &&
+            diet === ""
           ) {
-            const response = await getRecipeByIngredients(
-              searchString.ingredients
-            );
-            if (response.length < 1) {
-              setHasResults(false);
-            } else {
-              setHasResults(true);
-              setSearchResult(response);
-              setIsLoading(false);
-              searchString.ingredients !== ""
-                ? setSearchTitle(
-                    `Found ${response.length} recipes with ${searchString.ingredients}`
-                  )
-                : setSearchTitle(
-                    `Found ${response.length} recipes without ingredient search`
-                  );
-              //plockar ut idn på ingredienserna och lägger dem i searchResultStore
-              getIngredients(response);
-            }
+            const response = await getRecipeByIngredients(ingredients);
+            response.length < 1 ? handleEmptyResponse() : 
+              handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`, true);
           } else {
-            const response = await filterRecipes(
-              searchString.ingredients,
-              searchString.type,
-              searchString.intolerances,
-              searchString.diet
-            );
-            if (response.length < 1) {
-              setHasResults(false);
-            } else {
-              setHasResults(true);
-              setSearchResult(response);
-              setIsLoading(false);
-              setSearchTitle(
-                `Found ${response.length} recipes with ${searchString.ingredients}`
-              );
-              getIngredients(response);
-            }
+            const response = await filterRecipes(ingredients,type,intolerances,diet);
+            response.length < 1 ? handleEmptyResponse() : 
+              handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`, (ingredients !== "")) //Om man inte skrivit i ingredienser sköts val av endpoint i filterRecipes() men getIngredients behöver ändå rätt info.
           }
         };
         fetchIngredient();
         break;
       case "getRecipeSearch":
         const fetchFreeSearch = async () => {
-          const response = await getRecipeSearch(searchString.ingredients);
-          // const allRecipes = await getAllRecipes();
-          if (response.length < 1) {
-            setHasResults(false);
-            setSearchResult(await getAllRecipes());
-            setSearchTitle(`Other recipes`);
-          } else {
-            setHasResults(true);
-            setSearchResult(response);
-            setIsLoading(false);
-            setSearchTitle(
-              `Found ${response.length} recipes with ${searchString.ingredients}`
-            );
-            setSearchIngredients([]);
-          }
+          const response = await getRecipeSearch(ingredients);
+          response.length < 1 ? handleEmptyResponse() : 
+            handleResponse(response, `Found ${response.length === 100 ? "100+" : response.length} recipes`);
         };
         fetchFreeSearch();
         break;
       case "getRandom":
         const fetchRandom = async () => {
-          const response = await getRandomRecipes(searchString.ingredients);
-          if (response.length < 1) {
-            setHasResults(false);
-          } else {
-            setHasResults(true);
-            setSearchResult(response);
-            setSearchTitle("Random Recipes");
-            setSearchIngredients([]);
-            setIsLoading(false);
-          }
+          const response = await getRandomRecipes(ingredients);
+          response.length < 1 ? handleEmptyResponse() : 
+            handleResponse(response, "Random Recipes");
         };
         fetchRandom();
         break;
@@ -187,20 +150,19 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Search />
-      <AdCarousel />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        {isLoading && <LoaderSpinner />}
-      </div>
-      {!hasResults && (
-        <div className="noResult">
-          <h3>Sorry, no results found.</h3>
-        </div>
-      )}
-      {searchResult !== undefined && searchResult.length > 0 && (
-        <RecipeRepresentation recipes={searchResult} title={searchTitle} />
-      )}
-    </>
+    <main className="home">
+      <section className="upper">
+        <Search isLoading={isLoading}/>
+        <AdCarousel />
+      </section>
+      <section className="lower">
+        {/* <div className={isLoading ? "loader" : "noLoader"}>
+          <LoaderSpinner />
+        </div> */}
+        {searchResult !== undefined && searchResult.length > 0 && (
+          <RecipeRepresentation recipes={searchResult} title={searchTitle} />
+        )}
+      </section>
+    </main>
   );
 }

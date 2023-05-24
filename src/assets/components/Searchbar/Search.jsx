@@ -9,26 +9,43 @@ import { useSearchStringStore } from "../../hooks/useSearchStringStore";
 import { shallow } from "zustand/shallow";
 import CustomAccordion from "./Accordion";
 import { useIngredientStore } from "../../hooks/useIngredientStore";
+import { 
+  useMealTypeStore,
+  useDietStore, 
+  useIntoleranceStore, 
+} from "../../hooks/useFilterStore";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
-function Search() {
+function Search({ isLoading }) {
   const [input, setInput] = useState("");
   const [ingredients, updateIngredients] = useIngredientStore((state) => [
     state.ingredients,
     state.updateIngredients,
   ]);
+  const [mealType, updateMealType] = useMealTypeStore((state) => [
+    state.mealType,
+    state.updateMealType,
+  ]);
+  const [diet, updateDiet] = useDietStore((state) => [
+    state.diet,
+    state.updateDiet,
+  ]);
+  const [intolerance, updateIntolerance] = useIntoleranceStore((state) => [
+    state.intolerance,
+    state.updateIntolerance,
+  ]);
   const [listInputs, setlistInputs] = useState(ingredients);
   const [recipeSearch, setrecipeSearch] = useState("");
-  const [listDiet, setlistDiet] = useState([]);
-  const [listType, setlistType] = useState("");
-  const [listIntolerances, setlistIntolerances] = useState([]);
+  const [listDiet, setlistDiet] = useState(diet);
+  const [listType, setlistType] = useState(mealType);
+  const [listIntolerances, setlistIntolerances] = useState(intolerance);
   const [searchString, setSearchString] = useSearchStringStore(
     (state) => [state.searchString, state.setSearchString],
     shallow
   );
   const setIsClicked = useClickStore(
-    (state) => state.setIsClicked,
-    shallow
-  );
+    (state) => state.setIsClicked, 
+    shallow);
   const [alertMsgRecipe, setAlertMsgRecipe] = useState("");
   const [alertMsgIngredient, setAlertMsgIngredient] = useState("");
   const [isMobile, setMobile] = useState(window.innerWidth < 730);
@@ -61,11 +78,20 @@ function Search() {
     } else {
       setEmptyTextWarning(true);
     }
-  }
+  };
 
   useEffect(() => {
     updateIngredients(listInputs);
   }, [listInputs]);
+  useEffect(() => {
+    updateMealType(listType);
+  }, [listType]);
+  useEffect(() => {
+    updateDiet(listDiet);
+  }, [listDiet]);
+  useEffect(() => {
+    updateIntolerance(listIntolerances);
+  }, [listIntolerances]);
 
   // Funktion för att ta bort ingredienserna från listan.
   const deleteInput = (value) => {
@@ -146,7 +172,6 @@ function Search() {
                 value={input}
                 name="tab1"
                 onChange={(event) => setInput(event.target.value)}
-                className={emptyTextWarning ? "search-text-alert" : null}
               />
               <Button
                 className="addBtn"
@@ -175,10 +200,21 @@ function Search() {
                 );
               })}
             </ul>
-
-            <Button onClick={sendIngredients} variant="outline-dark">
-              Search
-            </Button>
+            <div className="search-btn-container">
+              <div className="search-btn">
+                <button
+                  type="button"
+                  className="searchButton"
+                  disabled={isLoading} onClick={sendIngredients}
+                >
+                  <b>Search</b>
+                </button>
+              
+                <div className={isLoading ? "spinner" : "noLoader"}>
+                  <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+                </div>
+              </div>
+            </div>
 
             <CustomAccordion
               listType={listType}
@@ -204,9 +240,16 @@ function Search() {
                 onChange={(event) => setrecipeSearch(event.target.value)}
               />
             </div>
-            <Button variant="outline-dark" type="Button" onClick={sendRecipe}>
-              Search
-            </Button>
+            <div className="search-btn-container">
+            <div className="search-btn">
+              <button className="searchButton" disabled={isLoading} onClick={sendRecipe}>
+                <b>Search</b>
+              </button>
+              <div className={isLoading ? "spinner" : "noLoader"}>
+              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+              </div>
+            </div>
+          </div>
           </form>
         </Tab>
 
@@ -214,11 +257,16 @@ function Search() {
           <p className="textpadding">
             Use our randomizer when you have a hard time coming up with ideas.
           </p>
-
-          <Button variant="outline-dark" onClick={sendRandom} type="Button">
-            Go!
-          </Button>
-
+          <div className="search-btn-container">
+            <div className="search-btn">
+              <button className="searchButton" onClick={sendRandom}>
+                <b>Go!</b>
+              </button>
+              <div className={isLoading ? "spinner" : "noLoader"}>
+              <LoaderSpinner wrapperClass="search-spinner" height="30" width="30" />
+              </div>
+            </div>
+          </div>
           <CustomAccordion
             listType={listType}
             setlistType={setlistType}
